@@ -1,0 +1,40 @@
+$cor-preto: #111111;
+$cor-cinza: #727272;
+$cor-azul: #556E8A;
+$cor-azul2: #2D4561;
+$cor-branco: #FFFFFF;
+$cor-roxo: #6672FE;
+$cor-roxo2: #5A45FE;
+$cor-roxo3: #2D18D6;
+$cor-verde: #D2F801;
+$cor-vermelho: #FE5045;
+$cor-vermelho2: #D62318;
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  min-height: 100vh;
+}
+img{
+    display: block;
+    max-width: 100%;
+}
+li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+.container{
+    max-width: 144rem;
+    margin: 0 auto;
+}
