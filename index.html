@@ -9,17 +9,37 @@
     <link rel="stylesheet" href="css/login/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <main>
-
+    <main class="main">
+        <article class="login">
+            <h1>Login</h1>
+            <form class="form">
+                <div class="input-box">
+                    <input type="email" id="emailLogin" placeholder="E-mail" required>
+                </div>
+                <div class="input-box">
+                    <input type="password" id="senhaLogin" placeholder="Senha" required>
+                    <div id="eye" class="eye">
+                        <img class="eye-off" src="img/visibility_off.svg" alt="">
+                        <img class="eye-on" src="img/visibility.svg" alt="">
+                    </div>
+                </div>
+                <button type="submit">Entrar</button>
+            </form>
+        <p>Não possui uma conta? <span class="cadastrar">Cadastre-se</span>.</p>
+        </article>
     </main>
-    <footer>
-        
+    <footer class="footer">
+            <p>Desenvolvido por: <span class="me">Thiago Batista</span>.</p>
+        <div class="contato">
+            <a href="https://github.com/ThiagoSantosBatista" target="_blank"><img src="img/github.svg" alt=""></a>
+            <a href="https://www.linkedin.com/in/thiago-santos-batista/" target="_blank"><img src="img/linkedin.svg" alt=""></a>
+        </div>
     </footer>
-
+    <script src="js/login/script.js"></script>
 </body>
 
 </html>

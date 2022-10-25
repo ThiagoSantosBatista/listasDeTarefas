@@ -1,0 +1,109 @@
+.main {
+  display: grid;
+  place-items: center;
+  height: calc(100vh - 4rem);
+}
+.login {
+  max-width: 35rem;
+  min-width: 29rem;
+  margin: 1rem;
+  background-color: $cor-branco;
+  padding: 3.5rem 3rem;
+  border-radius: 0.5rem;
+  border: 0.3rem solid $cor-roxo2;
+  h1 {
+    font-size: 3.2rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    color: $cor-roxo2;
+    position: relative;
+    &::before {
+      content: "";
+      display: block;
+      width: 3.5rem;
+      height: 0.3rem;
+      background: $cor-verde;
+      position: absolute;
+      bottom: -0.5rem;
+      left: 0;
+    }
+  }
+  p {
+    font-weight: 500;
+    font-size: 1.4rem;
+    text-align: center;
+  }
+  .cadastrar {
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+      color: $cor-roxo3;
+    }
+  }
+}
+.form {
+  .input-box {
+    position: relative;
+    display: flex;
+    margin-bottom: 1.5rem;
+
+    input {
+      border: none;
+      font-size: 2rem;
+      width: 100%;
+      padding: 1rem 5.4rem 1rem 1.5rem;
+      border-radius: 0.5rem;
+      outline: 0.15rem solid $cor-cinza;
+      &:focus {
+        outline: 0.25rem solid $cor-roxo3;
+      }
+      &::-ms-reveal {
+        display: none;
+      }
+    }
+    .eye {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 1.5rem;
+      cursor: pointer;
+      .eye-on {
+        display: none;
+      }
+      &.on {
+        .eye-off {
+          display: none;
+        }
+        .eye-on {
+          display: block;
+        }
+      }
+    }
+  }
+  button {
+    font-size: 2rem;
+    font-weight: 500;
+    letter-spacing: 0.1rem;
+    background: $cor-roxo2;
+    color: $cor-branco;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    text-transform: uppercase;
+    padding: 1rem;
+    width: 100%;
+    margin-bottom: 1rem;
+    &:hover {
+      background: $cor-roxo3;
+    }
+  }
+  & .input-box:nth-child(2) {
+    margin-bottom: 2.5rem;
+  }
+}
+
+.cadastrar,
+.me {
+  font-weight: 700;
+  color: $cor-roxo2;
+}

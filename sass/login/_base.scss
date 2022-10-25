@@ -1,14 +1,14 @@
 $cor-preto: #111111;
 $cor-cinza: #727272;
-$cor-azul: #556E8A;
-$cor-azul2: #2D4561;
-$cor-branco: #FFFFFF;
-$cor-roxo: #6672FE;
-$cor-roxo2: #5A45FE;
-$cor-roxo3: #2D18D6;
-$cor-verde: #D2F801;
-$cor-vermelho: #FE5045;
-$cor-vermelho2: #D62318;
+$cor-azul: #556e8a;
+$cor-azul2: #2d4561;
+$cor-branco: #ffffff;
+$cor-roxo: #6672fe;
+$cor-roxo2: #5a45fe;
+$cor-roxo3: #2d18d6;
+$cor-verde: #d2f801;
+$cor-vermelho: #fe5045;
+$cor-vermelho2: #d62318;
 
 *,
 *::before,
@@ -17,24 +17,27 @@ $cor-vermelho2: #D62318;
   padding: 0;
   box-sizing: border-box;
   font-family: "Inter", sans-serif;
+  font-weight: 400;
 }
 html {
   font-size: 62.5%;
 }
 body {
   min-height: 100vh;
+  color: $cor-preto;
+  background-color: $cor-preto;
 }
-img{
-    display: block;
-    max-width: 100%;
+img {
+  display: block;
+  max-width: 100%;
 }
-li{
-    list-style: none;
+li {
+  list-style: none;
 }
-a{
-    text-decoration: none;
+a {
+  text-decoration: none;
 }
-.container{
-    max-width: 144rem;
-    margin: 0 auto;
+.container {
+  max-width: 144rem;
+  margin: 0 auto;
 }
