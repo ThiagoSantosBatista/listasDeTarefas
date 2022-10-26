@@ -1,12 +1,54 @@
-const olhoOn = document.querySelector(".eye-on");
-const olhoOff = document.querySelector(".eye-off");
+const olhoOn = document.querySelectorAll(".eye-on");
+const olhoOff = document.querySelectorAll(".eye-off");
+const cadastrar = document.querySelector(".cadastrar");
+const logar = document.querySelector(".logar");
+const olhoSenha = document.querySelectorAll(".eye");
+const inputSenha = document.querySelectorAll(".senha");
 
-function toggleSenha() {
-  const olhoSenha = document.getElementById("eye");
-  const inputSenha = document.getElementById("senhaLogin");
-  olhoSenha.classList.toggle("on");
-  olhoSenha.classList.contains("on") ? inputSenha.setAttribute("type", 'text') : inputSenha.setAttribute("type", 'password');
+function toggleSenha(event) {
+  if (event.type === "touchstart") {
+    event.preventDefault();
+  }
+  olhoSenha.forEach((e) => {
+    e.classList.toggle("on");
+    if (e.classList.contains("on")) {
+      inputSenha.forEach((e) => {
+        e.setAttribute("type", "text");
+      });
+    } else {
+      inputSenha.forEach((e) => {
+        e.setAttribute("type", "password");
+      });
+    }
+  });
 }
 
-olhoOff.addEventListener("click", toggleSenha);
-olhoOn.addEventListener("click", toggleSenha);
+function logarCadastrar() {
+  const main = document.querySelector(".main");
+  main.classList.toggle("telaCadastro");
+  olhoSenha.forEach((e) => {
+    e.classList.remove("on");
+    if (e.classList.contains("on")) {
+      inputSenha.forEach((e) => {
+        e.setAttribute("type", "text");
+      });
+    } else {
+      inputSenha.forEach((e) => {
+        e.setAttribute("type", "password");
+      });
+    }
+  });
+}
+
+olhoOff.forEach((e) => {
+  e.addEventListener("click", toggleSenha);
+  e.addEventListener("touchstart", toggleSenha);
+});
+
+olhoOn.forEach((e) => {
+  e.addEventListener("click", toggleSenha);
+  e.addEventListener("touchstart", toggleSenha);
+});
+
+cadastrar.addEventListener("click", logarCadastrar);
+logar.addEventListener("click", logarCadastrar);
