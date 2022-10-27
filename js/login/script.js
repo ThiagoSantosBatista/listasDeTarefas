@@ -24,8 +24,12 @@ function toggleSenha(event) {
 }
 
 function logarCadastrar() {
+  const input = document.querySelectorAll("input");
   const main = document.querySelector(".main");
   main.classList.toggle("telaCadastro");
+  input.forEach((e) => {
+    e.value = "";
+  });
   olhoSenha.forEach((e) => {
     e.classList.remove("on");
     if (e.classList.contains("on")) {

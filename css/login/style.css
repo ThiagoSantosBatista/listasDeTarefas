@@ -101,7 +101,7 @@ a {
   border: none;
   font-size: 2rem;
   width: 100%;
-  padding: 1rem 5.4rem 1rem 1.5rem;
+  padding: 1rem 1.5rem;
   border-radius: 0.5rem;
   outline: 0.15rem solid #727272;
 }
@@ -110,6 +110,9 @@ a {
 }
 .form .input-box input::-ms-reveal {
   display: none;
+}
+.form .input-box .senha {
+  padding: 1rem 5.4rem 1rem 1.5rem;
 }
 .form .input-box .eye {
   position: absolute;
