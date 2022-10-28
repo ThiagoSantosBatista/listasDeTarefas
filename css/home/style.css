@@ -1,0 +1,71 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  min-height: 100vh;
+  color: #111111;
+  background-color: #ffffff;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  max-width: 144rem;
+  margin: 0 auto;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 5rem;
+  width: 100%;
+  z-index: 20;
+  box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.3);
+}
+.header-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 0 4%;
+}
+
+.nav__btn, .sair {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 2rem;
+  border: none;
+  cursor: pointer;
+  background: none;
+}
+
+.sair {
+  font-size: 1.8rem;
+  color: #fe5045;
+}
+
+/*# sourceMappingURL=style.css.map */

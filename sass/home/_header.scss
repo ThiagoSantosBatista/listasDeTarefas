@@ -1,0 +1,29 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 5rem;
+  width: 100%;
+  z-index: 20;
+  box-shadow: 0 0 0.4rem rgb(0, 0, 0, 0.3);
+  &-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    padding: 0 4%;
+  }
+}
+.nav__btn, .sair {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 2rem;
+    border: none;
+    cursor: pointer;
+    background: none;
+}
+.sair{
+    font-size: 1.8rem;
+    color: $cor-vermelho;
+}
