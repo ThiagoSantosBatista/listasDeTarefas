@@ -5,7 +5,8 @@
   height: 5rem;
   width: 100%;
   z-index: 20;
-  box-shadow: 0 0 0.4rem rgb(0, 0, 0, 0.3);
+  background: var(--cor-neutra2-bg);
+  box-shadow: 0 .2rem .4rem var(--box-shadow);
   &-box {
     display: flex;
     justify-content: space-between;
@@ -19,11 +20,12 @@
     align-items: center;
     gap: 1rem;
     font-size: 2rem;
+    color: var(--cor-neutra-bg);
     border: none;
     cursor: pointer;
     background: none;
 }
 .sair{
     font-size: 1.8rem;
-    color: $cor-vermelho;
+    color: var(--cor-vermelho);
 }

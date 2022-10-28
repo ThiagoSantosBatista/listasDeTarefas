@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="dark-mod">
 
 <head>
     <meta charset="UTF-8">
@@ -11,14 +11,160 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <header class="header">
         <div class="header-box container">
             <nav class="nav">
-                <button class="nav__btn"><img src="./img/menu.svg" alt="">Menu</button>
+                <button class="nav__btn"><svg width="30" height="20" viewBox="0 0 30 20" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M1.25 20C0.888889 20 0.590278 19.8819 0.354167 19.6458C0.118056 19.4097 0 19.1111 0 18.75C0 18.3889 0.118056 18.0903 0.354167 17.8542C0.590278 17.6181 0.888889 17.5 1.25 17.5H28.75C29.1111 17.5 29.4097 17.6181 29.6458 17.8542C29.8819 18.0903 30 18.3889 30 18.75C30 19.1111 29.8819 19.4097 29.6458 19.6458C29.4097 19.8819 29.1111 20 28.75 20H1.25ZM1.25 11.25C0.888889 11.25 0.590278 11.1319 0.354167 10.8958C0.118056 10.6597 0 10.3611 0 10C0 9.63889 0.118056 9.34028 0.354167 9.10417C0.590278 8.86805 0.888889 8.75 1.25 8.75H28.75C29.1111 8.75 29.4097 8.86805 29.6458 9.10417C29.8819 9.34028 30 9.63889 30 10C30 10.3611 29.8819 10.6597 29.6458 10.8958C29.4097 11.1319 29.1111 11.25 28.75 11.25H1.25ZM1.25 2.5C0.888889 2.5 0.590278 2.38194 0.354167 2.14583C0.118056 1.90972 0 1.61111 0 1.25C0 0.888889 0.118056 0.590278 0.354167 0.354167C0.590278 0.118056 0.888889 0 1.25 0H28.75C29.1111 0 29.4097 0.118056 29.6458 0.354167C29.8819 0.590278 30 0.888889 30 1.25C30 1.61111 29.8819 1.90972 29.6458 2.14583C29.4097 2.38194 29.1111 2.5 28.75 2.5H1.25Z"
+                            fill="#111111" />
+                    </svg>
+                    Menu</button>
             </nav>
             <button class="sair"><img src="./img/logout.svg" alt="">Sair</button>
         </div>
     </header>
+    <main class="main container">
+        <div class="main__lista-add">
+            <button>Adicionar Lista<svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M9.00004 17.1666C8.66948 17.1666 8.3926 17.0546 8.16937 16.8306C7.94537 16.6074 7.83337 16.3305 7.83337 15.9999V10.1666H2.00004C1.66949 10.1666 1.39221 10.0546 1.16821 9.83058C0.944985 9.60736 0.833374 9.33047 0.833374 8.99992C0.833374 8.66936 0.944985 8.39208 1.16821 8.16808C1.39221 7.94486 1.66949 7.83325 2.00004 7.83325H7.83337V1.99992C7.83337 1.66936 7.94537 1.39209 8.16937 1.16809C8.3926 0.944863 8.66948 0.833252 9.00004 0.833252C9.3306 0.833252 9.60787 0.944863 9.83187 1.16809C10.0551 1.39209 10.1667 1.66936 10.1667 1.99992V7.83325H16C16.3306 7.83325 16.6075 7.94486 16.8307 8.16808C17.0547 8.39208 17.1667 8.66936 17.1667 8.99992C17.1667 9.33047 17.0547 9.60736 16.8307 9.83058C16.6075 10.0546 16.3306 10.1666 16 10.1666H10.1667V15.9999C10.1667 16.3305 10.0551 16.6074 9.83187 16.8306C9.60787 17.0546 9.3306 17.1666 9.00004 17.1666Z"
+                        fill="white" />
+                </svg></button>
+        </div>
+        <div class="main__listas">
+            <div class="lista">
+                <div class="lista__nome">
+                    <h1>Nome da Lista</h1>
+                    <img src="./img/edit_note.svg" alt="">
+                </div>
+                <div class="lista__add">
+                    <input type="text">
+                    <button>Add</button>
+                </div>
+                <ul class="lista__conteudo">
+                    <li class="lista__item">
+                        <div class="checkbox-campo">
+                            <input type="checkbox" id="checkbox-1">
+                            <label for="checkbox-1" class="descricao"></label>
+                        </div>
+                        <p>Nome da Tarefa
+                        </p>
+                        <img src="./img/more.svg" alt="">
+                        <span class="linha"></span>
+                    </li>
+                    <li class="lista__item">
+                        <div class="checkbox-campo">
+                            <input type="checkbox" id="checkbox-2">
+                            <label for="checkbox-2" class="descricao"></label>
+                        </div>
+                        <p>Nome da Tarefa
+                        </p>
+                        <img src="./img/more.svg" alt="">
+                        <span class="linha"></span>
+                    </li>
+                    <li class="lista__item">
+                        <div class="checkbox-campo">
+                            <input type="checkbox" id="checkbox-3">
+                            <label for="checkbox-3" class="descricao"></label>
+                        </div>
+                        <p>Nome da Tarefa
+                        </p>
+                        <img src="./img/more.svg" alt="">
+                        <span class="linha"></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="lista">
+                <div class="lista__nome">
+                    <h1>Nome da Lista</h1>
+                    <img src="./img/edit_note.svg" alt="">
+                </div>
+                <div class="lista__add">
+                    <input type="text">
+                    <button>Add</button>
+                </div>
+                <ul class="lista__conteudo">
+                    <li class="lista__item">
+                        <div class="checkbox-campo">
+                            <input type="checkbox" id="checkbox-4">
+                            <label for="checkbox-4" class="descricao"></label>
+                        </div>
+                        <p>Nome da Tarefa
+                        </p>
+                        <img src="./img/more.svg" alt="">
+                        <span class="linha"></span>
+                    </li>
+                    <li class="lista__item">
+                        <div class="checkbox-campo">
+                            <input type="checkbox" id="checkbox-5">
+                            <label for="checkbox-5" class="descricao"></label>
+                        </div>
+                        <p>Nome da Tarefa
+                        </p>
+                        <img src="./img/more.svg" alt="">
+                        <span class="linha"></span>
+                    </li>
+                    <li class="lista__item">
+                        <div class="checkbox-campo">
+                            <input type="checkbox" id="checkbox-6">
+                            <label for="checkbox-6" class="descricao"></label>
+                        </div>
+                        <p>Nome da Tarefa
+                        </p>
+                        <img src="./img/more.svg" alt="">
+                        <span class="linha"></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="lista">
+                <div class="lista__nome">
+                    <h1>Nome da Lista</h1>
+                    <img src="./img/edit_note.svg" alt="">
+                </div>
+                <div class="lista__add">
+                    <input type="text">
+                    <button>Add</button>
+                </div>
+                <ul class="lista__conteudo">
+                    <li class="lista__item">
+                        <div class="checkbox-campo">
+                            <input type="checkbox" id="checkbox-7">
+                            <label for="checkbox-7" class="descricao"></label>
+                        </div>
+                        <p>Nome da Tarefa
+                        </p>
+                        <img src="./img/more.svg" alt="">
+                        <span class="linha"></span>
+                    </li>
+                    <li class="lista__item">
+                        <div class="checkbox-campo">
+                            <input type="checkbox" id="checkbox-8">
+                            <label for="checkbox-8" class="descricao"></label>
+                        </div>
+                        <p>Nome da Tarefa
+                        </p>
+                        <img src="./img/more.svg" alt="">
+                        <span class="linha"></span>
+                    </li>
+                    <li class="lista__item">
+                        <div class="checkbox-campo">
+                            <input type="checkbox" id="checkbox-9">
+                            <label for="checkbox-9" class="descricao"></label>
+                        </div>
+                        <p>Nome da Tarefa
+                        </p>
+                        <img src="./img/more.svg" alt="">
+                        <span class="linha"></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
 </body>
+
 </html>

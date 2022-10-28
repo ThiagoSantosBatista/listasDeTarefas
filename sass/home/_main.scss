@@ -1,0 +1,127 @@
+.main {
+  padding: 9rem 4% 5rem 4%;
+  &__lista-add {
+    display: flex;
+    justify-content: end;
+    margin-bottom: 5rem;
+    button {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-weight: 700;
+      font-size: 1.4rem;
+      padding: 1rem 2rem;
+      letter-spacing: 0.1rem;
+      border: none;
+      cursor: pointer;
+      text-transform: uppercase;
+      border-radius: 0.5rem;
+      color: var(--cor-neutra2-bg);
+      background: var(--cor-roxo2);
+    }
+  }
+  &__listas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(40rem, 1fr));
+    justify-content: center;
+    gap: 7rem;
+  }
+}
+.lista {
+  max-height: 45rem;
+  box-shadow: 0 0.2rem 0.4rem var(--box-shadow);
+  border-radius: 0.5rem;
+  overflow-y: auto;
+  &__nome {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    padding: 1.5rem 1.5rem;
+    color: var(--cor-neutra2-bg);
+    background: var(--cor-roxo4);
+    h1 {
+      font-size: 2rem;
+      font-weight: 500;
+    }
+    img {
+      cursor: pointer;
+    }
+  }
+  &__add {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1.5rem 1.5rem 3rem;
+    input {
+      width: 100%;
+      font-size: 1.6rem;
+      padding: 0.5rem 1rem;
+      border: 0.1rem solid var(--cor-neutra-bg);
+      border-radius: 0.5rem;
+      &:focus {
+        outline-color: var(--cor-roxo2);
+      }
+    }
+    button {
+      font-size: 1.6rem;
+      text-transform: uppercase;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      padding: 1rem 1.5rem;
+      border-radius: 0.5rem;
+      color: var(--cor-neutra2-bg);
+      background: var(--cor-roxo2);
+    }
+  }
+  &__conteudo {
+    padding: 0 0 1.5rem 1.5rem;
+  }
+  &__item {
+    display: flex;
+    position: relative;
+    align-items: start;
+    gap: 1.5rem;
+    font-size: 1.6rem;
+    .checkbox-campo {
+      input {
+        display: none;
+        &:checked ~ .descricao:before {
+          background-image: url("/img/checkboxChecked.svg");
+        }
+      }
+      .descricao:before {
+        content: "";
+        cursor: pointer;
+        width: 2.5rem;
+        height: 2.5rem;
+        display: inline-block;
+        background-image: url("/img/checkbox.svg");
+        transition: 0.3s;
+      }
+    }
+    p {
+      align-self: center;
+      padding: 0 6.4rem 4.5rem 0;
+      line-height: 1.5;
+    }
+    img {
+      position: absolute;
+      top: 0;
+      right: 0;
+      transform: translateY(-1.5rem);
+      padding: 1.5rem;
+      display: block;
+      cursor: pointer;
+    }
+    .linha {
+      display: block;
+      position: absolute;
+      bottom: 3rem;
+      width: calc(100% - 1.5rem);
+      height: 0.2rem;
+      background: var(--cor-roxo5);
+    }
+  }
+}

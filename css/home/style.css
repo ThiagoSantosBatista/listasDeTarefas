@@ -1,3 +1,28 @@
+:root {
+  --cor-neutra-bg: #111111;
+  --cor-neutra2-bg: #ffffff;
+  --cor-cinza: #727272;
+  --cor-cinza2: #2f2f2f;
+  --cor-roxo: #6672fe;
+  --cor-roxo2: #5a45fe;
+  --cor-roxo3: #2d18d6;
+  --cor-roxo4: #4f4980;
+  --cor-roxo5: #807BA8;
+  --cor-verde: #d2f801;
+  --cor-vermelho: #fe5045;
+  --cor-vermelho2: #d62318;
+  --box-shadow: rgba(17, 17, 17, 0.2);
+}
+
+.dark-mode:root {
+  --cor-neutra-bg: #ffffff;
+  --cor-neutra2-bg: #111111;
+  --box-shadow: rgba(255, 255, 255, 0.2);
+}
+.dark-mode:root svg path {
+  fill: var(--cor-neutra-bg);
+}
+
 *,
 *::before,
 *::after {
@@ -14,8 +39,8 @@ html {
 
 body {
   min-height: 100vh;
-  color: #111111;
-  background-color: #ffffff;
+  color: var(--cor-neutra-bg);
+  background-color: var(--cor-neutra2-bg);
 }
 
 img {
@@ -43,7 +68,8 @@ a {
   height: 5rem;
   width: 100%;
   z-index: 20;
-  box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.3);
+  background: var(--cor-neutra2-bg);
+  box-shadow: 0 0.2rem 0.4rem var(--box-shadow);
 }
 .header-box {
   display: flex;
@@ -58,6 +84,7 @@ a {
   align-items: center;
   gap: 1rem;
   font-size: 2rem;
+  color: var(--cor-neutra-bg);
   border: none;
   cursor: pointer;
   background: none;
@@ -65,7 +92,134 @@ a {
 
 .sair {
   font-size: 1.8rem;
-  color: #fe5045;
+  color: var(--cor-vermelho);
+}
+
+.main {
+  padding: 9rem 4% 5rem 4%;
+}
+.main__lista-add {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 5rem;
+}
+.main__lista-add button {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-weight: 700;
+  font-size: 1.4rem;
+  padding: 1rem 2rem;
+  letter-spacing: 0.1rem;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  border-radius: 0.5rem;
+  color: var(--cor-neutra2-bg);
+  background: var(--cor-roxo2);
+}
+.main__listas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(40rem, 1fr));
+  justify-content: center;
+  gap: 7rem;
+}
+
+.lista {
+  max-height: 45rem;
+  box-shadow: 0 0.2rem 0.4rem var(--box-shadow);
+  border-radius: 0.5rem;
+  overflow-y: auto;
+}
+.lista__nome {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  padding: 1.5rem 1.5rem;
+  color: var(--cor-neutra2-bg);
+  background: var(--cor-roxo4);
+}
+.lista__nome h1 {
+  font-size: 2rem;
+  font-weight: 500;
+}
+.lista__nome img {
+  cursor: pointer;
+}
+.lista__add {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem 1.5rem 3rem;
+}
+.lista__add input {
+  width: 100%;
+  font-size: 1.6rem;
+  padding: 0.5rem 1rem;
+  border: 0.1rem solid var(--cor-neutra-bg);
+  border-radius: 0.5rem;
+}
+.lista__add input:focus {
+  outline-color: var(--cor-roxo2);
+}
+.lista__add button {
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+  color: var(--cor-neutra2-bg);
+  background: var(--cor-roxo2);
+}
+.lista__conteudo {
+  padding: 0 0 1.5rem 1.5rem;
+}
+.lista__item {
+  display: flex;
+  position: relative;
+  align-items: start;
+  gap: 1.5rem;
+  font-size: 1.6rem;
+}
+.lista__item .checkbox-campo input {
+  display: none;
+}
+.lista__item .checkbox-campo input:checked ~ .descricao:before {
+  background-image: url("/img/checkboxChecked.svg");
+}
+.lista__item .checkbox-campo .descricao:before {
+  content: "";
+  cursor: pointer;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: inline-block;
+  background-image: url("/img/checkbox.svg");
+  transition: 0.3s;
+}
+.lista__item p {
+  align-self: center;
+  padding: 0 6.4rem 4.5rem 0;
+  line-height: 1.5;
+}
+.lista__item img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translateY(-1.5rem);
+  padding: 1.5rem;
+  display: block;
+  cursor: pointer;
+}
+.lista__item .linha {
+  display: block;
+  position: absolute;
+  bottom: 3rem;
+  width: calc(100% - 1.5rem);
+  height: 0.2rem;
+  background: var(--cor-roxo5);
 }
 
 /*# sourceMappingURL=style.css.map */
