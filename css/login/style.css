@@ -13,7 +13,7 @@ html {
 }
 
 body {
-  min-height: 100vh;
+  min-height: -webkit-fill-available;
   color: #111111;
   background-color: #111111;
 }
@@ -141,7 +141,7 @@ a {
   text-transform: uppercase;
   padding: 1rem;
   width: 100%;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 .form button:hover {
   background: #2d18d6;
