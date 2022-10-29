@@ -7,6 +7,7 @@ const inputSenha = document.querySelectorAll(".senha");
 const btnEntrar = document.querySelector(".btn-entrar");
 const btnCadastrar = document.querySelector(".btn-cadastrar");
 
+
 function toggleSenha(event) {
   if (event.type === "touchstart") {
     event.preventDefault();

@@ -1,5 +1,6 @@
 $cor-preto: #111111;
 $cor-cinza: #727272;
+$cor-cinza2: #2F2F2F;
 $cor-azul: #556e8a;
 $cor-azul2: #2d4561;
 $cor-branco: #ffffff;
@@ -23,7 +24,7 @@ html {
   font-size: 62.5%;
 }
 body {
-  min-height: -webkit-fill-available;
+  min-height: 100vh;
   color: $cor-preto;
   background-color: $cor-preto;
 }
@@ -38,6 +39,6 @@ a {
   text-decoration: none;
 }
 .container {
-  max-width: 144rem;
+  max-width: 160rem;
   margin: 0 auto;
 }

@@ -1,5 +1,5 @@
 .main {
-  padding: 9rem 4% 5rem 4%;
+  padding: 9rem 7% 5rem 7%;
   &__lista-add {
     display: flex;
     justify-content: end;
@@ -24,7 +24,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(40rem, 1fr));
     justify-content: center;
-    gap: 7rem;
+    gap: 6rem;
   }
 }
 .lista {
@@ -124,4 +124,12 @@
       background: var(--cor-roxo5);
     }
   }
+}
+
+
+@media screen and (max-width: 500px){
+    .main__listas{
+    grid-template-columns: repeat(auto-fill, minmax(28rem, 1fr));
+
+    }
 }
