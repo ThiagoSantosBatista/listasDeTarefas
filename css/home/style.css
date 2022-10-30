@@ -7,7 +7,7 @@
   --cor-roxo2: #5a45fe;
   --cor-roxo3: #2d18d6;
   --cor-roxo4: #4f4980;
-  --cor-roxo5: #807BA8;
+  --cor-roxo5: #807ba8;
   --cor-verde: #d2f801;
   --cor-vermelho: #fe5045;
   --cor-vermelho2: #d62318;
@@ -100,10 +100,10 @@ a {
   display: none;
 }
 .nav__list-box {
+  display: none;
   position: absolute;
   top: 0;
-  bottom: 0;
-  left: -28rem;
+  left: 0;
   padding-top: 1rem;
   z-index: 20;
   width: 28rem;
@@ -115,7 +115,6 @@ a {
   margin: 7rem 4rem 0 4rem;
 }
 .nav .nav__btn-fechar {
-  display: block;
   position: absolute;
   top: 2rem;
   right: 2rem;
@@ -154,8 +153,15 @@ a {
   fill: var(--cor-neutra2-bg);
 }
 .nav.ativo .nav__list-box {
-  left: 0;
+  pointer-events: auto;
+  display: block;
   box-shadow: 0rem 0 0 1000rem rgba(17, 17, 17, 0.6);
+}
+.nav.ativo .nav__btn-fechar {
+  display: block;
+}
+.nav.ativo .nav__btn {
+  display: none;
 }
 
 .main {

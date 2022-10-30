@@ -1,6 +1,7 @@
 const btnMenu = document.querySelector(".nav__btn");
 const btnMenuFechar = document.querySelector(".nav__btn-fechar");
 const btnSair = document.querySelector(".sair");
+const listas = document.querySelector(".listas");
 
 function logout(event) {
   if (event.type === "touchstart") {
@@ -15,6 +16,15 @@ function toggleMenu(event) {
   }
   const nav = document.querySelector(".nav");
   nav.classList.toggle("ativo");
+  const ativo = nav.classList.contains("ativo");
+  btnMenu.setAttribute("aria-expanded", ativo);
+  btnMenuFechar.setAttribute("aria-expanded", ativo);
+  ativo
+    ? (document.body.style.overflowY = "hidden")
+    : (document.body.style.overflowY = "visible");
+  ativo
+    ? (document.body.style.pointerEvents = "none")
+    : (document.body.style.pointerEvents = "auto");
 }
 
 (function () {
@@ -31,3 +41,5 @@ btnMenuFechar.addEventListener("click", toggleMenu);
 btnMenuFechar.addEventListener("touchstart", toggleMenu);
 btnSair.addEventListener("click", logout);
 btnSair.addEventListener("touchstart", logout);
+listas.addEventListener("click", toggleMenu);
+listas.addEventListener("touchstart", toggleMenu);
