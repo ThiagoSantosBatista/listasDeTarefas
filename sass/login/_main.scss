@@ -72,15 +72,15 @@
       transform: translateY(-50%);
       right: 1.5rem;
       cursor: pointer;
-      .eye-on {
+      &-off {
         display: none;
       }
       &.on {
         .eye-off {
-          display: none;
+          display: block;
         }
         .eye-on {
-          display: block;
+          display: none;
         }
       }
     }

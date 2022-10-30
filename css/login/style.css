@@ -121,14 +121,14 @@ a {
   right: 1.5rem;
   cursor: pointer;
 }
-.form .input-box .eye .eye-on {
+.form .input-box .eye-off {
   display: none;
 }
 .form .input-box .eye.on .eye-off {
-  display: none;
+  display: block;
 }
 .form .input-box .eye.on .eye-on {
-  display: block;
+  display: none;
 }
 .form button {
   font-size: 2rem;
