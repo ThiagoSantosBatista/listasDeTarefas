@@ -7,11 +7,11 @@ const divListas = document.querySelector(".main__listas");
 const addLista = document.querySelector(".adicionar");
 const btnFecharModal = document.querySelector(".fecharModal");
 const inputNomeLista = document.querySelector("#inputNomeLista");
-const btnAddTarefa = document.querySelector(".addTarefa");
 const listas = document.getElementsByClassName(".lista")[0];
 let conteudoArrayListas = localStorage.getItem("listas")
   ? JSON.parse(localStorage.getItem("listas"))
   : [];
+
 function logout(event) {
   if (event.type === "touchstart") {
     event.preventDefault();
@@ -44,27 +44,100 @@ function toggleMenu(event) {
   userSpan.innerHTML = jsonData.nome;
 })();
 
-conteudoArrayListas.forEach(criarLista);
+conteudoArrayListas.forEach((text, id) => {
+  let conteudo = text.nome;
+  let div = document.createElement("div");
+  div.classList.add(`lista`);
+  div.innerHTML = `<div class="lista__nome">
+                          <h1>${conteudo}</h1>
+                          <img src="./img/edit_note.svg" alt="">
+                      </div>
+                      <div class="lista__add">
+                          <input class="inputTarefa it${id}" type="text">
+                          <button class="addTarefa at${id}">Add</button>
+                      </div>
+                      <ul class="lista__conteudo lc${id}">
+                      </ul>
+                      `;
+  divListas.appendChild(div);
+  inputNomeLista.value = "";
+  inputNomeLista.focus();
+});
+
+conteudoArrayListas.forEach((undefined, id) => {
+  let btnAddTarefa = document.querySelector(`.at${id}`);
+  const ulListaConteudo = document.querySelector(`.lc${id}`);
+  function adicionarTarefa() {
+    let inputTarefa = document.querySelector(`.it${id}`);
+    let valor = inputTarefa.value.trim();
+    if (valor.length > 0) {
+      let li = document.createElement("li");
+      li.classList.add("lista__item");
+      li.innerHTML = `<div class="checkbox-campo">
+       <input type="checkbox" id="checkbox-${id}">
+       <label for="checkbox-${id}" class="descricao"></label>
+       </div>
+       <p>${inputTarefa.value}
+       </p>
+       <img src="./img/more.svg" alt="">
+       <span class="linha"></span>`;
+      ulListaConteudo.appendChild(li);
+      inputTarefa.value = "";
+    } else {
+      alert("Escreva uma tarefa!");
+    }
+  }
+  btnAddTarefa.addEventListener("click", adicionarTarefa);
+});
 
 function criarLista(text) {
-    let conteudo = text.nome;
+  let conteudo = text.nome;
+  let id = conteudoArrayListas.length - 1;
   let div = document.createElement("div");
-  div.classList.add("lista");
+  div.classList.add(`lista`);
   div.innerHTML = `<div class="lista__nome">
-                    <h1>${conteudo}</h1>
-                    <img src="./img/edit_note.svg" alt="">
-                </div>
-                <div class="lista__add">
-                    <input class="inputTarefa" type="text">
-                    <button class="addTarefa" onclick="adicionarTarefa()">Add</button>
-                </div>
-                <ul class="lista__conteudo">
-                </ul>
-                `;
+    <h1>${conteudo}</h1>
+    <img src="./img/edit_note.svg" alt="">
+  </div>
+  <div class="lista__add">
+    <input class="inputTarefa it${id}" type="text">
+    <button class="addTarefa at${id}">Add</button>
+  </div>
+  <ul class="lista__conteudo lc${id}">
+  </ul>
+  `;
   divListas.appendChild(div);
   inputNomeLista.value = "";
   inputNomeLista.focus();
 }
+
+function criarTarefa() {
+  let id = conteudoArrayListas.length - 1;
+  let btnAddTarefa = document.querySelector(`.at${id}`);
+  const ulListaConteudo = document.querySelector(`.lc${id}`);
+  function adicionarTarefa() {
+    let inputTarefa = document.querySelector(`.it${id}`);
+    let valor = inputTarefa.value.trim();
+    if (valor.length > 0) {
+      let li = document.createElement("li");
+      li.classList.add("lista__item");
+      li.innerHTML = `<div class="checkbox-campo">
+       <input type="checkbox" id="checkbox-${id}">
+       <label for="checkbox-${id}" class="descricao"></label>
+       </div>
+       <p>${inputTarefa.value}
+       </p>
+       <img src="./img/more.svg" alt="">
+       <span class="linha"></span>`;
+      ulListaConteudo.appendChild(li);
+      inputTarefa.value = "";
+    } else {
+      alert("Escreva uma tarefa!");
+    }
+  }
+  btnAddTarefa.addEventListener("click", adicionarTarefa);
+}
+
 function addListasDados() {
   let value = inputNomeLista.value.trim();
   if (value.length > 0) {
@@ -74,6 +147,7 @@ function addListasDados() {
     conteudoArrayListas.push(listaDados);
     localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
     criarLista(conteudoArrayListas[conteudoArrayListas.length - 1]);
+    criarTarefa(conteudoArrayListas[conteudoArrayListas.length - 1]);
   } else {
     alert("Nome da lista deve ter no mínimo 1 caractere!");
   }
@@ -87,28 +161,6 @@ function abrirModal() {
 function fecharModal() {
   let modalAddLista = document.querySelector(".adicionarLista");
   modalAddLista.classList.remove("ativo");
-}
-
-function adicionarTarefa(e) {
-  const ulListaConteudo = document.querySelector(".lista__conteudo");
-  const inputTarefa = document.querySelector(".inputTarefa");
-  let value = inputTarefa.value.trim();
-  if (value.length > 0) {
-    let li = document.createElement("li");
-    li.classList.add("lista__item");
-    li.innerHTML = `<div class="checkbox-campo">
-     <input type="checkbox" id="checkbox-7">
-     <label for="checkbox-7" class="descricao"></label>
-     </div>
-     <p>${inputTarefa.value}
-     </p>
-     <img src="./img/more.svg" alt="">
-     <span class="linha"></span>`;
-    ulListaConteudo.appendChild(li);
-    inputTarefa.value = "";
-  } else {
-    alert("Escreva uma tarefa!");
-  }
 }
 
 btnMenu.addEventListener("click", toggleMenu);
