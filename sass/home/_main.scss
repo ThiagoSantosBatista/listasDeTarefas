@@ -94,26 +94,30 @@
         }
       }
       .descricao:before {
-        content: "";
-        cursor: pointer;
-        width: 2.5rem;
-        height: 2.5rem;
-        display: inline-block;
-        background-image: url("/img/checkbox.svg");
-        transition: 0.3s;
-      }
+          content: "";
+          cursor: pointer;
+          width: 2.5rem;
+          height: 2.5rem;
+          display: inline-block;
+          background-image: url("/img/checkbox.svg");
+          transition: 0.3s;
+        }
     }
     p {
       padding: 0 6.4rem 4.5rem 0;
       line-height: 1.5;
       word-break: break-all;
     }
+    &.concluido{
+        p{
+           text-decoration: line-through;
+       }
+   }
     img {
       position: absolute;
       top: 0;
       right: 0;
-      transform: translateY(-1.5rem);
-      padding: 1.5rem;
+      margin-right: 1.5rem;
       display: block;
       cursor: pointer;
     }

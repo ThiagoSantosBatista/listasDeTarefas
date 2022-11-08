@@ -275,12 +275,14 @@ a {
   line-height: 1.5;
   word-break: break-all;
 }
+.lista__item.concluido p {
+  text-decoration: line-through;
+}
 .lista__item img {
   position: absolute;
   top: 0;
   right: 0;
-  transform: translateY(-1.5rem);
-  padding: 1.5rem;
+  margin-right: 1.5rem;
   display: block;
   cursor: pointer;
 }
