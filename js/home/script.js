@@ -49,12 +49,10 @@ let arrayCheckbox5 = localStorage.getItem("checkbox5")
   ? JSON.parse(localStorage.getItem("checkbox5"))
   : [];
 
-let contagemTarefas0 = localStorage.getItem("tarefas0")
-  ? parseInt(localStorage.getItem("tarefas0"))
+let contagemTarefas = localStorage.getItem("tarefas")
+  ? parseInt(localStorage.getItem("tarefas"))
   : 0;
-let contagemTarefas1 = localStorage.getItem("tarefas1")
-  ? parseInt(localStorage.getItem("tarefas1"))
-  : 0;
+let idCheckbox = contagemTarefas;
 
 function logout(event) {
   if (event.type === "touchstart") {
@@ -150,15 +148,8 @@ conteudoArrayListas.forEach((text, id) => {
 function criarTarefa() {
   let id = conteudoArrayListas.length - 1;
   let idTarefa;
-
-  if (id === 0) {
-    idTarefa = tarefasLista0.length;
-    idCheckbox = contagemTarefas0;
-  }
-  if (id === 1) {
-    idTarefa = tarefasLista1.length;
-    idCheckbox = contagemTarefas1;
-  }
+  if (id === 0) idTarefa = tarefasLista0.length;
+  if (id === 1) idTarefa = tarefasLista1.length;
   if (id === 2) idTarefa = tarefasLista2.length;
   if (id === 3) idTarefa = tarefasLista3.length;
   if (id === 4) idTarefa = tarefasLista4.length;
@@ -190,8 +181,6 @@ function criarTarefa() {
         arrayCheckbox0.push(idCheckbox);
         localStorage.setItem("checkbox0", JSON.stringify(arrayCheckbox0));
         mostrarTarefas0();
-        contagemTarefas0 = idCheckbox;
-        localStorage.setItem("tarefas0", JSON.stringify(contagemTarefas0));
       } else if (id === 1) {
         let listaTarefa = {
           tarefa: inputTarefa.value,
@@ -201,8 +190,6 @@ function criarTarefa() {
         arrayCheckbox1.push(idCheckbox);
         localStorage.setItem("checkbox1", JSON.stringify(arrayCheckbox1));
         mostrarTarefas1();
-        contagemTarefas1 = idCheckbox;
-        localStorage.setItem("tarefas1", JSON.stringify(contagemTarefas1));
       } else if (id === 2) {
         let listaTarefa = {
           tarefa: inputTarefa.value,
@@ -240,10 +227,12 @@ function criarTarefa() {
         localStorage.setItem("checkbox5", JSON.stringify(arrayCheckbox5));
         mostrarTarefas5();
       }
+      ++idCheckbox;
+      addTarefaNum = idCheckbox;
+      localStorage.setItem("tarefas", JSON.stringify(addTarefaNum));
       inputTarefa.value = "";
       inputTarefa.focus();
       salvarCheckbox();
-      ++idCheckbox;
     } else {
       alert("Escreva uma tarefa!");
     }
@@ -269,21 +258,14 @@ document.addEventListener("click", (e) => {
 });
 
 conteudoArrayListas.forEach((undefined, id) => {
-  let idCheckbox = 0;
   let idTarefa;
-
-  if (id === 0) {
-    idTarefa = tarefasLista0.length;
-    idCheckbox = contagemTarefas0;
-  }
-  if (id === 1) {
-    idTarefa = tarefasLista1.length;
-    idCheckbox = contagemTarefas1;
-  }
+  if (id === 0) idTarefa = tarefasLista0.length;
+  if (id === 1) idTarefa = tarefasLista1.length;
   if (id === 2) idTarefa = tarefasLista2.length;
   if (id === 3) idTarefa = tarefasLista3.length;
   if (id === 4) idTarefa = tarefasLista4.length;
   if (id === 5) idTarefa = tarefasLista5.length;
+
   let btnAddTarefa = document.querySelector(`.at${id}`);
   const ulListaConteudo = document.querySelector(`.lc${id}`);
   function adicionarTarefa() {
@@ -310,8 +292,9 @@ conteudoArrayListas.forEach((undefined, id) => {
         arrayCheckbox0.push(idCheckbox);
         localStorage.setItem("checkbox0", JSON.stringify(arrayCheckbox0));
         mostrarTarefas0();
-        contagemTarefas0 = idCheckbox;
-        localStorage.setItem("tarefas0", JSON.stringify(contagemTarefas0));
+        ++idCheckbox;
+        addTarefaNum = idCheckbox;
+        localStorage.setItem("tarefas", JSON.stringify(addTarefaNum));
       } else if (id === 1) {
         let listaTarefa = {
           tarefa: inputTarefa.value,
@@ -321,8 +304,9 @@ conteudoArrayListas.forEach((undefined, id) => {
         arrayCheckbox1.push(idCheckbox);
         localStorage.setItem("checkbox1", JSON.stringify(arrayCheckbox1));
         mostrarTarefas1();
-        contagemTarefas1 = idCheckbox;
-        localStorage.setItem("tarefas1", JSON.stringify(contagemTarefas1));
+        ++idCheckbox;
+        addTarefaNum = idCheckbox;
+        localStorage.setItem("tarefas", JSON.stringify(addTarefaNum));
       } else if (id === 2) {
         let listaTarefa = {
           tarefa: inputTarefa.value,
@@ -332,6 +316,9 @@ conteudoArrayListas.forEach((undefined, id) => {
         arrayCheckbox2.push(idCheckbox);
         localStorage.setItem("checkbox2", JSON.stringify(arrayCheckbox2));
         mostrarTarefas2();
+        ++idCheckbox;
+        addTarefaNum = idCheckbox;
+        localStorage.setItem("tarefas", JSON.stringify(addTarefaNum));
       } else if (id === 3) {
         let listaTarefa = {
           tarefa: inputTarefa.value,
@@ -341,6 +328,9 @@ conteudoArrayListas.forEach((undefined, id) => {
         arrayCheckbox3.push(idCheckbox);
         localStorage.setItem("checkbox3", JSON.stringify(arrayCheckbox3));
         mostrarTarefas3();
+        ++idCheckbox;
+        addTarefaNum = idCheckbox;
+        localStorage.setItem("tarefas", JSON.stringify(addTarefaNum));
       } else if (id === 4) {
         let listaTarefa = {
           tarefa: inputTarefa.value,
@@ -350,6 +340,9 @@ conteudoArrayListas.forEach((undefined, id) => {
         arrayCheckbox4.push(idCheckbox);
         localStorage.setItem("checkbox4", JSON.stringify(arrayCheckbox4));
         mostrarTarefas4();
+        ++idCheckbox;
+        addTarefaNum = idCheckbox;
+        localStorage.setItem("tarefas", JSON.stringify(addTarefaNum));
       } else if (id === 5) {
         let listaTarefa = {
           tarefa: inputTarefa.value,
@@ -359,11 +352,13 @@ conteudoArrayListas.forEach((undefined, id) => {
         arrayCheckbox5.push(idCheckbox);
         localStorage.setItem("checkbox5", JSON.stringify(arrayCheckbox5));
         mostrarTarefas5();
+        ++idCheckbox;
+        addTarefaNum = idCheckbox;
+        localStorage.setItem("tarefas", JSON.stringify(addTarefaNum));
       }
       inputTarefa.value = "";
       inputTarefa.focus();
       salvarCheckbox();
-      ++idCheckbox;
     } else {
       alert("Escreva uma tarefa!");
     }
