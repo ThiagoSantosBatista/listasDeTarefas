@@ -54,13 +54,6 @@ let contagemTarefas = localStorage.getItem("tarefas")
   : 0;
 let idCheckbox = contagemTarefas;
 
-function logout(event) {
-  if (event.type === "touchstart") {
-    event.preventDefault();
-  }
-  window.location.href = "index.html";
-}
-
 function toggleMenu(event) {
   if (event.type === "touchstart") {
     event.preventDefault();
@@ -77,14 +70,6 @@ function toggleMenu(event) {
     ? (document.body.style.pointerEvents = "none")
     : (document.body.style.pointerEvents = "auto");
 }
-
-(function () {
-  let nome = localStorage.getItem("user");
-  let jsonData = JSON.parse(nome);
-  let userSpan = document.querySelector(".user-roxo");
-
-  userSpan.innerHTML = jsonData.nome;
-})();
 
 function addListasDados() {
   let value = inputNomeLista.value.trim();
@@ -600,8 +585,6 @@ btnMenu.addEventListener("click", toggleMenu);
 btnMenu.addEventListener("touchstart", toggleMenu);
 btnMenuFechar.addEventListener("click", toggleMenu);
 btnMenuFechar.addEventListener("touchstart", toggleMenu);
-btnSair.addEventListener("click", logout);
-btnSair.addEventListener("touchstart", logout);
 navListas.addEventListener("click", toggleMenu);
 navListas.addEventListener("touchstart", toggleMenu);
 addLista.addEventListener("click", addListasDados);
