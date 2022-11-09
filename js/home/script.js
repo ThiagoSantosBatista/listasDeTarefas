@@ -30,6 +30,32 @@ let tarefasLista5 = localStorage.getItem("lista5")
   ? JSON.parse(localStorage.getItem("lista5"))
   : [];
 
+let arrayCheckbox0 = localStorage.getItem("checkbox0")
+  ? JSON.parse(localStorage.getItem("checkbox0"))
+  : [];
+let arrayCheckbox1 = localStorage.getItem("checkbox1")
+  ? JSON.parse(localStorage.getItem("checkbox1"))
+  : [];
+let arrayCheckbox2 = localStorage.getItem("checkbox2")
+  ? JSON.parse(localStorage.getItem("checkbox2"))
+  : [];
+let arrayCheckbox3 = localStorage.getItem("checkbox3")
+  ? JSON.parse(localStorage.getItem("checkbox3"))
+  : [];
+let arrayCheckbox4 = localStorage.getItem("checkbox4")
+  ? JSON.parse(localStorage.getItem("checkbox4"))
+  : [];
+let arrayCheckbox5 = localStorage.getItem("checkbox5")
+  ? JSON.parse(localStorage.getItem("checkbox5"))
+  : [];
+
+let contagemTarefas0 = localStorage.getItem("tarefas0")
+  ? parseInt(localStorage.getItem("tarefas0"))
+  : 0;
+let contagemTarefas1 = localStorage.getItem("tarefas1")
+  ? parseInt(localStorage.getItem("tarefas1"))
+  : 0;
+
 function logout(event) {
   if (event.type === "touchstart") {
     event.preventDefault();
@@ -124,12 +150,20 @@ conteudoArrayListas.forEach((text, id) => {
 function criarTarefa() {
   let id = conteudoArrayListas.length - 1;
   let idTarefa;
-  if (id === 0) idTarefa = tarefasLista0.length;
-  if (id === 1) idTarefa = tarefasLista1.length;
+
+  if (id === 0) {
+    idTarefa = tarefasLista0.length;
+    idCheckbox = contagemTarefas0;
+  }
+  if (id === 1) {
+    idTarefa = tarefasLista1.length;
+    idCheckbox = contagemTarefas1;
+  }
   if (id === 2) idTarefa = tarefasLista2.length;
   if (id === 3) idTarefa = tarefasLista3.length;
   if (id === 4) idTarefa = tarefasLista4.length;
   if (id === 5) idTarefa = tarefasLista5.length;
+
   let btnAddTarefa = document.querySelector(`.at${id}`);
   const ulListaConteudo = document.querySelector(`.lc${id}`);
   function adicionarTarefa() {
@@ -139,12 +173,12 @@ function criarTarefa() {
       let li = document.createElement("li");
       li.classList.add("lista__item");
       li.innerHTML = `<div class="checkbox-campo">
-       <input type="checkbox" class="checkbox" id="checkbox${id}-${idTarefa}">
-       <label for="checkbox${id}-${idTarefa}" class="descricao"></label>
+       <input type="checkbox" class="checkbox" id="checkbox${id}-${idCheckbox}}">
+       <label for="checkbox${id}-${idCheckbox}" class="descricao"></label>
        </div>
        <p>${inputTarefa.value}
        </p>
-       <img src="./img/delete.svg" alt="" class="delete" onclick="deletarTarefa${id}(${idTarefa})">
+       <img src="./img/delete.svg" alt="" class="delete" onclick="deletarTarefa${id}(${idTarefa}, ${idCheckbox})">
        <span class="linha"></span>`;
       ulListaConteudo.appendChild(li);
       if (id === 0) {
@@ -153,20 +187,30 @@ function criarTarefa() {
         };
         tarefasLista0.push(listaTarefa);
         localStorage.setItem("lista0", JSON.stringify(tarefasLista0));
+        arrayCheckbox0.push(idCheckbox);
+        localStorage.setItem("checkbox0", JSON.stringify(arrayCheckbox0));
         mostrarTarefas0();
+        contagemTarefas0 = idCheckbox;
+        localStorage.setItem("tarefas0", JSON.stringify(contagemTarefas0));
       } else if (id === 1) {
         let listaTarefa = {
           tarefa: inputTarefa.value,
         };
         tarefasLista1.push(listaTarefa);
         localStorage.setItem("lista1", JSON.stringify(tarefasLista1));
+        arrayCheckbox1.push(idCheckbox);
+        localStorage.setItem("checkbox1", JSON.stringify(arrayCheckbox1));
         mostrarTarefas1();
+        contagemTarefas1 = idCheckbox;
+        localStorage.setItem("tarefas1", JSON.stringify(contagemTarefas1));
       } else if (id === 2) {
         let listaTarefa = {
           tarefa: inputTarefa.value,
         };
         tarefasLista2.push(listaTarefa);
         localStorage.setItem("lista2", JSON.stringify(tarefasLista2));
+        arrayCheckbox2.push(idCheckbox);
+        localStorage.setItem("checkbox2", JSON.stringify(arrayCheckbox2));
         mostrarTarefas2();
       } else if (id === 3) {
         let listaTarefa = {
@@ -174,6 +218,8 @@ function criarTarefa() {
         };
         tarefasLista3.push(listaTarefa);
         localStorage.setItem("lista3", JSON.stringify(tarefasLista3));
+        arrayCheckbox3.push(idCheckbox);
+        localStorage.setItem("checkbox3", JSON.stringify(arrayCheckbox3));
         mostrarTarefas3();
       } else if (id === 4) {
         let listaTarefa = {
@@ -181,6 +227,8 @@ function criarTarefa() {
         };
         tarefasLista4.push(listaTarefa);
         localStorage.setItem("lista4", JSON.stringify(tarefasLista4));
+        arrayCheckbox4.push(idCheckbox);
+        localStorage.setItem("checkbox4", JSON.stringify(arrayCheckbox4));
         mostrarTarefas4();
       } else if (id === 5) {
         let listaTarefa = {
@@ -188,11 +236,14 @@ function criarTarefa() {
         };
         tarefasLista5.push(listaTarefa);
         localStorage.setItem("lista5", JSON.stringify(tarefasLista5));
+        arrayCheckbox5.push(idCheckbox);
+        localStorage.setItem("checkbox5", JSON.stringify(arrayCheckbox5));
         mostrarTarefas5();
       }
       inputTarefa.value = "";
       inputTarefa.focus();
-      isChecked();
+      salvarCheckbox();
+      ++idCheckbox;
     } else {
       alert("Escreva uma tarefa!");
     }
@@ -200,7 +251,7 @@ function criarTarefa() {
   btnAddTarefa.addEventListener("click", adicionarTarefa);
 }
 
-function isChecked() {
+function salvarCheckbox() {
   let lista = document.querySelectorAll("[type=checkbox]");
   lista.forEach((el) => {
     localStorage.setItem(el.id, el.checked);
@@ -213,20 +264,22 @@ document.addEventListener("click", (e) => {
 
   if (target.classList.contains("checkbox")) {
     divcheckbox.classList.toggle("concluido");
-    isChecked();
+    salvarCheckbox();
   }
 });
 
-let listaCheckbox = document.querySelectorAll(`[type*="checkbox"]`);
-listaCheckbox.forEach((el) => {
-  var checked = JSON.parse(localStorage.getItem(el.id));
-  document.getElementById(checked).checked = localStorage.getItem(el.che);
-});
-
 conteudoArrayListas.forEach((undefined, id) => {
+  let idCheckbox = 0;
   let idTarefa;
-  if (id === 0) idTarefa = tarefasLista0.length;
-  if (id === 1) idTarefa = tarefasLista1.length;
+
+  if (id === 0) {
+    idTarefa = tarefasLista0.length;
+    idCheckbox = contagemTarefas0;
+  }
+  if (id === 1) {
+    idTarefa = tarefasLista1.length;
+    idCheckbox = contagemTarefas1;
+  }
   if (id === 2) idTarefa = tarefasLista2.length;
   if (id === 3) idTarefa = tarefasLista3.length;
   if (id === 4) idTarefa = tarefasLista4.length;
@@ -240,12 +293,12 @@ conteudoArrayListas.forEach((undefined, id) => {
       let li = document.createElement("li");
       li.classList.add("lista__item");
       li.innerHTML = `<div class="checkbox-campo">
-         <input type="checkbox" class="checkbox" id="checkbox${id}-${idTarefa}">
-         <label for="checkbox${id}-${idTarefa}" class="descricao"></label>
+         <input type="checkbox" class="checkbox" id="checkbox${id}-${idCheckbox}">
+         <label for="checkbox${id}-${idCheckbox}" class="descricao"></label>
          </div>
          <p>${inputTarefa.value}
          </p>
-         <img src="./img/delete.svg" alt="" class="delete" onclick="deletarTarefa${id}(${idTarefa})">
+         <img src="./img/delete.svg" alt="" class="delete" onclick="deletarTarefa${id}(${idTarefa}, ${idCheckbox})">
          <span class="linha"></span>`;
       ulListaConteudo.appendChild(li);
       if (id === 0) {
@@ -254,46 +307,63 @@ conteudoArrayListas.forEach((undefined, id) => {
         };
         tarefasLista0.push(listaTarefa);
         localStorage.setItem("lista0", JSON.stringify(tarefasLista0));
-        ++idTarefa;
+        arrayCheckbox0.push(idCheckbox);
+        localStorage.setItem("checkbox0", JSON.stringify(arrayCheckbox0));
+        mostrarTarefas0();
+        contagemTarefas0 = idCheckbox;
+        localStorage.setItem("tarefas0", JSON.stringify(contagemTarefas0));
       } else if (id === 1) {
         let listaTarefa = {
           tarefa: inputTarefa.value,
         };
         tarefasLista1.push(listaTarefa);
         localStorage.setItem("lista1", JSON.stringify(tarefasLista1));
-        ++idTarefa;
+        arrayCheckbox1.push(idCheckbox);
+        localStorage.setItem("checkbox1", JSON.stringify(arrayCheckbox1));
+        mostrarTarefas1();
+        contagemTarefas1 = idCheckbox;
+        localStorage.setItem("tarefas1", JSON.stringify(contagemTarefas1));
       } else if (id === 2) {
         let listaTarefa = {
           tarefa: inputTarefa.value,
         };
         tarefasLista2.push(listaTarefa);
         localStorage.setItem("lista2", JSON.stringify(tarefasLista2));
-        ++idTarefa;
+        arrayCheckbox2.push(idCheckbox);
+        localStorage.setItem("checkbox2", JSON.stringify(arrayCheckbox2));
+        mostrarTarefas2();
       } else if (id === 3) {
         let listaTarefa = {
           tarefa: inputTarefa.value,
         };
         tarefasLista3.push(listaTarefa);
         localStorage.setItem("lista3", JSON.stringify(tarefasLista3));
-        ++idTarefa;
+        arrayCheckbox3.push(idCheckbox);
+        localStorage.setItem("checkbox3", JSON.stringify(arrayCheckbox3));
+        mostrarTarefas3();
       } else if (id === 4) {
         let listaTarefa = {
           tarefa: inputTarefa.value,
         };
         tarefasLista4.push(listaTarefa);
         localStorage.setItem("lista4", JSON.stringify(tarefasLista4));
-        ++idTarefa;
+        arrayCheckbox4.push(idCheckbox);
+        localStorage.setItem("checkbox4", JSON.stringify(arrayCheckbox4));
+        mostrarTarefas4();
       } else if (id === 5) {
         let listaTarefa = {
           tarefa: inputTarefa.value,
         };
         tarefasLista5.push(listaTarefa);
         localStorage.setItem("lista5", JSON.stringify(tarefasLista5));
-        ++idTarefa;
+        arrayCheckbox5.push(idCheckbox);
+        localStorage.setItem("checkbox5", JSON.stringify(arrayCheckbox5));
+        mostrarTarefas5();
       }
       inputTarefa.value = "";
       inputTarefa.focus();
-      isChecked();
+      salvarCheckbox();
+      ++idCheckbox;
     } else {
       alert("Escreva uma tarefa!");
     }
@@ -302,121 +372,145 @@ conteudoArrayListas.forEach((undefined, id) => {
 });
 
 function mostrarTarefas0() {
+  let i = 0;
   const ulListaConteudo = document.querySelector(".lc0");
   if (ulListaConteudo) ulListaConteudo.innerHTML = "";
   tarefasLista0.forEach((value, id) => {
     let tarefa = value.tarefa;
+    let idCheckbox = JSON.parse(localStorage.getItem(`checkbox0`));
     let li = document.createElement("li");
     li.classList.add("lista__item");
     li.innerHTML = `<div class="checkbox-campo">
-       <input type="checkbox" class="checkbox" id="checkbox0-${id}">
-       <label for="checkbox0-${id}" class="descricao"></label>
+       <input type="checkbox" class="checkbox"" id="checkbox0-${idCheckbox[id]}">
+       <label for="checkbox0-${idCheckbox[id]}" class="descricao"></label>
        </div>
        <p>${tarefa}
        </p>
-       <img src="./img/delete.svg" alt="" class="delete" onclick="deletarTarefa0(${id})">
+       <img src="./img/delete.svg" alt="" class="delete" onclick="deletarTarefa0(${id}, ${idCheckbox[id]})">
        <span class="linha"></span>`;
     ulListaConteudo.appendChild(li);
+    ++i;
+    isChecked();
   });
 }
 mostrarTarefas0();
 
 function mostrarTarefas1() {
+  let i = 0;
   const ulListaConteudo = document.querySelector(".lc1");
   if (ulListaConteudo) ulListaConteudo.innerHTML = "";
   tarefasLista1.forEach((value, id) => {
     let tarefa = value.tarefa;
+    let idCheckbox = JSON.parse(localStorage.getItem(`checkbox1`));
     let li = document.createElement("li");
     li.classList.add("lista__item");
     li.innerHTML = `<div class="checkbox-campo">
-         <input type="checkbox" class="checkbox" id="checkbox1-${id}">
-         <label for="checkbox1-${id}" class="descricao"></label>
+         <input type="checkbox" class="checkbox"" id="checkbox1-${idCheckbox[id]}">
+         <label for="checkbox1-${idCheckbox[id]}" class="descricao"></label>
          </div>
          <p>${tarefa}
          </p>
-         <img src="./img/delete.svg" alt="" class="delete" onclick="deletarTarefa1(${id})">
+         <img src="./img/delete.svg" alt="" class="delete" onclick="deletarTarefa1(${id}, ${idCheckbox[id]})">
          <span class="linha"></span>`;
     ulListaConteudo.appendChild(li);
+    ++i;
+    isChecked();
   });
 }
 mostrarTarefas1();
 
 function mostrarTarefas2() {
+  let i = 0;
   const ulListaConteudo = document.querySelector(".lc2");
   if (ulListaConteudo) ulListaConteudo.innerHTML = "";
   tarefasLista2.forEach((value, id) => {
     let tarefa = value.tarefa;
+    let idCheckbox = JSON.parse(localStorage.getItem(`checkbox2`));
     let li = document.createElement("li");
     li.classList.add("lista__item");
     li.innerHTML = `<div class="checkbox-campo">
-         <input type="checkbox" class="checkbox" id="checkbox2-${id}">
-         <label for="checkbox2-${id}" class="descricao"></label>
+         <input type="checkbox" class="checkbox"" id="checkbox2-${idCheckbox[id]}">
+         <label for="checkbox2-${idCheckbox[id]}" class="descricao"></label>
          </div>
          <p>${tarefa}
          </p>
-         <img src="./img/delete.svg" alt="" class="delete" onclick="deletarTarefa2(${id})">
+         <img src="./img/delete.svg" alt="" class="delete" onclick="deletarTarefa2(${id}, ${idCheckbox[id]})">
          <span class="linha"></span>`;
     ulListaConteudo.appendChild(li);
+    ++i;
+    isChecked();
   });
 }
 mostrarTarefas2();
 
 function mostrarTarefas3() {
+  let i = 0;
   const ulListaConteudo = document.querySelector(".lc3");
   if (ulListaConteudo) ulListaConteudo.innerHTML = "";
   tarefasLista3.forEach((value, id) => {
     let tarefa = value.tarefa;
+    let idCheckbox = JSON.parse(localStorage.getItem(`checkbox3`));
     let li = document.createElement("li");
     li.classList.add("lista__item");
     li.innerHTML = `<div class="checkbox-campo">
-         <input type="checkbox" class="checkbox" id="checkbox3-${id}">
-         <label for="checkbox3-${id}" class="descricao"></label>
+         <input type="checkbox" class="checkbox"" id="checkbox3-${idCheckbox[id]}">
+         <label for="checkbox3-${idCheckbox[id]}" class="descricao"></label>
          </div>
          <p>${tarefa}
          </p>
-         <img src="./img/delete.svg" alt="" class="delete" onclick="deletarTarefa3(${id})">
+         <img src="./img/delete.svg" alt="" class="delete" onclick="deletarTarefa3(${id}, ${idCheckbox[id]})">
          <span class="linha"></span>`;
     ulListaConteudo.appendChild(li);
+    ++i;
+    isChecked();
   });
 }
 mostrarTarefas3();
 
 function mostrarTarefas4() {
+  let i = 0;
   const ulListaConteudo = document.querySelector(".lc4");
   if (ulListaConteudo) ulListaConteudo.innerHTML = "";
   tarefasLista4.forEach((value, id) => {
     let tarefa = value.tarefa;
+    let idCheckbox = JSON.parse(localStorage.getItem(`checkbox4`));
     let li = document.createElement("li");
     li.classList.add("lista__item");
     li.innerHTML = `<div class="checkbox-campo">
-         <input type="checkbox" class="checkbox" id="checkbox4-${id}">
-         <label for="checkbox4-${id}" class="descricao"></label>
+         <input type="checkbox" class="checkbox"" id="checkbox4-${idCheckbox[id]}">
+         <label for="checkbox4-${idCheckbox[id]}" class="descricao"></label>
          </div>
          <p>${tarefa}
          </p>
-         <img src="./img/delete.svg" alt="" class="delete" onclick="deletarTarefa4(${id})">
+         <img src="./img/delete.svg" alt="" class="delete" onclick="deletarTarefa4(${id}, ${idCheckbox[id]})">
          <span class="linha"></span>`;
     ulListaConteudo.appendChild(li);
+    ++i;
+    isChecked();
   });
 }
 mostrarTarefas4();
 
 function mostrarTarefas5() {
+  let i = 0;
   const ulListaConteudo = document.querySelector(".lc5");
   if (ulListaConteudo) ulListaConteudo.innerHTML = "";
   tarefasLista5.forEach((value, id) => {
     let tarefa = value.tarefa;
+    let idCheckbox = JSON.parse(localStorage.getItem(`checkbox5`));
     let li = document.createElement("li");
     li.classList.add("lista__item");
     li.innerHTML = `<div class="checkbox-campo">
-         <input type="checkbox" class="checkbox" id="checkbox5-${id}">
-         <label for="checkbox5-${id}" class="descricao"></label>
+         <input type="checkbox" class="checkbox"" id="checkbox5-${idCheckbox[id]}">
+         <label for="checkbox5-${idCheckbox[id]}" class="descricao"></label>
          </div>
          <p>${tarefa}
          </p>
-         <img src="./img/delete.svg" alt="" class="delete" onclick="deletarTarefa5(${id})">
+         <img src="./img/delete.svg" alt="" class="delete" onclick="deletarTarefa5(${id}, ${idCheckbox[id]})">
          <span class="linha"></span>`;
     ulListaConteudo.appendChild(li);
+    ++i;
+    isChecked();
   });
 }
 mostrarTarefas5();
@@ -431,41 +525,81 @@ function fecharModal() {
   modalAddLista.classList.remove("ativo");
 }
 
-function deletarTarefa0(i) {
+function deletarTarefa0(i, idcheckbox) {
+  let buscarIndice = arrayCheckbox0.indexOf(idcheckbox);
   tarefasLista0.splice(i, 1);
   localStorage.setItem("lista0", JSON.stringify(tarefasLista0));
+
+  arrayCheckbox0.splice(buscarIndice, 1);
+  localStorage.removeItem(`checkbox0-${idcheckbox}`);
+  localStorage.setItem("checkbox0", JSON.stringify(arrayCheckbox0));
   mostrarTarefas0();
 }
 
-function deletarTarefa1(i) {
+function deletarTarefa1(i, idcheckbox) {
+  let buscarIndice = arrayCheckbox1.indexOf(idcheckbox);
   tarefasLista1.splice(i, 1);
   localStorage.setItem("lista1", JSON.stringify(tarefasLista1));
+
+  arrayCheckbox1.splice(buscarIndice, 1);
+  localStorage.removeItem(`checkbox1-${idcheckbox}`);
+  localStorage.setItem("checkbox1", JSON.stringify(arrayCheckbox1));
   mostrarTarefas1();
 }
 
-function deletarTarefa2(i) {
+function deletarTarefa2(i, idcheckbox) {
+  let buscarIndice = arrayCheckbox2.indexOf(idcheckbox);
   tarefasLista2.splice(i, 1);
   localStorage.setItem("lista2", JSON.stringify(tarefasLista2));
+
+  arrayCheckbox2.splice(buscarIndice, 1);
+  localStorage.removeItem(`checkbox2-${idcheckbox}`);
+  localStorage.setItem("checkbox2", JSON.stringify(arrayCheckbox2));
   mostrarTarefas2();
 }
 
-function deletarTarefa3(i) {
+function deletarTarefa3(i, idcheckbox) {
+  let buscarIndice = arrayCheckbox3.indexOf(idcheckbox);
   tarefasLista3.splice(i, 1);
   localStorage.setItem("lista3", JSON.stringify(tarefasLista3));
+
+  arrayCheckbox3.splice(buscarIndice, 1);
+  localStorage.removeItem(`checkbox3-${idcheckbox}`);
+  localStorage.setItem("checkbox3", JSON.stringify(arrayCheckbox3));
   mostrarTarefas3();
 }
 
-function deletarTarefa4(i) {
+function deletarTarefa4(i, idcheckbox) {
+  let buscarIndice = arrayCheckbox4.indexOf(idcheckbox);
   tarefasLista4.splice(i, 1);
   localStorage.setItem("lista4", JSON.stringify(tarefasLista4));
+
+  arrayCheckbox4.splice(buscarIndice, 1);
+  localStorage.removeItem(`checkbox4-${idcheckbox}`);
+  localStorage.setItem("checkbox4", JSON.stringify(arrayCheckbox4));
   mostrarTarefas4();
 }
 
-function deletarTarefa5(i) {
+function deletarTarefa5(i, idcheckbox) {
+  let buscarIndice = arrayCheckbox5.indexOf(idcheckbox);
   tarefasLista5.splice(i, 1);
   localStorage.setItem("lista5", JSON.stringify(tarefasLista5));
+
+  arrayCheckbox5.splice(buscarIndice, 1);
+  localStorage.removeItem(`checkbox5-${idcheckbox}`);
+  localStorage.setItem("checkbox5", JSON.stringify(arrayCheckbox5));
   mostrarTarefas5();
 }
+
+function isChecked() {
+  let listaCheckbox = document.querySelectorAll("input[type=checkbox]");
+  listaCheckbox.forEach((el) => {
+    var checked = JSON.parse(localStorage.getItem(el.id));
+    document.getElementById(el.id).checked = checked;
+    if (el.checked) el.closest("li").classList.add("concluido");
+  });
+}
+isChecked();
 
 btnMenu.addEventListener("click", toggleMenu);
 btnMenu.addEventListener("touchstart", toggleMenu);

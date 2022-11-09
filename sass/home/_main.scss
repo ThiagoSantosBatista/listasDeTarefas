@@ -59,9 +59,11 @@
       width: 100%;
       font-size: 1.6rem;
       padding: 0.5rem 1rem;
-      border: 0.1rem solid var(--cor-neutra-bg);
       border-radius: 0.5rem;
-      &:focus {
+      border: none;
+      outline: 0.15rem solid var(--cor-neutra-bg);
+      &:focus, &:hover {
+        outline-width: 0.2rem;
         outline-color: var(--cor-roxo2);
       }
     }

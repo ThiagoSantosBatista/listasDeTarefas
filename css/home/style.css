@@ -228,10 +228,12 @@ a {
   width: 100%;
   font-size: 1.6rem;
   padding: 0.5rem 1rem;
-  border: 0.1rem solid var(--cor-neutra-bg);
   border-radius: 0.5rem;
+  border: none;
+  outline: 0.15rem solid var(--cor-neutra-bg);
 }
-.lista__add input:focus {
+.lista__add input:focus, .lista__add input:hover {
+  outline-width: 0.2rem;
   outline-color: var(--cor-roxo2);
 }
 .lista__add button {
