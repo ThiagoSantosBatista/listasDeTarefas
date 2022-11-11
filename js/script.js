@@ -55,9 +55,18 @@ let contagemTarefas = localStorage.getItem("tarefas")
   : 0;
 let idCheckbox = contagemTarefas;
 
+function carregarTema(){
+    const darkMode = localStorage.getItem('darkMode');
+    if(darkMode) trocarTema();
+}
+carregarTema();
+
 function trocarTema() {
     const html = document.querySelector('html');
-    html.classList.toggle('dark-mode')
+    html.classList.toggle('dark-mode');
+
+    localStorage.removeItem('darkMode');
+    if(html.classList.contains('dark-mode')) localStorage.setItem("darkMode", 1);
 }
 
 function toggleMenu(event) {
@@ -88,6 +97,7 @@ function addListasDados() {
     localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
     criarLista(conteudoArrayListas[conteudoArrayListas.length - 1]);
     criarTarefa(conteudoArrayListas[conteudoArrayListas.length - 1]);
+    alert('Lista criada com sucesso!');
   } else {
     alert(
       "Nome da lista deve ter no mínimo 1 caractere! Obs: Máximo de 6 listas."

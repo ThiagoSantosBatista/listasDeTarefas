@@ -68,6 +68,7 @@ body {
   min-height: 100vh;
   color: var(--cor-neutra-bg);
   background-color: var(--cor-neutra2-bg);
+  transition: 0.2s;
 }
 
 img {
