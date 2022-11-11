@@ -16,7 +16,7 @@
       cursor: pointer;
       text-transform: uppercase;
       border-radius: 0.5rem;
-      color: var(--cor-neutra2-bg);
+      color: var(--cor-texto);
       background: var(--cor-roxo2);
     }
   }
@@ -41,7 +41,7 @@
     border-top-right-radius: 0.5rem;
     padding: 1.5rem 1.5rem;
     gap: 1.5rem;
-    color: var(--cor-neutra2-bg);
+    color: var(--cor-texto);
     background: var(--cor-roxo4);
     h1 {
       font-size: 2rem;
@@ -61,7 +61,8 @@
       padding: 0.5rem 1rem;
       border-radius: 0.5rem;
       border: none;
-      outline: 0.15rem solid var(--cor-neutra-bg);
+      background: var(--cor-neutra2-bg);
+      outline: 0.15rem solid var(--cor-roxo5);
       &:focus, &:hover {
         outline-width: 0.2rem;
         outline-color: var(--cor-roxo2);
@@ -75,7 +76,7 @@
       border: none;
       padding: 1rem 1.5rem;
       border-radius: 0.5rem;
-      color: var(--cor-neutra2-bg);
+      color: var(--cor-texto);
       background: var(--cor-roxo2);
     }
   }

@@ -1,7 +1,8 @@
 :root {
   --cor-neutra-bg: #111111;
   --cor-neutra2-bg: #ffffff;
-  --cor-cinza: #727272;
+  --cor-texto: #ffffff;
+  --cor-cinza: #3b3b3b;
   --cor-cinza2: #2f2f2f;
   --cor-roxo: #6672fe;
   --cor-roxo2: #5a45fe;
@@ -17,10 +18,36 @@
 .dark-mode:root {
   --cor-neutra-bg: #ffffff;
   --cor-neutra2-bg: #111111;
-  --box-shadow: rgba(255, 255, 255, 0.2);
+  --box-shadow: rgba(255, 255, 255, 0.3);
+}
+.dark-mode:root .nav__item a {
+  color: #f3f3f3;
+}
+.dark-mode:root .nav__item a:hover {
+  color: #f3f3f3;
+}
+.dark-mode:root .nav__item a:hover svg path {
+  fill: var(--cor-neutra-bg);
+}
+.dark-mode:root .modal input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+.dark-mode:root .modal .adicionar {
+  color: #ffffff;
 }
 .dark-mode:root svg path {
-  fill: var(--cor-neutra-bg);
+  fill: #ffffff;
+}
+.dark-mode:root .addTarefa {
+  color: #ffffff;
+}
+.dark-mode:root .inputTarefa,
+.dark-mode:root .modal input {
+  color: #ffffff;
+  background: #3b3b3b;
+}
+.dark-mode:root .lista {
+  background: #2f2f2f;
 }
 
 *,
@@ -80,7 +107,7 @@ a {
 }
 
 .nav__btn,
-.sair {
+.btnTrocarTema {
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -89,11 +116,6 @@ a {
   border: none;
   cursor: pointer;
   background: none;
-}
-
-.sair {
-  font-size: 1.8rem;
-  color: var(--cor-vermelho);
 }
 
 .nav__btn-fechar {
@@ -126,10 +148,6 @@ a {
   font-size: 3rem;
   font-weight: 500;
   margin-bottom: 4rem;
-}
-.nav .nav__item-usuario h1 .user-roxo {
-  color: var(--cor-roxo2);
-  font-weight: 500;
 }
 .nav .nav__item {
   margin-bottom: 0.2rem;
@@ -164,6 +182,21 @@ a {
   display: none;
 }
 
+.temaClaro {
+  display: none;
+}
+
+.temaEscuro {
+  display: block;
+}
+
+.dark-mode .temaClaro {
+  display: block;
+}
+.dark-mode .temaEscuro {
+  display: none;
+}
+
 .main {
   padding: 9rem 7% 5rem 7%;
 }
@@ -184,7 +217,7 @@ a {
   cursor: pointer;
   text-transform: uppercase;
   border-radius: 0.5rem;
-  color: var(--cor-neutra2-bg);
+  color: var(--cor-texto);
   background: var(--cor-roxo2);
 }
 .main__listas {
@@ -209,7 +242,7 @@ a {
   border-top-right-radius: 0.5rem;
   padding: 1.5rem 1.5rem;
   gap: 1.5rem;
-  color: var(--cor-neutra2-bg);
+  color: var(--cor-texto);
   background: var(--cor-roxo4);
 }
 .lista__nome h1 {
@@ -230,7 +263,8 @@ a {
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   border: none;
-  outline: 0.15rem solid var(--cor-neutra-bg);
+  background: var(--cor-neutra2-bg);
+  outline: 0.15rem solid var(--cor-roxo5);
 }
 .lista__add input:focus, .lista__add input:hover {
   outline-width: 0.2rem;
@@ -244,7 +278,7 @@ a {
   border: none;
   padding: 1rem 1.5rem;
   border-radius: 0.5rem;
-  color: var(--cor-neutra2-bg);
+  color: var(--cor-texto);
   background: var(--cor-roxo2);
 }
 .lista__conteudo {
@@ -349,13 +383,14 @@ a {
   width: 100%;
   font-size: 2rem;
   padding: 1rem 1.5rem;
-  outline: 0.1rem solid var(--cor-cinza);
+  outline: 0.15rem solid var(--cor-roxo5);
   border: none;
   border-radius: 0.5rem;
   margin-bottom: 1rem;
 }
-.adicionarLista input:focus {
-  outline: 0.25rem solid var(--cor-roxo3);
+.adicionarLista input:hover, .adicionarLista input:focus {
+  outline-width: 0.2rem;
+  outline-color: var(--cor-roxo2);
 }
 .adicionarLista .adicionar {
   width: 100%;

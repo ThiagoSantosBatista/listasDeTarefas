@@ -7,6 +7,7 @@ const divListas = document.querySelector(".main__listas");
 const addLista = document.querySelector(".adicionar");
 const btnFecharModal = document.querySelector(".fecharModal");
 const inputNomeLista = document.querySelector("#inputNomeLista");
+const btnTrocarTema = document.querySelector(".btnTrocarTema");
 let conteudoArrayListas = localStorage.getItem("listas")
   ? JSON.parse(localStorage.getItem("listas"))
   : [];
@@ -53,6 +54,11 @@ let contagemTarefas = localStorage.getItem("tarefas")
   ? parseInt(localStorage.getItem("tarefas"))
   : 0;
 let idCheckbox = contagemTarefas;
+
+function trocarTema() {
+    const html = document.querySelector('html');
+    html.classList.toggle('dark-mode')
+}
 
 function toggleMenu(event) {
   if (event.type === "touchstart") {
@@ -226,7 +232,7 @@ function criarTarefa() {
 }
 
 function salvarCheckbox() {
-  let lista = document.querySelectorAll("[type=checkbox]");
+  let lista = document.querySelectorAll(".checkbox");
   lista.forEach((el) => {
     localStorage.setItem(el.id, el.checked);
   });
@@ -590,3 +596,4 @@ navListas.addEventListener("touchstart", toggleMenu);
 addLista.addEventListener("click", addListasDados);
 btnAddLista.addEventListener("click", abrirModal);
 btnFecharModal.addEventListener("click", fecharModal);
+btnTrocarTema.addEventListener('click', trocarTema);

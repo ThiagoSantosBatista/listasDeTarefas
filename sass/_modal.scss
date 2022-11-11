@@ -43,12 +43,13 @@
     width: 100%;
     font-size: 2rem;
     padding: 1rem 1.5rem;
-    outline: 0.1rem solid var(--cor-cinza);
+    outline: 0.15rem solid var(--cor-roxo5);
     border: none;
     border-radius: 0.5rem;
     margin-bottom: 1rem;
-    &:focus {
-      outline: 0.25rem solid var(--cor-roxo3);
+    &:hover, &:focus {
+        outline-width: 0.2rem;
+        outline-color: var(--cor-roxo2);
     }
   }
   .adicionar {
