@@ -19,15 +19,15 @@
 .dark-mode:root {
   --cor-neutra-bg: #ffffff;
   --cor-neutra2-bg: #111111;
-  --box-shadow: rgba(255, 255, 255, 0.3);
+  --box-shadow: rgba(255, 255, 255, 0.2);
 }
 .dark-mode:root .nav__list-box {
+  border-right: 0.1rem solid var(--cor-roxo6);
+}
+.dark-mode:root .adicionarLista-box, .dark-mode:root .editarLista-box {
   border: 0.1rem solid var(--cor-roxo6);
 }
-.dark-mode:root .adicionarLista-box {
-  border: 0.1rem solid var(--cor-roxo6);
-}
-.dark-mode:root .adicionarLista-box h1 {
+.dark-mode:root .adicionarLista-box h1, .dark-mode:root .editarLista-box h1 {
   color: #8090ff;
 }
 .dark-mode:root .lista__item .checkbox-campo input:checked ~ .descricao:before {
@@ -148,7 +148,7 @@ a {
   width: 28rem;
   height: 100vh;
   transition: all 0.3s;
-  border: 0.1rem solid var(--cor-roxo2);
+  border-right: 0.1rem solid var(--cor-roxo2);
   background: var(--cor-neutra2-bg);
 }
 .nav .nav__list {
@@ -366,29 +366,35 @@ a {
   background: rgba(17, 17, 17, 0.7);
 }
 
-.adicionarLista {
+.adicionarLista,
+.editarLista {
   display: none;
 }
-.adicionarLista.ativo {
+.adicionarLista.ativo,
+.editarLista.ativo {
   display: grid;
 }
-.adicionarLista-box {
+.adicionarLista-box,
+.editarLista-box {
   margin: 1rem 2rem;
   max-width: 40rem;
+  width: 90%;
   padding: 2rem;
   border-radius: 0.5rem;
   background: var(--cor-neutra2-bg);
   border: 0.1rem solid var(--cor-roxo2);
   position: relative;
 }
-.adicionarLista h1 {
+.adicionarLista h1,
+.editarLista h1 {
   font-size: 3.2rem;
   font-weight: 500;
   color: var(--cor-roxo2);
   margin-bottom: 4rem;
   position: relative;
 }
-.adicionarLista h1::before {
+.adicionarLista h1::before,
+.editarLista h1::before {
   content: "";
   display: block;
   width: 3.5rem;
@@ -398,32 +404,49 @@ a {
   bottom: -0.5rem;
   left: 0;
 }
-.adicionarLista input {
+.adicionarLista input,
+.editarLista input {
   width: 100%;
-  font-size: 2rem;
+  font-size: 1.7rem;
   padding: 1rem 1.5rem;
   outline: 0.15rem solid var(--cor-roxo5);
   border: none;
   border-radius: 0.5rem;
   margin-bottom: 1rem;
 }
-.adicionarLista input:hover, .adicionarLista input:focus {
+.adicionarLista input:hover, .adicionarLista input:focus,
+.editarLista input:hover,
+.editarLista input:focus {
   outline-width: 0.2rem;
   outline-color: var(--cor-roxo2);
 }
-.adicionarLista .adicionar {
+.adicionarLista .adicionar,
+.adicionarLista .trocarNomeLista,
+.adicionarLista .deletarLista,
+.editarLista .adicionar,
+.editarLista .trocarNomeLista,
+.editarLista .deletarLista {
   width: 100%;
-  font-size: 2rem;
+  font-size: 1.7rem;
   padding: 1rem;
+  letter-spacing: 0.1rem;
   text-transform: uppercase;
   font-weight: 700;
   cursor: pointer;
   background-color: var(--cor-roxo2);
-  color: var(--cor-neutra2-bg);
+  color: var(--cor-texto);
   border: none;
   border-radius: 0.5rem;
 }
-.adicionarLista .fecharModal {
+.adicionarLista .deletarLista,
+.editarLista .deletarLista {
+  margin-top: 1rem;
+  color: var(--cor-vermelho);
+  border: 0.1rem solid var(--cor-vermelho);
+  background: none;
+}
+.adicionarLista .fecharModal,
+.editarLista .fecharModal {
   position: absolute;
   top: 0;
   right: 0;
@@ -433,6 +456,13 @@ a {
   background-color: var(--cor-neutra2-bg);
   border: 0.2rem solid var(--cor-vermelho);
   border-radius: 50%;
+}
+
+.editarLista {
+  display: none;
+}
+.editarLista.ativo {
+  display: grid;
 }
 
 /*# sourceMappingURL=style.css.map */

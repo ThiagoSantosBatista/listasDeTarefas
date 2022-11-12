@@ -2,52 +2,15 @@ const btnMenu = document.querySelector(".nav__btn");
 const btnMenuFechar = document.querySelector(".nav__btn-fechar");
 const btnSair = document.querySelector(".sair");
 const navListas = document.querySelector(".nav__listas");
-const btnAddLista = document.querySelector("#btnAddLista");
+const btnAddLista = document.querySelector(".btnAddLista");
 const divListas = document.querySelector(".main__listas");
 const addLista = document.querySelector(".adicionar");
-const btnFecharModal = document.querySelector(".fecharModal");
+const btnFecharModal = document.querySelectorAll(".fecharModal");
 const inputNomeLista = document.querySelector("#inputNomeLista");
 const btnTrocarTema = document.querySelector(".btnTrocarTema");
+
 let conteudoArrayListas = localStorage.getItem("listas")
   ? JSON.parse(localStorage.getItem("listas"))
-  : [];
-
-let tarefasLista0 = localStorage.getItem("lista0")
-  ? JSON.parse(localStorage.getItem("lista0"))
-  : [];
-let tarefasLista1 = localStorage.getItem("lista1")
-  ? JSON.parse(localStorage.getItem("lista1"))
-  : [];
-let tarefasLista2 = localStorage.getItem("lista2")
-  ? JSON.parse(localStorage.getItem("lista2"))
-  : [];
-let tarefasLista3 = localStorage.getItem("lista3")
-  ? JSON.parse(localStorage.getItem("lista3"))
-  : [];
-let tarefasLista4 = localStorage.getItem("lista4")
-  ? JSON.parse(localStorage.getItem("lista4"))
-  : [];
-let tarefasLista5 = localStorage.getItem("lista5")
-  ? JSON.parse(localStorage.getItem("lista5"))
-  : [];
-
-let arrayCheckbox0 = localStorage.getItem("checkbox0")
-  ? JSON.parse(localStorage.getItem("checkbox0"))
-  : [];
-let arrayCheckbox1 = localStorage.getItem("checkbox1")
-  ? JSON.parse(localStorage.getItem("checkbox1"))
-  : [];
-let arrayCheckbox2 = localStorage.getItem("checkbox2")
-  ? JSON.parse(localStorage.getItem("checkbox2"))
-  : [];
-let arrayCheckbox3 = localStorage.getItem("checkbox3")
-  ? JSON.parse(localStorage.getItem("checkbox3"))
-  : [];
-let arrayCheckbox4 = localStorage.getItem("checkbox4")
-  ? JSON.parse(localStorage.getItem("checkbox4"))
-  : [];
-let arrayCheckbox5 = localStorage.getItem("checkbox5")
-  ? JSON.parse(localStorage.getItem("checkbox5"))
   : [];
 
 let contagemTarefas = localStorage.getItem("tarefas")
@@ -55,18 +18,30 @@ let contagemTarefas = localStorage.getItem("tarefas")
   : 0;
 let idCheckbox = contagemTarefas;
 
-function carregarTema(){
-    const darkMode = localStorage.getItem('darkMode');
-    if(darkMode) trocarTema();
+for (let i = 0; i < 6; i++) {
+  window[`tarefasLista${i}`] = localStorage.getItem(`lista${i}`)
+    ? JSON.parse(localStorage.getItem(`lista${i}`))
+    : [];
+}
+
+for (let i = 0; i < 6; i++) {
+  window[`arrayCheckbox${i}`] = localStorage.getItem(`checkbox${i}`)
+    ? JSON.parse(localStorage.getItem(`checkbox${i}`))
+    : [];
+}
+
+function carregarTema() {
+  const darkMode = localStorage.getItem("darkMode");
+  if (darkMode) trocarTema();
 }
 carregarTema();
 
 function trocarTema() {
-    const html = document.querySelector('html');
-    html.classList.toggle('dark-mode');
+  const html = document.querySelector("html");
+  html.classList.toggle("dark-mode");
 
-    localStorage.removeItem('darkMode');
-    if(html.classList.contains('dark-mode')) localStorage.setItem("darkMode", 1);
+  localStorage.removeItem("darkMode");
+  if (html.classList.contains("dark-mode")) localStorage.setItem("darkMode", 1);
 }
 
 function toggleMenu(event) {
@@ -97,7 +72,6 @@ function addListasDados() {
     localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
     criarLista(conteudoArrayListas[conteudoArrayListas.length - 1]);
     criarTarefa(conteudoArrayListas[conteudoArrayListas.length - 1]);
-    alert('Lista criada com sucesso!');
   } else {
     alert(
       "Nome da lista deve ter no mínimo 1 caractere! Obs: Máximo de 6 listas."
@@ -106,33 +80,41 @@ function addListasDados() {
 }
 
 function criarLista(text) {
-  let conteudo = text.nome;
-  let id = conteudoArrayListas.length - 1;
-  let div = document.createElement("div");
-  div.classList.add(`lista`);
-  div.innerHTML = `<div class="lista__nome">
+  function listaConteudo() {
+    let conteudo = text.nome;
+    let id = conteudoArrayListas.length - 1;
+    let div = document.createElement("div");
+    div.classList.add(`lista`);
+    div.innerHTML = `<div class="lista__nome">
       <h1>${conteudo}</h1>
-      <img src="./img/edit_note.svg" alt="">
+      <img class="listaEdit" src="./img/edit_note.svg" alt="">
     </div>
     <div class="lista__add">
       <input class="inputTarefa it${id}" type="text">
       <button class="addTarefa at${id}">Add</button>
-    </div>
-    <ul class="lista__conteudo lc${id}">
-    </ul>
-    `;
-  divListas.appendChild(div);
-  inputNomeLista.value = "";
-  inputNomeLista.focus();
+      </div>
+      <ul class="lista__conteudo lc${id}">
+      </ul>
+      `;
+    divListas.appendChild(div);
+    inputNomeLista.value = "";
+    inputNomeLista.focus();
+  }
+  listaConteudo();
+  let btnEditarLista = document.querySelectorAll(".listaEdit");
+  btnEditarLista.forEach((e) => {
+    e.addEventListener("click", abrirModal);
+  });
 }
 
 conteudoArrayListas.forEach((text, id) => {
-  let conteudo = text.nome;
-  let div = document.createElement("div");
-  div.classList.add(`lista`);
-  div.innerHTML = `<div class="lista__nome">
+  function listaConteudo() {
+    let conteudo = text.nome;
+    let div = document.createElement("div");
+    div.classList.add(`lista`);
+    div.innerHTML = `<div class="lista__nome">
                               <h1>${conteudo}</h1>
-                              <img src="./img/edit_note.svg" alt="">
+                              <img class="listaEdit" src="./img/edit_note.svg" alt="">
                           </div>
                           <div class="lista__add">
                               <input class="inputTarefa it${id}" type="text">
@@ -141,9 +123,15 @@ conteudoArrayListas.forEach((text, id) => {
                           <ul class="lista__conteudo lc${id}">
                           </ul>
                           `;
-  divListas.appendChild(div);
-  inputNomeLista.value = "";
-  inputNomeLista.focus();
+    divListas.appendChild(div);
+    inputNomeLista.value = "";
+    inputNomeLista.focus();
+  }
+  listaConteudo();
+  let btnEditarLista = document.querySelectorAll(".listaEdit");
+  btnEditarLista.forEach((e) => {
+    e.addEventListener("click", abrirModal);
+  });
 });
 
 function criarTarefa() {
@@ -511,14 +499,28 @@ function mostrarTarefas5() {
 }
 mostrarTarefas5();
 
-function abrirModal() {
-  let modalAddLista = document.querySelector(".adicionarLista");
-  modalAddLista.classList.add("ativo");
+function abrirModal(event) {
+  let elemento = event.target;
+
+  if (elemento.classList.contains("btnAdd")) {
+    let modalAddLista = document.querySelector(".adicionarLista");
+    modalAddLista.classList.add("ativo");
+  } else {
+    let modalEditarLista = document.querySelector(".editarLista");
+    modalEditarLista.classList.add("ativo");
+  }
 }
 
-function fecharModal() {
-  let modalAddLista = document.querySelector(".adicionarLista");
-  modalAddLista.classList.remove("ativo");
+function fecharModal(event) {
+  let elemento = event.target;
+
+  if (elemento.classList.contains("modalAdd")) {
+    let modalAddLista = document.querySelector(".adicionarLista");
+    modalAddLista.classList.remove("ativo");
+  } else {
+    let modalEditarLista = document.querySelector(".editarLista");
+    modalEditarLista.classList.remove("ativo");
+  }
 }
 
 function deletarTarefa0(i, idcheckbox) {
@@ -604,6 +606,8 @@ btnMenuFechar.addEventListener("touchstart", toggleMenu);
 navListas.addEventListener("click", toggleMenu);
 navListas.addEventListener("touchstart", toggleMenu);
 addLista.addEventListener("click", addListasDados);
+btnTrocarTema.addEventListener("click", trocarTema);
 btnAddLista.addEventListener("click", abrirModal);
-btnFecharModal.addEventListener("click", fecharModal);
-btnTrocarTema.addEventListener('click', trocarTema);
+btnFecharModal.forEach((e) => {
+  e.addEventListener("click", fecharModal);
+});

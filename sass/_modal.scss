@@ -9,7 +9,8 @@
   z-index: 30;
   background: rgba(17, 17, 17, 0.7);
 }
-.adicionarLista {
+.adicionarLista,
+.editarLista {
   display: none;
   &.ativo {
     display: grid;
@@ -17,6 +18,7 @@
   &-box {
     margin: 1rem 2rem;
     max-width: 40rem;
+    width: 90%;
     padding: 2rem;
     border-radius: 0.5rem;
     background: var(--cor-neutra2-bg);
@@ -42,7 +44,7 @@
   }
   input {
     width: 100%;
-    font-size: 2rem;
+    font-size: 1.7rem;
     padding: 1rem 1.5rem;
     outline: 0.15rem solid var(--cor-roxo5);
     border: none;
@@ -54,17 +56,26 @@
       outline-color: var(--cor-roxo2);
     }
   }
-  .adicionar {
+  .adicionar,
+  .trocarNomeLista,
+  .deletarLista {
     width: 100%;
-    font-size: 2rem;
+    font-size: 1.7rem;
     padding: 1rem;
+    letter-spacing: 0.1rem;
     text-transform: uppercase;
     font-weight: 700;
     cursor: pointer;
     background-color: var(--cor-roxo2);
-    color: var(--cor-neutra2-bg);
+    color: var(--cor-texto);
     border: none;
     border-radius: 0.5rem;
+  }
+  .deletarLista {
+    margin-top: 1rem;
+    color: var(--cor-vermelho);
+    border: 0.1rem solid var(--cor-vermelho);
+    background: none;
   }
   .fecharModal {
     position: absolute;
@@ -76,5 +87,12 @@
     background-color: var(--cor-neutra2-bg);
     border: 0.2rem solid var(--cor-vermelho);
     border-radius: 50%;
+  }
+}
+
+.editarLista {
+  display: none;
+  &.ativo {
+    display: grid;
   }
 }

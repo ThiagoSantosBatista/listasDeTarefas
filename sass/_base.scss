@@ -18,11 +18,11 @@
 .dark-mode:root {
   --cor-neutra-bg: #ffffff;
   --cor-neutra2-bg: #111111;
-  --box-shadow: rgba(255, 255, 255, 0.3);
+  --box-shadow: rgba(255, 255, 255, 0.2);
   .nav__list-box {
-    border: 0.1rem solid var(--cor-roxo6);
+    border-right: 0.1rem solid var(--cor-roxo6);
   }
-  .adicionarLista-box {
+  .adicionarLista-box, .editarLista-box {
     border: 0.1rem solid var(--cor-roxo6);
     h1 {
       color: #8090ff;
