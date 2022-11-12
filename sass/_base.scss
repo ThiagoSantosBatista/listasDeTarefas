@@ -9,6 +9,7 @@
   --cor-roxo3: #2d18d6;
   --cor-roxo4: #4f4980;
   --cor-roxo5: #807ba8;
+  --cor-roxo6: #8090ff;
   --cor-verde: #d2f801;
   --cor-vermelho: #fe5045;
   --cor-vermelho2: #d62318;
@@ -18,6 +19,25 @@
   --cor-neutra-bg: #ffffff;
   --cor-neutra2-bg: #111111;
   --box-shadow: rgba(255, 255, 255, 0.3);
+  .nav__list-box {
+    border: 0.1rem solid var(--cor-roxo6);
+  }
+  .adicionarLista-box {
+    border: 0.1rem solid var(--cor-roxo6);
+    h1 {
+      color: #8090ff;
+    }
+  }
+  .lista__item {
+    .checkbox-campo {
+      input:checked ~ .descricao:before {
+        background-image: url("/img/checkboxChecked-Dark.svg");
+      }
+      .descricao:before {
+        background-image: url("/img/checkbox-Dark.svg");
+      }
+    }
+  }
   .nav__item a {
     color: #f3f3f3;
     &:hover {
@@ -69,7 +89,7 @@ body {
   min-height: 100vh;
   color: var(--cor-neutra-bg);
   background-color: var(--cor-neutra2-bg);
-  transition: .2s;
+  transition: 0.2s;
 }
 img {
   display: block;

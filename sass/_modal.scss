@@ -20,6 +20,7 @@
     padding: 2rem;
     border-radius: 0.5rem;
     background: var(--cor-neutra2-bg);
+    border: 0.1rem solid var(--cor-roxo2);
     position: relative;
   }
   h1 {
@@ -47,9 +48,10 @@
     border: none;
     border-radius: 0.5rem;
     margin-bottom: 1rem;
-    &:hover, &:focus {
-        outline-width: 0.2rem;
-        outline-color: var(--cor-roxo2);
+    &:hover,
+    &:focus {
+      outline-width: 0.2rem;
+      outline-color: var(--cor-roxo2);
     }
   }
   .adicionar {

@@ -9,6 +9,7 @@
   --cor-roxo3: #2d18d6;
   --cor-roxo4: #4f4980;
   --cor-roxo5: #807ba8;
+  --cor-roxo6: #8090ff;
   --cor-verde: #d2f801;
   --cor-vermelho: #fe5045;
   --cor-vermelho2: #d62318;
@@ -19,6 +20,21 @@
   --cor-neutra-bg: #ffffff;
   --cor-neutra2-bg: #111111;
   --box-shadow: rgba(255, 255, 255, 0.3);
+}
+.dark-mode:root .nav__list-box {
+  border: 0.1rem solid var(--cor-roxo6);
+}
+.dark-mode:root .adicionarLista-box {
+  border: 0.1rem solid var(--cor-roxo6);
+}
+.dark-mode:root .adicionarLista-box h1 {
+  color: #8090ff;
+}
+.dark-mode:root .lista__item .checkbox-campo input:checked ~ .descricao:before {
+  background-image: url("/img/checkboxChecked-Dark.svg");
+}
+.dark-mode:root .lista__item .checkbox-campo .descricao:before {
+  background-image: url("/img/checkbox-Dark.svg");
 }
 .dark-mode:root .nav__item a {
   color: #f3f3f3;
@@ -132,6 +148,7 @@ a {
   width: 28rem;
   height: 100vh;
   transition: all 0.3s;
+  border: 0.1rem solid var(--cor-roxo2);
   background: var(--cor-neutra2-bg);
 }
 .nav .nav__list {
@@ -361,6 +378,7 @@ a {
   padding: 2rem;
   border-radius: 0.5rem;
   background: var(--cor-neutra2-bg);
+  border: 0.1rem solid var(--cor-roxo2);
   position: relative;
 }
 .adicionarLista h1 {
