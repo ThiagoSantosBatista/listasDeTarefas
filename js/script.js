@@ -5,9 +5,11 @@ const navListas = document.querySelector(".nav__listas");
 const btnAddLista = document.querySelector(".btnAddLista");
 const divListas = document.querySelector(".main__listas");
 const addLista = document.querySelector(".adicionar");
-const btnFecharModal = document.querySelectorAll(".fecharModal");
+const btnFecharModal = document.querySelector(".fecharModal");
+const btnFecharModalLista = document.querySelector(".fecharModalLista");
 const inputNomeLista = document.querySelector("#inputNomeLista");
 const btnTrocarTema = document.querySelector(".btnTrocarTema");
+const btnTrocarNome = document.querySelector(".trocarNomeLista");
 
 let conteudoArrayListas = localStorage.getItem("listas")
   ? JSON.parse(localStorage.getItem("listas"))
@@ -71,7 +73,7 @@ function addListasDados() {
     conteudoArrayListas.push(listaDados);
     localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
     criarLista(conteudoArrayListas[conteudoArrayListas.length - 1]);
-    criarTarefa(conteudoArrayListas[conteudoArrayListas.length - 1]);
+    criarTarefa();
   } else {
     alert(
       "Nome da lista deve ter no mínimo 1 caractere! Obs: Máximo de 6 listas."
@@ -80,14 +82,14 @@ function addListasDados() {
 }
 
 function criarLista(text) {
+  let id = conteudoArrayListas.length - 1;
   function listaConteudo() {
     let conteudo = text.nome;
-    let id = conteudoArrayListas.length - 1;
     let div = document.createElement("div");
     div.classList.add(`lista`);
     div.innerHTML = `<div class="lista__nome">
-      <h1>${conteudo}</h1>
-      <img class="listaEdit" src="./img/edit_note.svg" alt="">
+      <h1 class="listaNome${id}">${conteudo}</h1>
+      <img class="listaEditar${id} listaEdit" src="./img/edit_note.svg" alt="">
     </div>
     <div class="lista__add">
       <input class="inputTarefa it${id}" type="text">
@@ -101,10 +103,65 @@ function criarLista(text) {
     inputNomeLista.focus();
   }
   listaConteudo();
+  eventoLista();
+}
+
+function eventoLista() {
   let btnEditarLista = document.querySelectorAll(".listaEdit");
   btnEditarLista.forEach((e) => {
-    e.addEventListener("click", abrirModal);
+    e.addEventListener("click", function (e) {
+      let elemento = e.target;
+      const inputEditarNome = document.querySelector("#editarNomeLista");
+
+      let modalEditarLista = document.querySelector(".editarLista");
+      modalEditarLista.classList.add("modal-aberto");
+      document.body.style.overflowY = "hidden";
+
+      if (elemento.classList.contains("listaEditar0")) {
+        inputEditarNome.classList.add("0");
+        let h1 = document.querySelector(".listaNome0");
+        inputEditarNome.value = h1.innerText;
+      }
+      if (elemento.classList.contains("listaEditar1")) {
+        inputEditarNome.classList.add("1");
+        let h1 = document.querySelector(".listaNome1");
+        inputEditarNome.value = h1.innerText;
+      }
+      if (elemento.classList.contains("listaEditar2")) {
+        inputEditarNome.classList.add("2");
+        let h1 = document.querySelector(".listaNome2");
+        inputEditarNome.value = h1.innerText;
+      }
+      if (elemento.classList.contains("listaEditar3")) {
+        inputEditarNome.classList.add("3");
+        let h1 = document.querySelector(".listaNome3");
+        inputEditarNome.value = h1.innerText;
+      }
+      if (elemento.classList.contains("listaEditar4")) {
+        inputEditarNome.classList.add("4");
+        let h1 = document.querySelector(".listaNome4");
+        inputEditarNome.value = h1.innerText;
+      }
+      if (elemento.classList.contains("listaEditar5")) {
+        inputEditarNome.classList.add("5");
+        let h1 = document.querySelector(".listaNome5");
+        inputEditarNome.value = h1.innerText;
+      }
+    });
   });
+}
+
+function abrirModal() {
+  let modalAddLista = document.querySelector(".adicionarLista");
+
+  modalAddLista.classList.add("modal-aberto");
+  document.body.style.overflowY = "hidden";
+}
+
+function fecharModal() {
+  let modalAddLista = document.querySelector(".adicionarLista");
+  modalAddLista.classList.remove("modal-aberto");
+  document.body.style.overflowY = "visible";
 }
 
 conteudoArrayListas.forEach((text, id) => {
@@ -113,8 +170,8 @@ conteudoArrayListas.forEach((text, id) => {
     let div = document.createElement("div");
     div.classList.add(`lista`);
     div.innerHTML = `<div class="lista__nome">
-                              <h1>${conteudo}</h1>
-                              <img class="listaEdit" src="./img/edit_note.svg" alt="">
+                              <h1 class="listaNome${id}">${conteudo}</h1>
+                              <img class="listaEditar${id} listaEdit" src="./img/edit_note.svg" alt="">
                           </div>
                           <div class="lista__add">
                               <input class="inputTarefa it${id}" type="text">
@@ -128,10 +185,7 @@ conteudoArrayListas.forEach((text, id) => {
     inputNomeLista.focus();
   }
   listaConteudo();
-  let btnEditarLista = document.querySelectorAll(".listaEdit");
-  btnEditarLista.forEach((e) => {
-    e.addEventListener("click", abrirModal);
-  });
+  eventoLista();
 });
 
 function criarTarefa() {
@@ -499,30 +553,6 @@ function mostrarTarefas5() {
 }
 mostrarTarefas5();
 
-function abrirModal(event) {
-  let elemento = event.target;
-
-  if (elemento.classList.contains("btnAdd")) {
-    let modalAddLista = document.querySelector(".adicionarLista");
-    modalAddLista.classList.add("ativo");
-  } else {
-    let modalEditarLista = document.querySelector(".editarLista");
-    modalEditarLista.classList.add("ativo");
-  }
-}
-
-function fecharModal(event) {
-  let elemento = event.target;
-
-  if (elemento.classList.contains("modalAdd")) {
-    let modalAddLista = document.querySelector(".adicionarLista");
-    modalAddLista.classList.remove("ativo");
-  } else {
-    let modalEditarLista = document.querySelector(".editarLista");
-    modalEditarLista.classList.remove("ativo");
-  }
-}
-
 function deletarTarefa0(i, idcheckbox) {
   let buscarIndice = arrayCheckbox0.indexOf(idcheckbox);
   tarefasLista0.splice(i, 1);
@@ -599,6 +629,26 @@ function isChecked() {
 }
 isChecked();
 
+function fecharModalLista() {
+  const inputEditarNome = document.querySelector("#editarNomeLista");
+
+  let modalEditarLista = document.querySelector(".editarLista");
+  modalEditarLista.classList.remove("modal-aberto");
+  document.body.style.overflowY = "visible";
+  if (inputEditarNome.classList.contains("0"))
+    inputEditarNome.classList.remove("0");
+  if (inputEditarNome.classList.contains("1"))
+    inputEditarNome.classList.remove("1");
+  if (inputEditarNome.classList.contains("2"))
+    inputEditarNome.classList.remove("2");
+  if (inputEditarNome.classList.contains("3"))
+    inputEditarNome.classList.remove("3");
+  if (inputEditarNome.classList.contains("4"))
+    inputEditarNome.classList.remove("4");
+  if (inputEditarNome.classList.contains("5"))
+    inputEditarNome.classList.remove("5");
+}
+
 btnMenu.addEventListener("click", toggleMenu);
 btnMenu.addEventListener("touchstart", toggleMenu);
 btnMenuFechar.addEventListener("click", toggleMenu);
@@ -608,6 +658,62 @@ navListas.addEventListener("touchstart", toggleMenu);
 addLista.addEventListener("click", addListasDados);
 btnTrocarTema.addEventListener("click", trocarTema);
 btnAddLista.addEventListener("click", abrirModal);
-btnFecharModal.forEach((e) => {
-  e.addEventListener("click", fecharModal);
+btnFecharModal.addEventListener("click", fecharModal);
+btnFecharModalLista.addEventListener("click", fecharModalLista);
+
+btnTrocarNome.addEventListener("click", () => {
+  const inputEditarNome = document.querySelector("#editarNomeLista");
+  let valor = inputEditarNome.value.trim();
+  if (valor.length > 0) {
+    if (inputEditarNome.classList.contains("0")) {
+      let h1 = document.querySelector(".listaNome0");
+      let novoNome = inputEditarNome.value;
+      h1.innerText = novoNome;
+      conteudoArrayListas[0].nome = novoNome;
+      localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
+      fecharModalLista();
+    }
+    if (inputEditarNome.classList.contains("1")) {
+      let h1 = document.querySelector(".listaNome1");
+      let novoNome = inputEditarNome.value;
+      h1.innerText = novoNome;
+      conteudoArrayListas[1].nome = novoNome;
+      localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
+      fecharModalLista();
+    }
+    if (inputEditarNome.classList.contains("2")) {
+      let h1 = document.querySelector(".listaNome2");
+      let novoNome = inputEditarNome.value;
+      h1.innerText = novoNome;
+      conteudoArrayListas[2].nome = novoNome;
+      localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
+      fecharModalLista();
+    }
+    if (inputEditarNome.classList.contains("3")) {
+      let h1 = document.querySelector(".listaNome3");
+      let novoNome = inputEditarNome.value;
+      h1.innerText = novoNome;
+      conteudoArrayListas[3].nome = novoNome;
+      localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
+      fecharModalLista();
+    }
+    if (inputEditarNome.classList.contains("4")) {
+      let h1 = document.querySelector(".listaNome4");
+      let novoNome = inputEditarNome.value;
+      h1.innerText = novoNome;
+      conteudoArrayListas[4].nome = novoNome;
+      localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
+      fecharModalLista();
+    }
+    if (inputEditarNome.classList.contains("5")) {
+      let h1 = document.querySelector(".listaNome5");
+      let novoNome = inputEditarNome.value;
+      h1.innerText = novoNome;
+      conteudoArrayListas[5].nome = novoNome;
+      localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
+      fecharModalLista();
+    }
+  } else {
+    alert("Insira um nome!");
+  }
 });

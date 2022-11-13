@@ -101,7 +101,7 @@ a {
 }
 
 .container {
-  max-width: 160rem;
+  max-width: 190rem;
 }
 
 .header {
@@ -370,8 +370,8 @@ a {
 .editarLista {
   display: none;
 }
-.adicionarLista.ativo,
-.editarLista.ativo {
+.adicionarLista.modal-aberto,
+.editarLista.modal-aberto {
   display: grid;
 }
 .adicionarLista-box,
@@ -440,7 +440,7 @@ a {
 }
 .adicionarLista .deletarLista,
 .editarLista .deletarLista {
-  margin-top: 1rem;
+  margin-top: 2rem;
   color: var(--cor-vermelho);
   border: 0.1rem solid var(--cor-vermelho);
   background: none;
@@ -456,13 +456,6 @@ a {
   background-color: var(--cor-neutra2-bg);
   border: 0.2rem solid var(--cor-vermelho);
   border-radius: 50%;
-}
-
-.editarLista {
-  display: none;
-}
-.editarLista.ativo {
-  display: grid;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -12,7 +12,7 @@
 .adicionarLista,
 .editarLista {
   display: none;
-  &.ativo {
+  &.modal-aberto {
     display: grid;
   }
   &-box {
@@ -72,7 +72,7 @@
     border-radius: 0.5rem;
   }
   .deletarLista {
-    margin-top: 1rem;
+    margin-top: 2rem;
     color: var(--cor-vermelho);
     border: 0.1rem solid var(--cor-vermelho);
     background: none;
@@ -90,9 +90,3 @@
   }
 }
 
-.editarLista {
-  display: none;
-  &.ativo {
-    display: grid;
-  }
-}
