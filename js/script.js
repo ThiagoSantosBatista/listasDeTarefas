@@ -10,6 +10,7 @@ const btnFecharModalLista = document.querySelector(".fecharModalLista");
 const inputNomeLista = document.querySelector("#inputNomeLista");
 const btnTrocarTema = document.querySelector(".btnTrocarTema");
 const btnTrocarNome = document.querySelector(".trocarNomeLista");
+const inputEditarNome = document.querySelector("#editarNomeLista");
 
 let conteudoArrayListas = localStorage.getItem("listas")
   ? JSON.parse(localStorage.getItem("listas"))
@@ -63,7 +64,7 @@ function toggleMenu(event) {
     : (document.body.style.pointerEvents = "auto");
 }
 
-function addListasDados() {
+function addListasDados(event) {
   let value = inputNomeLista.value.trim();
   if (conteudoArrayListas.length > 5) return alert("Máximo de 6 listas");
   if (value.length > 0) {
@@ -107,11 +108,10 @@ function criarLista(text) {
 }
 
 function eventoLista() {
-  let btnEditarLista = document.querySelectorAll(".listaEdit");
+  const btnEditarLista = document.querySelectorAll(".listaEdit");
   btnEditarLista.forEach((e) => {
     e.addEventListener("click", function (e) {
       let elemento = e.target;
-      const inputEditarNome = document.querySelector("#editarNomeLista");
 
       let modalEditarLista = document.querySelector(".editarLista");
       modalEditarLista.classList.add("modal-aberto");
@@ -162,6 +162,8 @@ function fecharModal() {
   let modalAddLista = document.querySelector(".adicionarLista");
   modalAddLista.classList.remove("modal-aberto");
   document.body.style.overflowY = "visible";
+
+  inputNomeLista.value = "";
 }
 
 conteudoArrayListas.forEach((text, id) => {
@@ -200,8 +202,8 @@ function criarTarefa() {
 
   let btnAddTarefa = document.querySelector(`.at${id}`);
   const ulListaConteudo = document.querySelector(`.lc${id}`);
+  let inputTarefa = document.querySelector(`.it${id}`);
   function adicionarTarefa() {
-    let inputTarefa = document.querySelector(`.it${id}`);
     let valor = inputTarefa.value.trim();
     if (valor.length > 0) {
       let li = document.createElement("li");
@@ -282,6 +284,12 @@ function criarTarefa() {
       alert("Escreva uma tarefa!");
     }
   }
+  inputTarefa.addEventListener("keyup", (e) => {
+    e.preventDefault();
+    if (e.keyCode === 13) {
+      btnAddTarefa.click();
+    }
+  });
   btnAddTarefa.addEventListener("click", adicionarTarefa);
 }
 
@@ -313,8 +321,8 @@ conteudoArrayListas.forEach((undefined, id) => {
 
   let btnAddTarefa = document.querySelector(`.at${id}`);
   const ulListaConteudo = document.querySelector(`.lc${id}`);
+  let inputTarefa = document.querySelector(`.it${id}`);
   function adicionarTarefa() {
-    let inputTarefa = document.querySelector(`.it${id}`);
     let valor = inputTarefa.value.trim();
     if (valor.length > 0) {
       let li = document.createElement("li");
@@ -410,6 +418,12 @@ conteudoArrayListas.forEach((undefined, id) => {
       alert("Escreva uma tarefa!");
     }
   }
+  inputTarefa.addEventListener("keyup", (e) => {
+    e.preventDefault();
+    if (e.keyCode === 13) {
+      btnAddTarefa.click();
+    }
+  });
   btnAddTarefa.addEventListener("click", adicionarTarefa);
 });
 
@@ -665,20 +679,7 @@ function fecharModalLista() {
     inputEditarNome.classList.remove("5");
 }
 
-btnMenu.addEventListener("click", toggleMenu);
-btnMenu.addEventListener("touchstart", toggleMenu);
-btnMenuFechar.addEventListener("click", toggleMenu);
-btnMenuFechar.addEventListener("touchstart", toggleMenu);
-navListas.addEventListener("click", toggleMenu);
-navListas.addEventListener("touchstart", toggleMenu);
-addLista.addEventListener("click", addListasDados);
-btnTrocarTema.addEventListener("click", trocarTema);
-btnAddLista.addEventListener("click", abrirModal);
-btnFecharModal.addEventListener("click", fecharModal);
-btnFecharModalLista.addEventListener("click", fecharModalLista);
-
-btnTrocarNome.addEventListener("click", () => {
-  const inputEditarNome = document.querySelector("#editarNomeLista");
+function editarLista() {
   let valor = inputEditarNome.value.trim();
   if (valor.length > 0) {
     if (inputEditarNome.classList.contains("0")) {
@@ -731,5 +732,30 @@ btnTrocarNome.addEventListener("click", () => {
     }
   } else {
     alert("Insira um nome!");
+  }
+}
+
+btnMenu.addEventListener("click", toggleMenu);
+btnMenu.addEventListener("touchstart", toggleMenu);
+btnMenuFechar.addEventListener("click", toggleMenu);
+btnMenuFechar.addEventListener("touchstart", toggleMenu);
+navListas.addEventListener("click", toggleMenu);
+navListas.addEventListener("touchstart", toggleMenu);
+addLista.addEventListener("click", addListasDados);
+btnTrocarTema.addEventListener("click", trocarTema);
+btnAddLista.addEventListener("click", abrirModal);
+btnFecharModal.addEventListener("click", fecharModal);
+btnFecharModalLista.addEventListener("click", fecharModalLista);
+btnTrocarNome.addEventListener("click", editarLista);
+inputNomeLista.addEventListener("keyup", (e) => {
+  e.preventDefault();
+  if (e.keyCode === 13) {
+    addLista.click();
+  }
+});
+inputEditarNome.addEventListener("keyup", (e) => {
+  e.preventDefault();
+  if (e.keyCode === 13) {
+    btnTrocarNome.click();
   }
 });
