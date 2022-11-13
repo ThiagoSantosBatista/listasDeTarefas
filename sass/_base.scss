@@ -4,30 +4,51 @@
   --cor-texto: #ffffff;
   --cor-cinza: #3b3b3b;
   --cor-cinza2: #2f2f2f;
-  --cor-roxo: #6672fe;
+  --cor-roxo: #8090ff;
   --cor-roxo2: #5a45fe;
   --cor-roxo3: #2d18d6;
   --cor-roxo4: #4f4980;
   --cor-roxo5: #807ba8;
-  --cor-roxo6: #8090ff;
   --cor-verde: #d2f801;
   --cor-vermelho: #fe5045;
-  --cor-vermelho2: #d62318;
+  --cor-vermelho2: #c71910;
   --box-shadow: rgba(17, 17, 17, 0.2);
 }
 .dark-mode:root {
   --cor-neutra-bg: #ffffff;
   --cor-neutra2-bg: #111111;
   --box-shadow: rgba(255, 255, 255, 0.2);
-  .nav__list-box {
-    border-right: 0.1rem solid var(--cor-roxo6);
-  }
-  .adicionarLista-box, .editarLista-box {
-    border: 0.1rem solid var(--cor-roxo6);
-    h1 {
-      color: #8090ff;
+
+  .nav {
+    &__list-box {
+      border-right: 0.1rem solid var(--cor-roxo);
+    }
+    &__item a {
+      color: #f3f3f3;
+      svg path {
+        fill: var(--cor-neutra-bg);
+      }
+      &:hover {
+        color: var(--cor-neutra-bg);
+        background: var(--cor-roxo2);
+        svg path {
+          fill: var(--cor-neutra-bg);
+        }
+      }
+    }
+    &__btn svg path {
+      fill: #ffffff;
     }
   }
+
+  .adicionarLista-box,
+  .editarLista-box {
+    border: 0.1rem solid var(--cor-roxo);
+    h1 {
+      color: var(--cor-roxo);
+    }
+  }
+
   .lista__item {
     .checkbox-campo {
       input:checked ~ .descricao:before {
@@ -38,31 +59,15 @@
       }
     }
   }
-  .nav__item a {
-    color: #f3f3f3;
-    &:hover {
-      color: #f3f3f3;
-      svg path {
-        fill: var(--cor-neutra-bg);
-      }
-    }
-  }
+
   .modal {
     input {
       &::placeholder {
         color: rgba(255, 255, 255, 0.7);
       }
     }
-    .adicionar {
-      color: #ffffff;
-    }
   }
-  svg path {
-    fill: #ffffff;
-  }
-  .addTarefa {
-    color: #ffffff;
-  }
+
   .inputTarefa,
   .modal input {
     color: #ffffff;

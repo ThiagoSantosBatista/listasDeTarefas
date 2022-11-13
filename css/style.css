@@ -4,15 +4,14 @@
   --cor-texto: #ffffff;
   --cor-cinza: #3b3b3b;
   --cor-cinza2: #2f2f2f;
-  --cor-roxo: #6672fe;
+  --cor-roxo: #8090ff;
   --cor-roxo2: #5a45fe;
   --cor-roxo3: #2d18d6;
   --cor-roxo4: #4f4980;
   --cor-roxo5: #807ba8;
-  --cor-roxo6: #8090ff;
   --cor-verde: #d2f801;
   --cor-vermelho: #fe5045;
-  --cor-vermelho2: #d62318;
+  --cor-vermelho2: #c71910;
   --box-shadow: rgba(17, 17, 17, 0.2);
 }
 
@@ -22,13 +21,31 @@
   --box-shadow: rgba(255, 255, 255, 0.2);
 }
 .dark-mode:root .nav__list-box {
-  border-right: 0.1rem solid var(--cor-roxo6);
+  border-right: 0.1rem solid var(--cor-roxo);
 }
-.dark-mode:root .adicionarLista-box, .dark-mode:root .editarLista-box {
-  border: 0.1rem solid var(--cor-roxo6);
+.dark-mode:root .nav__item a {
+  color: #f3f3f3;
 }
-.dark-mode:root .adicionarLista-box h1, .dark-mode:root .editarLista-box h1 {
-  color: #8090ff;
+.dark-mode:root .nav__item a svg path {
+  fill: var(--cor-neutra-bg);
+}
+.dark-mode:root .nav__item a:hover {
+  color: var(--cor-neutra-bg);
+  background: var(--cor-roxo2);
+}
+.dark-mode:root .nav__item a:hover svg path {
+  fill: var(--cor-neutra-bg);
+}
+.dark-mode:root .nav__btn svg path {
+  fill: #ffffff;
+}
+.dark-mode:root .adicionarLista-box,
+.dark-mode:root .editarLista-box {
+  border: 0.1rem solid var(--cor-roxo);
+}
+.dark-mode:root .adicionarLista-box h1,
+.dark-mode:root .editarLista-box h1 {
+  color: var(--cor-roxo);
 }
 .dark-mode:root .lista__item .checkbox-campo input:checked ~ .descricao:before {
   background-image: url("/img/checkboxChecked-Dark.svg");
@@ -36,26 +53,8 @@
 .dark-mode:root .lista__item .checkbox-campo .descricao:before {
   background-image: url("/img/checkbox-Dark.svg");
 }
-.dark-mode:root .nav__item a {
-  color: #f3f3f3;
-}
-.dark-mode:root .nav__item a:hover {
-  color: #f3f3f3;
-}
-.dark-mode:root .nav__item a:hover svg path {
-  fill: var(--cor-neutra-bg);
-}
 .dark-mode:root .modal input::placeholder {
   color: rgba(255, 255, 255, 0.7);
-}
-.dark-mode:root .modal .adicionar {
-  color: #ffffff;
-}
-.dark-mode:root svg path {
-  fill: #ffffff;
-}
-.dark-mode:root .addTarefa {
-  color: #ffffff;
 }
 .dark-mode:root .inputTarefa,
 .dark-mode:root .modal input {
@@ -237,6 +236,10 @@ a {
   border-radius: 0.5rem;
   color: var(--cor-texto);
   background: var(--cor-roxo2);
+  transition: 0.3s;
+}
+.main__lista-add button:hover {
+  background-color: var(--cor-roxo3);
 }
 .main__listas {
   display: grid;
@@ -298,6 +301,10 @@ a {
   border-radius: 0.5rem;
   color: var(--cor-texto);
   background: var(--cor-roxo2);
+  transition: 0.3s;
+}
+.lista__add button:hover {
+  background-color: var(--cor-roxo3);
 }
 .lista__conteudo {
   padding: 0 0 1.5rem 1.5rem;
@@ -332,13 +339,17 @@ a {
 .lista__item.concluido p {
   text-decoration: line-through;
 }
-.lista__item img {
+.lista__item svg {
   position: absolute;
   top: 0;
   right: 0;
   margin-right: 1.5rem;
   display: block;
   cursor: pointer;
+}
+.lista__item svg:hover path {
+  transition: 0.3s;
+  fill: var(--cor-vermelho2);
 }
 .lista__item .linha {
   display: block;
@@ -437,6 +448,15 @@ a {
   color: var(--cor-texto);
   border: none;
   border-radius: 0.5rem;
+  transition: 0.3s;
+}
+.adicionarLista .adicionar:hover,
+.adicionarLista .trocarNomeLista:hover,
+.adicionarLista .deletarLista:hover,
+.editarLista .adicionar:hover,
+.editarLista .trocarNomeLista:hover,
+.editarLista .deletarLista:hover {
+  background-color: var(--cor-roxo3);
 }
 .adicionarLista .deletarLista,
 .editarLista .deletarLista {
@@ -444,6 +464,11 @@ a {
   color: var(--cor-vermelho);
   border: 0.1rem solid var(--cor-vermelho);
   background: none;
+}
+.adicionarLista .deletarLista:hover,
+.editarLista .deletarLista:hover {
+  background-color: var(--cor-vermelho);
+  color: var(--cor-neutra2-bg);
 }
 .adicionarLista .fecharModal,
 .editarLista .fecharModal {

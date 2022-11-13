@@ -70,12 +70,20 @@
     color: var(--cor-texto);
     border: none;
     border-radius: 0.5rem;
+    transition: 0.3s;
+    &:hover {
+      background-color: var(--cor-roxo3);
+    }
   }
   .deletarLista {
     margin-top: 2rem;
     color: var(--cor-vermelho);
     border: 0.1rem solid var(--cor-vermelho);
     background: none;
+    &:hover {
+      background-color: var(--cor-vermelho);
+      color: var(--cor-neutra2-bg);
+    }
   }
   .fecharModal {
     position: absolute;
@@ -89,4 +97,3 @@
     border-radius: 50%;
   }
 }
-
