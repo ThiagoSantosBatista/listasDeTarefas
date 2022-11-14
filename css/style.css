@@ -155,6 +155,7 @@ a {
 }
 .nav__list {
   margin: 7rem 4rem 0 4rem;
+  position: relative;
 }
 .nav__btn-fechar {
   position: absolute;
@@ -398,6 +399,12 @@ a {
 .editarLista.modal-aberto {
   display: grid;
 }
+.adicionarLista.modal-aberto .adicionarLista-box,
+.adicionarLista.modal-aberto .editarLista-box,
+.editarLista.modal-aberto .adicionarLista-box,
+.editarLista.modal-aberto .editarLista-box {
+  animation: modal 0.3s;
+}
 .adicionarLista-box,
 .editarLista-box {
   margin: 1rem 2rem;
@@ -494,6 +501,59 @@ a {
   background-color: var(--cor-neutra2-bg);
   border: 0.2rem solid var(--cor-vermelho);
   border-radius: 50%;
+}
+
+@keyframes modal {
+  from {
+    opacity: 0;
+    transform: translateY(-6rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.areaNotificacao {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: fixed;
+  top: 1.5rem;
+  left: 1.5rem;
+  width: 23rem;
+  height: 11.4rem;
+  overflow-y: hidden;
+  z-index: 100;
+}
+
+.notificacao {
+  top: 1.5rem;
+  left: 1.5rem;
+  padding: 1.5rem 1.5rem;
+  width: 23rem;
+  font-size: 1.4rem;
+  border-radius: 0.5rem;
+  color: var(--cor-roxo2);
+  background: var(--cor-texto);
+  border: 0.2rem solid var(--cor-roxo2);
+  border-left: 1rem solid var(--cor-roxo2);
+  animation: notificacao 0.4s;
+  font-weight: 700;
+}
+.notificacaoMax, .notificacaoNome {
+  border-color: var(--cor-vermelho);
+  color: var(--cor-vermelho);
+}
+
+@keyframes notificacao {
+  from {
+    opacity: 0;
+    transform: translateX(-6rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -14,6 +14,10 @@
   display: none;
   &.modal-aberto {
     display: grid;
+    & .adicionarLista-box,
+    .editarLista-box {
+      animation: modal 0.3s;
+    }
   }
   &-box {
     margin: 1rem 2rem;
@@ -95,5 +99,16 @@
     background-color: var(--cor-neutra2-bg);
     border: 0.2rem solid var(--cor-vermelho);
     border-radius: 50%;
+  }
+}
+
+@keyframes modal {
+  from {
+    opacity: 0;
+    transform: translateY(-6rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

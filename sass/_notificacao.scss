@@ -1,0 +1,42 @@
+
+.areaNotificacao{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: fixed;
+    top: 1.5rem;
+    left: 1.5rem;
+    width: 23rem;
+    height: 11.4rem;
+    overflow-y: hidden;
+    z-index: 100;
+}
+.notificacao{
+    top: 1.5rem;
+    left: 1.5rem;
+    padding: 1.5rem 1.5rem;
+    width: 23rem;
+    font-size: 1.4rem;
+    border-radius: .5rem;
+    color: var(--cor-roxo2);
+    background: var(--cor-texto);
+    border: .2rem solid var(--cor-roxo2);
+    border-left: 1rem solid var(--cor-roxo2);
+    animation: notificacao .4s;
+    font-weight: 700;
+    &Max, &Nome{
+        border-color: var(--cor-vermelho);
+        color: var(--cor-vermelho);
+    }
+}
+
+@keyframes notificacao {
+    from {
+      opacity: 0;
+      transform: translateX(-6rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+}
