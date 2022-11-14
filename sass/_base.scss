@@ -36,6 +36,9 @@
         }
       }
     }
+    &__item-usuario p {
+      color: var(--cor-roxo);
+    }
     &__btn svg path {
       fill: #ffffff;
     }
@@ -59,13 +62,8 @@
       }
     }
   }
-
-  .modal {
-    input {
-      &::placeholder {
-        color: rgba(255, 255, 255, 0.7);
-      }
-    }
+  input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
   }
 
   .inputTarefa,

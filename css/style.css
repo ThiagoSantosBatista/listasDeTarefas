@@ -36,6 +36,9 @@
 .dark-mode:root .nav__item a:hover svg path {
   fill: var(--cor-neutra-bg);
 }
+.dark-mode:root .nav__item-usuario p {
+  color: var(--cor-roxo);
+}
 .dark-mode:root .nav__btn svg path {
   fill: #ffffff;
 }
@@ -53,7 +56,7 @@
 .dark-mode:root .lista__item .checkbox-campo .descricao:before {
   background-image: url("/img/checkbox-Dark.svg");
 }
-.dark-mode:root .modal input::placeholder {
+.dark-mode:root input::placeholder {
   color: rgba(255, 255, 255, 0.7);
 }
 .dark-mode:root .inputTarefa,
@@ -150,10 +153,10 @@ a {
   border-right: 0.1rem solid var(--cor-roxo2);
   background: var(--cor-neutra2-bg);
 }
-.nav .nav__list {
+.nav__list {
   margin: 7rem 4rem 0 4rem;
 }
-.nav .nav__btn-fechar {
+.nav__btn-fechar {
   position: absolute;
   top: 2rem;
   right: 2rem;
@@ -161,15 +164,25 @@ a {
   background: none;
   border: none;
 }
-.nav .nav__item-usuario h1 {
+.nav__item-usuario h1 {
   font-size: 3rem;
   font-weight: 500;
-  margin-bottom: 4rem;
+  margin-bottom: 1rem;
 }
-.nav .nav__item {
+.nav__item-usuario p {
+  color: var(--cor-roxo2);
+  font-size: 1.2rem;
+  margin-bottom: 4rem;
+  font-weight: 500;
+}
+.nav__item-usuario p .me {
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+.nav__item {
   margin-bottom: 0.2rem;
 }
-.nav .nav__item a {
+.nav__item a {
   display: flex;
   align-items: center;
   justify-self: start;
@@ -180,11 +193,11 @@ a {
   border-radius: 0.5rem;
   font-weight: 500;
 }
-.nav .nav__item a:hover {
+.nav__item a:hover {
   color: var(--cor-neutra2-bg);
   background: var(--cor-roxo2);
 }
-.nav .nav__item a:hover svg path {
+.nav__item a:hover svg path {
   fill: var(--cor-neutra2-bg);
 }
 .nav.ativo .nav__list-box {

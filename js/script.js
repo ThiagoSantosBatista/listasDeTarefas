@@ -10,6 +10,7 @@ const btnFecharModalLista = document.querySelector(".fecharModalLista");
 const inputNomeLista = document.querySelector("#inputNomeLista");
 const btnTrocarTema = document.querySelector(".btnTrocarTema");
 const btnTrocarNome = document.querySelector(".trocarNomeLista");
+const btnDeletarLista = document.querySelector(".deletarLista");
 const inputEditarNome = document.querySelector("#editarNomeLista");
 
 let conteudoArrayListas = localStorage.getItem("listas")
@@ -28,8 +29,8 @@ for (let i = 0; i < 6; i++) {
 }
 
 for (let i = 0; i < 6; i++) {
-  window[`arrayCheckbox${i}`] = localStorage.getItem(`checkbox${i}`)
-    ? JSON.parse(localStorage.getItem(`checkbox${i}`))
+  window[`arrayCheckbox${i}`] = localStorage.getItem(`checkboxLista-${i}`)
+    ? JSON.parse(localStorage.getItem(`checkboxLista-${i}`))
     : [];
 }
 
@@ -93,7 +94,7 @@ function criarLista(text) {
       <img class="listaEditar${id} listaEdit" src="./img/edit_note.svg" alt="">
     </div>
     <div class="lista__add">
-      <input class="inputTarefa it${id}" type="text">
+      <input class="inputTarefa it${id}" type="text" placeholder="Escreva uma tarefa">
       <button class="addTarefa at${id}">Add</button>
       </div>
       <ul class="lista__conteudo lc${id}">
@@ -166,29 +167,33 @@ function fecharModal() {
   inputNomeLista.value = "";
 }
 
-conteudoArrayListas.forEach((text, id) => {
-  function listaConteudo() {
-    let conteudo = text.nome;
-    let div = document.createElement("div");
-    div.classList.add(`lista`);
-    div.innerHTML = `<div class="lista__nome">
+function atualizarListas() {
+  divListas.innerHTML = "";
+  conteudoArrayListas.forEach((text, id) => {
+    function listaConteudo() {
+      let conteudo = text.nome;
+      let div = document.createElement("div");
+      div.classList.add(`lista`);
+      div.innerHTML = `<div class="lista__nome">
                               <h1 class="listaNome${id}">${conteudo}</h1>
                               <img class="listaEditar${id} listaEdit" src="./img/edit_note.svg" alt="">
                           </div>
                           <div class="lista__add">
-                              <input class="inputTarefa it${id}" type="text">
+                              <input class="inputTarefa it${id}" type="text" placeholder="Escreva uma tarefa">
                               <button class="addTarefa at${id}">Add</button>
                           </div>
                           <ul class="lista__conteudo lc${id}">
                           </ul>
                           `;
-    divListas.appendChild(div);
-    inputNomeLista.value = "";
-    inputNomeLista.focus();
-  }
-  listaConteudo();
-  eventoLista();
-});
+      divListas.appendChild(div);
+      inputNomeLista.value = "";
+      inputNomeLista.focus();
+    }
+    listaConteudo();
+    eventoLista();
+  });
+}
+atualizarListas();
 
 function criarTarefa() {
   let id = conteudoArrayListas.length - 1;
@@ -209,12 +214,12 @@ function criarTarefa() {
       let li = document.createElement("li");
       li.classList.add("lista__item");
       li.innerHTML = `<div class="checkbox-campo">
-       <input type="checkbox" class="checkbox" id="checkbox${id}-${idCheckbox}}">
-       <label for="checkbox${id}-${idCheckbox}" class="descricao"></label>
+       <input type="checkbox" class="checkbox" id="checkbox${idCheckbox}}">
+       <label for="checkbox${idCheckbox}" class="descricao"></label>
        </div>
        <p>${inputTarefa.value}
        </p>
-       <svg onclick="deletarTarefa${id}(${idTarefa}, ${idCheckbox}) [id]})" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+       <svg onclick="deletarTarefa${id}(${idTarefa}, ${idCheckbox})" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
          <path d="M3.68229 25C3.09896 25 2.58854 24.7917 2.15104 24.375C1.71354 23.9583 1.49479 23.4722 1.49479 22.9167V3.125H1.09375C0.777778 3.125 0.516493 3.02662 0.309896 2.82986C0.103299 2.6331 0 2.38426 0 2.08333C0 1.78241 0.103299 1.53356 0.309896 1.33681C0.516493 1.14005 0.777778 1.04167 1.09375 1.04167H6.85417C6.85417 0.740741 6.95747 0.491898 7.16406 0.295139C7.37066 0.0983798 7.63194 0 7.94792 0H15.3854C15.7014 0 15.9627 0.0983798 16.1693 0.295139C16.3759 0.491898 16.4792 0.740741 16.4792 1.04167H22.2396C22.5556 1.04167 22.8168 1.14005 23.0234 1.33681C23.23 1.53356 23.3333 1.78241 23.3333 2.08333C23.3333 2.38426 23.23 2.6331 23.0234 2.82986C22.8168 3.02662 22.5556 3.125 22.2396 3.125H21.8385V22.9167C21.8385 23.4722 21.6198 23.9583 21.1823 24.375C20.7448 24.7917 20.2344 25 19.651 25H3.68229ZM3.68229 3.125V22.9167H19.651V3.125H3.68229ZM7.54688 18.8889C7.54688 19.1898 7.65017 19.4387 7.85677 19.6354C8.06337 19.8322 8.32465 19.9306 8.64063 19.9306C8.9566 19.9306 9.21788 19.8322 9.42448 19.6354C9.63108 19.4387 9.73438 19.1898 9.73438 18.8889V7.11806C9.73438 6.81713 9.63108 6.56829 9.42448 6.37153C9.21788 6.17477 8.9566 6.07639 8.64063 6.07639C8.32465 6.07639 8.06337 6.17477 7.85677 6.37153C7.65017 6.56829 7.54688 6.81713 7.54688 7.11806V18.8889ZM13.599 18.8889C13.599 19.1898 13.7023 19.4387 13.9089 19.6354C14.1155 19.8322 14.3767 19.9306 14.6927 19.9306C15.0087 19.9306 15.27 19.8322 15.4766 19.6354C15.6832 19.4387 15.7865 19.1898 15.7865 18.8889V7.11806C15.7865 6.81713 15.6832 6.56829 15.4766 6.37153C15.27 6.17477 15.0087 6.07639 14.6927 6.07639C14.3767 6.07639 14.1155 6.17477 13.9089 6.37153C13.7023 6.56829 13.599 6.81713 13.599 7.11806V18.8889Z" fill="#FE5045"/>
          </svg>
        <span class="linha"></span>`;
@@ -226,7 +231,7 @@ function criarTarefa() {
         tarefasLista0.push(listaTarefa);
         localStorage.setItem("lista0", JSON.stringify(tarefasLista0));
         arrayCheckbox0.push(idCheckbox);
-        localStorage.setItem("checkbox0", JSON.stringify(arrayCheckbox0));
+        localStorage.setItem("checkboxLista-0", JSON.stringify(arrayCheckbox0));
         mostrarTarefas0();
       } else if (id === 1) {
         let listaTarefa = {
@@ -235,7 +240,7 @@ function criarTarefa() {
         tarefasLista1.push(listaTarefa);
         localStorage.setItem("lista1", JSON.stringify(tarefasLista1));
         arrayCheckbox1.push(idCheckbox);
-        localStorage.setItem("checkbox1", JSON.stringify(arrayCheckbox1));
+        localStorage.setItem("checkboxLista-1", JSON.stringify(arrayCheckbox1));
         mostrarTarefas1();
       } else if (id === 2) {
         let listaTarefa = {
@@ -244,7 +249,7 @@ function criarTarefa() {
         tarefasLista2.push(listaTarefa);
         localStorage.setItem("lista2", JSON.stringify(tarefasLista2));
         arrayCheckbox2.push(idCheckbox);
-        localStorage.setItem("checkbox2", JSON.stringify(arrayCheckbox2));
+        localStorage.setItem("checkboxLista-2", JSON.stringify(arrayCheckbox2));
         mostrarTarefas2();
       } else if (id === 3) {
         let listaTarefa = {
@@ -253,7 +258,7 @@ function criarTarefa() {
         tarefasLista3.push(listaTarefa);
         localStorage.setItem("lista3", JSON.stringify(tarefasLista3));
         arrayCheckbox3.push(idCheckbox);
-        localStorage.setItem("checkbox3", JSON.stringify(arrayCheckbox3));
+        localStorage.setItem("checkboxLista-3", JSON.stringify(arrayCheckbox3));
         mostrarTarefas3();
       } else if (id === 4) {
         let listaTarefa = {
@@ -262,7 +267,7 @@ function criarTarefa() {
         tarefasLista4.push(listaTarefa);
         localStorage.setItem("lista4", JSON.stringify(tarefasLista4));
         arrayCheckbox4.push(idCheckbox);
-        localStorage.setItem("checkbox4", JSON.stringify(arrayCheckbox4));
+        localStorage.setItem("checkboxLista-4", JSON.stringify(arrayCheckbox4));
         mostrarTarefas4();
       } else if (id === 5) {
         let listaTarefa = {
@@ -271,7 +276,7 @@ function criarTarefa() {
         tarefasLista5.push(listaTarefa);
         localStorage.setItem("lista5", JSON.stringify(tarefasLista5));
         arrayCheckbox5.push(idCheckbox);
-        localStorage.setItem("checkbox5", JSON.stringify(arrayCheckbox5));
+        localStorage.setItem("checkboxLista-5", JSON.stringify(arrayCheckbox5));
         mostrarTarefas5();
       }
       ++idCheckbox;
@@ -328,12 +333,12 @@ conteudoArrayListas.forEach((undefined, id) => {
       let li = document.createElement("li");
       li.classList.add("lista__item");
       li.innerHTML = `<div class="checkbox-campo">
-         <input type="checkbox" class="checkbox" id="checkbox${id}-${idCheckbox}">
-         <label for="checkbox${id}-${idCheckbox}" class="descricao"></label>
+         <input type="checkbox" class="checkbox" id="checkbox${idCheckbox}">
+         <label for="checkbox${idCheckbox}" class="descricao"></label>
          </div>
          <p>${inputTarefa.value}
          </p>
-         <svg onclick="deletarTarefa${id}(${idTarefa}, ${idCheckbox}) [id]})" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+         <svg onclick="deletarTarefa${id}(${idTarefa}, ${idCheckbox})" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
          <path d="M3.68229 25C3.09896 25 2.58854 24.7917 2.15104 24.375C1.71354 23.9583 1.49479 23.4722 1.49479 22.9167V3.125H1.09375C0.777778 3.125 0.516493 3.02662 0.309896 2.82986C0.103299 2.6331 0 2.38426 0 2.08333C0 1.78241 0.103299 1.53356 0.309896 1.33681C0.516493 1.14005 0.777778 1.04167 1.09375 1.04167H6.85417C6.85417 0.740741 6.95747 0.491898 7.16406 0.295139C7.37066 0.0983798 7.63194 0 7.94792 0H15.3854C15.7014 0 15.9627 0.0983798 16.1693 0.295139C16.3759 0.491898 16.4792 0.740741 16.4792 1.04167H22.2396C22.5556 1.04167 22.8168 1.14005 23.0234 1.33681C23.23 1.53356 23.3333 1.78241 23.3333 2.08333C23.3333 2.38426 23.23 2.6331 23.0234 2.82986C22.8168 3.02662 22.5556 3.125 22.2396 3.125H21.8385V22.9167C21.8385 23.4722 21.6198 23.9583 21.1823 24.375C20.7448 24.7917 20.2344 25 19.651 25H3.68229ZM3.68229 3.125V22.9167H19.651V3.125H3.68229ZM7.54688 18.8889C7.54688 19.1898 7.65017 19.4387 7.85677 19.6354C8.06337 19.8322 8.32465 19.9306 8.64063 19.9306C8.9566 19.9306 9.21788 19.8322 9.42448 19.6354C9.63108 19.4387 9.73438 19.1898 9.73438 18.8889V7.11806C9.73438 6.81713 9.63108 6.56829 9.42448 6.37153C9.21788 6.17477 8.9566 6.07639 8.64063 6.07639C8.32465 6.07639 8.06337 6.17477 7.85677 6.37153C7.65017 6.56829 7.54688 6.81713 7.54688 7.11806V18.8889ZM13.599 18.8889C13.599 19.1898 13.7023 19.4387 13.9089 19.6354C14.1155 19.8322 14.3767 19.9306 14.6927 19.9306C15.0087 19.9306 15.27 19.8322 15.4766 19.6354C15.6832 19.4387 15.7865 19.1898 15.7865 18.8889V7.11806C15.7865 6.81713 15.6832 6.56829 15.4766 6.37153C15.27 6.17477 15.0087 6.07639 14.6927 6.07639C14.3767 6.07639 14.1155 6.17477 13.9089 6.37153C13.7023 6.56829 13.599 6.81713 13.599 7.11806V18.8889Z" fill="#FE5045"/>
          </svg>
          <span class="linha"></span>`;
@@ -345,7 +350,7 @@ conteudoArrayListas.forEach((undefined, id) => {
         tarefasLista0.push(listaTarefa);
         localStorage.setItem("lista0", JSON.stringify(tarefasLista0));
         arrayCheckbox0.push(idCheckbox);
-        localStorage.setItem("checkbox0", JSON.stringify(arrayCheckbox0));
+        localStorage.setItem("checkboxLista-0", JSON.stringify(arrayCheckbox0));
         mostrarTarefas0();
         ++idCheckbox;
         addTarefaNum = idCheckbox;
@@ -357,7 +362,7 @@ conteudoArrayListas.forEach((undefined, id) => {
         tarefasLista1.push(listaTarefa);
         localStorage.setItem("lista1", JSON.stringify(tarefasLista1));
         arrayCheckbox1.push(idCheckbox);
-        localStorage.setItem("checkbox1", JSON.stringify(arrayCheckbox1));
+        localStorage.setItem("checkboxLista-1", JSON.stringify(arrayCheckbox1));
         mostrarTarefas1();
         ++idCheckbox;
         addTarefaNum = idCheckbox;
@@ -369,7 +374,7 @@ conteudoArrayListas.forEach((undefined, id) => {
         tarefasLista2.push(listaTarefa);
         localStorage.setItem("lista2", JSON.stringify(tarefasLista2));
         arrayCheckbox2.push(idCheckbox);
-        localStorage.setItem("checkbox2", JSON.stringify(arrayCheckbox2));
+        localStorage.setItem("checkboxLista-2", JSON.stringify(arrayCheckbox2));
         mostrarTarefas2();
         ++idCheckbox;
         addTarefaNum = idCheckbox;
@@ -381,7 +386,7 @@ conteudoArrayListas.forEach((undefined, id) => {
         tarefasLista3.push(listaTarefa);
         localStorage.setItem("lista3", JSON.stringify(tarefasLista3));
         arrayCheckbox3.push(idCheckbox);
-        localStorage.setItem("checkbox3", JSON.stringify(arrayCheckbox3));
+        localStorage.setItem("checkboxLista-3", JSON.stringify(arrayCheckbox3));
         mostrarTarefas3();
         ++idCheckbox;
         addTarefaNum = idCheckbox;
@@ -393,7 +398,7 @@ conteudoArrayListas.forEach((undefined, id) => {
         tarefasLista4.push(listaTarefa);
         localStorage.setItem("lista4", JSON.stringify(tarefasLista4));
         arrayCheckbox4.push(idCheckbox);
-        localStorage.setItem("checkbox4", JSON.stringify(arrayCheckbox4));
+        localStorage.setItem("checkboxLista-4", JSON.stringify(arrayCheckbox4));
         mostrarTarefas4();
         ++idCheckbox;
         addTarefaNum = idCheckbox;
@@ -405,7 +410,7 @@ conteudoArrayListas.forEach((undefined, id) => {
         tarefasLista5.push(listaTarefa);
         localStorage.setItem("lista5", JSON.stringify(tarefasLista5));
         arrayCheckbox5.push(idCheckbox);
-        localStorage.setItem("checkbox5", JSON.stringify(arrayCheckbox5));
+        localStorage.setItem("checkboxLista-5", JSON.stringify(arrayCheckbox5));
         mostrarTarefas5();
         ++idCheckbox;
         addTarefaNum = idCheckbox;
@@ -428,17 +433,16 @@ conteudoArrayListas.forEach((undefined, id) => {
 });
 
 function mostrarTarefas0() {
-  let i = 0;
   const ulListaConteudo = document.querySelector(".lc0");
   if (ulListaConteudo) ulListaConteudo.innerHTML = "";
   tarefasLista0.forEach((value, id) => {
     let tarefa = value.tarefa;
-    let idCheckbox = JSON.parse(localStorage.getItem(`checkbox0`));
+    let idCheckbox = JSON.parse(localStorage.getItem(`checkboxLista-0`));
     let li = document.createElement("li");
     li.classList.add("lista__item");
     li.innerHTML = `<div class="checkbox-campo">
-       <input type="checkbox" class="checkbox"" id="checkbox0-${idCheckbox[id]}">
-       <label for="checkbox0-${idCheckbox[id]}" class="descricao"></label>
+       <input type="checkbox" class="checkbox" id="checkbox${idCheckbox[id]}">
+       <label for="checkbox${idCheckbox[id]}" class="descricao"></label>
        </div>
        <p>${tarefa}
        </p>
@@ -447,24 +451,22 @@ function mostrarTarefas0() {
        </svg>
        <span class="linha"></span>`;
     ulListaConteudo.appendChild(li);
-    ++i;
     isChecked();
   });
 }
 mostrarTarefas0();
 
 function mostrarTarefas1() {
-  let i = 0;
   const ulListaConteudo = document.querySelector(".lc1");
   if (ulListaConteudo) ulListaConteudo.innerHTML = "";
   tarefasLista1.forEach((value, id) => {
     let tarefa = value.tarefa;
-    let idCheckbox = JSON.parse(localStorage.getItem(`checkbox1`));
+    let idCheckbox = JSON.parse(localStorage.getItem(`checkboxLista-1`));
     let li = document.createElement("li");
     li.classList.add("lista__item");
     li.innerHTML = `<div class="checkbox-campo">
-         <input type="checkbox" class="checkbox"" id="checkbox1-${idCheckbox[id]}">
-         <label for="checkbox1-${idCheckbox[id]}" class="descricao"></label>
+         <input type="checkbox" class="checkbox" id="checkbox${idCheckbox[id]}">
+         <label for="checkbox${idCheckbox[id]}" class="descricao"></label>
          </div>
          <p>${tarefa}
          </p>
@@ -473,24 +475,22 @@ function mostrarTarefas1() {
          </svg>
          <span class="linha"></span>`;
     ulListaConteudo.appendChild(li);
-    ++i;
     isChecked();
   });
 }
 mostrarTarefas1();
 
 function mostrarTarefas2() {
-  let i = 0;
   const ulListaConteudo = document.querySelector(".lc2");
   if (ulListaConteudo) ulListaConteudo.innerHTML = "";
   tarefasLista2.forEach((value, id) => {
     let tarefa = value.tarefa;
-    let idCheckbox = JSON.parse(localStorage.getItem(`checkbox2`));
+    let idCheckbox = JSON.parse(localStorage.getItem(`checkboxLista-2`));
     let li = document.createElement("li");
     li.classList.add("lista__item");
     li.innerHTML = `<div class="checkbox-campo">
-         <input type="checkbox" class="checkbox"" id="checkbox2-${idCheckbox[id]}">
-         <label for="checkbox2-${idCheckbox[id]}" class="descricao"></label>
+         <input type="checkbox" class="checkbox" id="checkbox${idCheckbox[id]}">
+         <label for="checkbox${idCheckbox[id]}" class="descricao"></label>
          </div>
          <p>${tarefa}
          </p>
@@ -499,24 +499,22 @@ function mostrarTarefas2() {
          </svg>
          <span class="linha"></span>`;
     ulListaConteudo.appendChild(li);
-    ++i;
     isChecked();
   });
 }
 mostrarTarefas2();
 
 function mostrarTarefas3() {
-  let i = 0;
   const ulListaConteudo = document.querySelector(".lc3");
   if (ulListaConteudo) ulListaConteudo.innerHTML = "";
   tarefasLista3.forEach((value, id) => {
     let tarefa = value.tarefa;
-    let idCheckbox = JSON.parse(localStorage.getItem(`checkbox3`));
+    let idCheckbox = JSON.parse(localStorage.getItem(`checkboxLista-3`));
     let li = document.createElement("li");
     li.classList.add("lista__item");
     li.innerHTML = `<div class="checkbox-campo">
-         <input type="checkbox" class="checkbox"" id="checkbox3-${idCheckbox[id]}">
-         <label for="checkbox3-${idCheckbox[id]}" class="descricao"></label>
+         <input type="checkbox" class="checkbox" id="checkbox${idCheckbox[id]}">
+         <label for="checkbox${idCheckbox[id]}" class="descricao"></label>
          </div>
          <p>${tarefa}
          </p>
@@ -525,24 +523,22 @@ function mostrarTarefas3() {
          </svg>
          <span class="linha"></span>`;
     ulListaConteudo.appendChild(li);
-    ++i;
     isChecked();
   });
 }
 mostrarTarefas3();
 
 function mostrarTarefas4() {
-  let i = 0;
   const ulListaConteudo = document.querySelector(".lc4");
   if (ulListaConteudo) ulListaConteudo.innerHTML = "";
   tarefasLista4.forEach((value, id) => {
     let tarefa = value.tarefa;
-    let idCheckbox = JSON.parse(localStorage.getItem(`checkbox4`));
+    let idCheckbox = JSON.parse(localStorage.getItem(`checkboxLista-4`));
     let li = document.createElement("li");
     li.classList.add("lista__item");
     li.innerHTML = `<div class="checkbox-campo">
-         <input type="checkbox" class="checkbox"" id="checkbox4-${idCheckbox[id]}">
-         <label for="checkbox4-${idCheckbox[id]}" class="descricao"></label>
+         <input type="checkbox" class="checkbox" id="checkbox${idCheckbox[id]}">
+         <label for="checkbox${idCheckbox[id]}" class="descricao"></label>
          </div>
          <p>${tarefa}
          </p>
@@ -551,24 +547,22 @@ function mostrarTarefas4() {
 </svg>
          <span class="linha"></span>`;
     ulListaConteudo.appendChild(li);
-    ++i;
     isChecked();
   });
 }
 mostrarTarefas4();
 
 function mostrarTarefas5() {
-  let i = 0;
   const ulListaConteudo = document.querySelector(".lc5");
   if (ulListaConteudo) ulListaConteudo.innerHTML = "";
   tarefasLista5.forEach((value, id) => {
     let tarefa = value.tarefa;
-    let idCheckbox = JSON.parse(localStorage.getItem(`checkbox5`));
+    let idCheckbox = JSON.parse(localStorage.getItem(`checkboxLista-5`));
     let li = document.createElement("li");
     li.classList.add("lista__item");
     li.innerHTML = `<div class="checkbox-campo">
-         <input type="checkbox" class="checkbox"" id="checkbox5-${idCheckbox[id]}">
-         <label for="checkbox5-${idCheckbox[id]}" class="descricao"></label>
+         <input type="checkbox" class="checkbox" id="checkbox${idCheckbox[id]}">
+         <label for="checkbox${idCheckbox[id]}" class="descricao"></label>
          </div>
          <p>${tarefa}
          </p>
@@ -577,7 +571,6 @@ function mostrarTarefas5() {
          </svg>
          <span class="linha"></span>`;
     ulListaConteudo.appendChild(li);
-    ++i;
     isChecked();
   });
 }
@@ -589,8 +582,8 @@ function deletarTarefa0(i, idcheckbox) {
   localStorage.setItem("lista0", JSON.stringify(tarefasLista0));
 
   arrayCheckbox0.splice(buscarIndice, 1);
-  localStorage.removeItem(`checkbox0-${idcheckbox}`);
-  localStorage.setItem("checkbox0", JSON.stringify(arrayCheckbox0));
+  localStorage.removeItem(`checkbox${idcheckbox}`);
+  localStorage.setItem("checkboxLista-0", JSON.stringify(arrayCheckbox0));
   mostrarTarefas0();
 }
 
@@ -600,8 +593,8 @@ function deletarTarefa1(i, idcheckbox) {
   localStorage.setItem("lista1", JSON.stringify(tarefasLista1));
 
   arrayCheckbox1.splice(buscarIndice, 1);
-  localStorage.removeItem(`checkbox1-${idcheckbox}`);
-  localStorage.setItem("checkbox1", JSON.stringify(arrayCheckbox1));
+  localStorage.removeItem(`checkbox${idcheckbox}`);
+  localStorage.setItem("checkboxLista-1", JSON.stringify(arrayCheckbox1));
   mostrarTarefas1();
 }
 
@@ -611,8 +604,8 @@ function deletarTarefa2(i, idcheckbox) {
   localStorage.setItem("lista2", JSON.stringify(tarefasLista2));
 
   arrayCheckbox2.splice(buscarIndice, 1);
-  localStorage.removeItem(`checkbox2-${idcheckbox}`);
-  localStorage.setItem("checkbox2", JSON.stringify(arrayCheckbox2));
+  localStorage.removeItem(`checkbox${idcheckbox}`);
+  localStorage.setItem("checkboxLista-2", JSON.stringify(arrayCheckbox2));
   mostrarTarefas2();
 }
 
@@ -622,8 +615,8 @@ function deletarTarefa3(i, idcheckbox) {
   localStorage.setItem("lista3", JSON.stringify(tarefasLista3));
 
   arrayCheckbox3.splice(buscarIndice, 1);
-  localStorage.removeItem(`checkbox3-${idcheckbox}`);
-  localStorage.setItem("checkbox3", JSON.stringify(arrayCheckbox3));
+  localStorage.removeItem(`checkbox${idcheckbox}`);
+  localStorage.setItem("checkboxLista-3", JSON.stringify(arrayCheckbox3));
   mostrarTarefas3();
 }
 
@@ -633,8 +626,8 @@ function deletarTarefa4(i, idcheckbox) {
   localStorage.setItem("lista4", JSON.stringify(tarefasLista4));
 
   arrayCheckbox4.splice(buscarIndice, 1);
-  localStorage.removeItem(`checkbox4-${idcheckbox}`);
-  localStorage.setItem("checkbox4", JSON.stringify(arrayCheckbox4));
+  localStorage.removeItem(`checkbox${idcheckbox}`);
+  localStorage.setItem("checkboxLista-4", JSON.stringify(arrayCheckbox4));
   mostrarTarefas4();
 }
 
@@ -644,8 +637,8 @@ function deletarTarefa5(i, idcheckbox) {
   localStorage.setItem("lista5", JSON.stringify(tarefasLista5));
 
   arrayCheckbox5.splice(buscarIndice, 1);
-  localStorage.removeItem(`checkbox5-${idcheckbox}`);
-  localStorage.setItem("checkbox5", JSON.stringify(arrayCheckbox5));
+  localStorage.removeItem(`checkbox${idcheckbox}`);
+  localStorage.setItem("checkboxLista-5", JSON.stringify(arrayCheckbox5));
   mostrarTarefas5();
 }
 
@@ -735,6 +728,155 @@ function editarLista() {
   }
 }
 
+function deletarLista() {
+  function deletarTarefas(id) {
+    let idCheckbox;
+    if (id === 0) {
+      while (tarefasLista0.length >= 1) {
+        idCheckbox = arrayCheckbox0[0];
+        localStorage.removeItem(`checkbox${idCheckbox}`);
+        tarefasLista0.splice(0, 1);
+        arrayCheckbox0.splice(0, 1);
+      }
+      localStorage.setItem("lista5", JSON.stringify(tarefasLista0));
+      localStorage.setItem("lista0", JSON.stringify(tarefasLista1));
+      localStorage.setItem("lista1", JSON.stringify(tarefasLista2));
+      localStorage.setItem("lista2", JSON.stringify(tarefasLista3));
+      localStorage.setItem("lista3", JSON.stringify(tarefasLista4));
+      localStorage.setItem("lista4", JSON.stringify(tarefasLista5));
+      localStorage.setItem("checkboxLista-5", JSON.stringify(arrayCheckbox0));
+      localStorage.setItem("checkboxLista-0", JSON.stringify(arrayCheckbox1));
+      localStorage.setItem("checkboxLista-1", JSON.stringify(arrayCheckbox2));
+      localStorage.setItem("checkboxLista-2", JSON.stringify(arrayCheckbox3));
+      localStorage.setItem("checkboxLista-3", JSON.stringify(arrayCheckbox4));
+      localStorage.setItem("checkboxLista-4", JSON.stringify(arrayCheckbox5));
+    }
+    if (id === 1) {
+      let idCheckbox;
+      while (tarefasLista1.length >= 1) {
+        idCheckbox = arrayCheckbox1[0];
+        localStorage.removeItem(`checkbox${idCheckbox}`);
+        tarefasLista1.splice(0, 1);
+        arrayCheckbox1.splice(0, 1);
+      }
+      localStorage.setItem("lista5", JSON.stringify(tarefasLista1));
+      localStorage.setItem("lista1", JSON.stringify(tarefasLista2));
+      localStorage.setItem("lista2", JSON.stringify(tarefasLista3));
+      localStorage.setItem("lista3", JSON.stringify(tarefasLista4));
+      localStorage.setItem("lista4", JSON.stringify(tarefasLista5));
+      localStorage.setItem("checkboxLista-5", JSON.stringify(arrayCheckbox1));
+      localStorage.setItem("checkboxLista-1", JSON.stringify(arrayCheckbox2));
+      localStorage.setItem("checkboxLista-2", JSON.stringify(arrayCheckbox3));
+      localStorage.setItem("checkboxLista-3", JSON.stringify(arrayCheckbox4));
+      localStorage.setItem("checkboxLista-4", JSON.stringify(arrayCheckbox5));
+    }
+    if (id === 2) {
+      let idCheckbox;
+      while (tarefasLista2.length >= 1) {
+        idCheckbox = arrayCheckbox2[0];
+        localStorage.removeItem(`checkbox${idCheckbox}`);
+        tarefasLista2.splice(0, 1);
+        arrayCheckbox2.splice(0, 1);
+      }
+      localStorage.setItem("lista5", JSON.stringify(tarefasLista2));
+      localStorage.setItem("lista2", JSON.stringify(tarefasLista3));
+      localStorage.setItem("lista3", JSON.stringify(tarefasLista4));
+      localStorage.setItem("lista4", JSON.stringify(tarefasLista5));
+      localStorage.setItem("checkboxLista-5", JSON.stringify(arrayCheckbox2));
+      localStorage.setItem("checkboxLista-2", JSON.stringify(arrayCheckbox3));
+      localStorage.setItem("checkboxLista-3", JSON.stringify(arrayCheckbox4));
+      localStorage.setItem("checkboxLista-4", JSON.stringify(arrayCheckbox5));
+    }
+    if (id === 3) {
+      let idCheckbox;
+      while (tarefasLista3.length >= 1) {
+        idCheckbox = arrayCheckbox3[0];
+        localStorage.removeItem(`checkbox${idCheckbox}`);
+        tarefasLista3.splice(0, 1);
+        arrayCheckbox3.splice(0, 1);
+      }
+      localStorage.setItem("lista5", JSON.stringify(tarefasLista3));
+      localStorage.setItem("lista3", JSON.stringify(tarefasLista4));
+      localStorage.setItem("lista4", JSON.stringify(tarefasLista5));
+      localStorage.setItem("checkboxLista-5", JSON.stringify(arrayCheckbox3));
+      localStorage.setItem("checkboxLista-3", JSON.stringify(arrayCheckbox4));
+      localStorage.setItem("checkboxLista-4", JSON.stringify(arrayCheckbox5));
+    }
+    if (id === 4) {
+      let idCheckbox;
+      while (tarefasLista4.length >= 1) {
+        idCheckbox = arrayCheckbox4[0];
+        localStorage.removeItem(`checkbox${idCheckbox}`);
+        tarefasLista4.splice(0, 1);
+        arrayCheckbox4.splice(0, 1);
+      }
+      localStorage.setItem("lista5", JSON.stringify(tarefasLista4));
+      localStorage.setItem("lista4", JSON.stringify(tarefasLista5));
+      localStorage.setItem("checkboxLista-5", JSON.stringify(arrayCheckbox4));
+      localStorage.setItem("checkboxLista-4", JSON.stringify(arrayCheckbox5));
+    }
+    if (id === 5) {
+      let idCheckbox;
+      while (tarefasLista5.length >= 1) {
+        idCheckbox = arrayCheckbox5[0];
+        localStorage.removeItem(`checkbox${idCheckbox}`);
+        tarefasLista5.splice(0, 1);
+        arrayCheckbox5.splice(0, 1);
+      }
+      localStorage.setItem("lista5", JSON.stringify(tarefasLista5));
+      localStorage.setItem("checkboxLista-5", JSON.stringify(arrayCheckbox5));
+    }
+  }
+  if (inputEditarNome.classList.contains("0")) {
+    deletarTarefas(0);
+    conteudoArrayListas.splice(0, 1);
+    localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
+    atualizarListas();
+    fecharModalLista();
+    location.reload();
+  }
+  if (inputEditarNome.classList.contains("1")) {
+    deletarTarefas(1);
+    conteudoArrayListas.splice(1, 1);
+    localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
+    atualizarListas();
+    fecharModalLista();
+    location.reload();
+  }
+  if (inputEditarNome.classList.contains("2")) {
+    deletarTarefas(2);
+    conteudoArrayListas.splice(2, 1);
+    localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
+    atualizarListas();
+    fecharModalLista();
+    location.reload();
+  }
+  if (inputEditarNome.classList.contains("3")) {
+    deletarTarefas(3);
+    conteudoArrayListas.splice(3, 1);
+    localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
+    atualizarListas();
+    fecharModalLista();
+    location.reload();
+  }
+  if (inputEditarNome.classList.contains("4")) {
+    deletarTarefas(4);
+    conteudoArrayListas.splice(4, 1);
+    localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
+    atualizarListas();
+    fecharModalLista();
+    location.reload();
+  }
+  if (inputEditarNome.classList.contains("5")) {
+    deletarTarefas(5);
+    conteudoArrayListas.splice(5, 1);
+    localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
+    atualizarListas();
+    fecharModalLista();
+    location.reload();
+  }
+}
+
 btnMenu.addEventListener("click", toggleMenu);
 btnMenu.addEventListener("touchstart", toggleMenu);
 btnMenuFechar.addEventListener("click", toggleMenu);
@@ -759,3 +901,5 @@ inputEditarNome.addEventListener("keyup", (e) => {
     btnTrocarNome.click();
   }
 });
+
+btnDeletarLista.addEventListener("click", deletarLista);

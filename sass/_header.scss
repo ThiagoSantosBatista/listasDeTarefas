@@ -45,10 +45,10 @@
     border-right: 0.1rem solid var(--cor-roxo2);
     background: var(--cor-neutra2-bg);
   }
-  .nav__list {
+  &__list {
     margin: 7rem 4rem 0 4rem;
   }
-  .nav__btn-fechar {
+  &__btn-fechar {
     position: absolute;
     top: 2rem;
     right: 2rem;
@@ -56,12 +56,22 @@
     background: none;
     border: none;
   }
-  .nav__item-usuario h1 {
+  &__item-usuario h1 {
     font-size: 3rem;
     font-weight: 500;
-    margin-bottom: 4rem;
+    margin-bottom: 1rem;
   }
-  .nav__item {
+  &__item-usuario p {
+    color: var(--cor-roxo2);
+    font-size: 1.2rem;
+    margin-bottom: 4rem;
+    font-weight: 500;
+    .me{
+    font-weight: 700;
+    font-size: 1.2rem;
+    }
+  }
+  &__item {
     margin-bottom: 0.2rem;
     a {
       display: flex;
