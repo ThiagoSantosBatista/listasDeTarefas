@@ -22,10 +22,10 @@
   align-items: center;
   gap: 1rem;
   font-size: 2rem;
-  color: var(--cor-neutra-bg);
   border: none;
   cursor: pointer;
   background: none;
+  color: var(--cor-neutra-bg);
 }
 
 .nav {
@@ -37,10 +37,10 @@
     position: absolute;
     top: 0;
     left: 0;
-    padding-top: 1rem;
     z-index: 20;
     width: 28rem;
     height: 100vh;
+    padding-top: 1rem;
     transition: all 0.3s;
     border-right: 0.1rem solid var(--cor-roxo2);
     background: var(--cor-neutra2-bg);
@@ -53,9 +53,9 @@
     position: absolute;
     top: 2rem;
     right: 2rem;
+    border: none;
     cursor: pointer;
     background: none;
-    border: none;
   }
   &__item-usuario h1 {
     font-size: 3rem;
@@ -63,13 +63,13 @@
     margin-bottom: 1rem;
   }
   &__item-usuario p {
-    color: var(--cor-roxo2);
+    font-weight: 500;
     font-size: 1.2rem;
     margin-bottom: 4rem;
-    font-weight: 500;
-    .me{
-    font-weight: 700;
-    font-size: 1.2rem;
+    color: var(--cor-roxo2);
+    .me {
+      font-weight: 700;
+      font-size: 1.2rem;
     }
   }
   &__item {
@@ -79,11 +79,11 @@
       align-items: center;
       justify-self: start;
       gap: 1.5rem;
+      font-weight: 500;
       font-size: 1.6rem;
+      border-radius: 0.5rem;
       padding: 1rem 1rem 1rem 1rem;
       color: var(--cor-cinza2);
-      border-radius: 0.5rem;
-      font-weight: 500;
       &:hover {
         color: var(--cor-neutra2-bg);
         background: var(--cor-roxo2);
@@ -95,8 +95,8 @@
   }
   &.ativo {
     .nav__list-box {
-      pointer-events: auto;
       display: block;
+      pointer-events: auto;
       box-shadow: 0rem 0 0 1000rem rgba(17, 17, 17, 0.7);
     }
     .nav__btn-fechar {

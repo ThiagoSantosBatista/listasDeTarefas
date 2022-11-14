@@ -20,40 +20,40 @@
     }
   }
   &-box {
-    margin: 1rem 2rem;
-    max-width: 40rem;
     width: 90%;
+    max-width: 40rem;
     padding: 2rem;
+    margin: 1rem 2rem;
     border-radius: 0.5rem;
+    position: relative;
     background: var(--cor-neutra2-bg);
     border: 0.1rem solid var(--cor-roxo2);
-    position: relative;
   }
   h1 {
     font-size: 3.2rem;
     font-weight: 500;
-    color: var(--cor-roxo2);
     margin-bottom: 4rem;
     position: relative;
+    color: var(--cor-roxo2);
     &::before {
       content: "";
-      display: block;
+      position: absolute;
+      left: 0;
+      bottom: -0.5rem;
       width: 3.5rem;
       height: 0.3rem;
+      display: block;
       background: var(--cor-verde);
-      position: absolute;
-      bottom: -0.5rem;
-      left: 0;
     }
   }
   input {
+    border: none;
     width: 100%;
     font-size: 1.7rem;
-    padding: 1rem 1.5rem;
-    outline: 0.15rem solid var(--cor-roxo5);
-    border: none;
-    border-radius: 0.5rem;
     margin-bottom: 1rem;
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    outline: 0.15rem solid var(--cor-roxo5);
     &:hover,
     &:focus {
       outline-width: 0.2rem;
@@ -63,27 +63,27 @@
   .adicionar,
   .trocarNomeLista,
   .deletarLista {
-    width: 100%;
     font-size: 1.7rem;
-    padding: 1rem;
-    letter-spacing: 0.1rem;
-    text-transform: uppercase;
     font-weight: 700;
-    cursor: pointer;
-    background-color: var(--cor-roxo2);
-    color: var(--cor-texto);
-    border: none;
-    border-radius: 0.5rem;
+    letter-spacing: 0.1rem;
+    width: 100%;
+    padding: 1rem;
     transition: 0.3s;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    color: var(--cor-texto);
+    background-color: var(--cor-roxo2);
     &:hover {
       background-color: var(--cor-roxo3);
     }
   }
   .deletarLista {
     margin-top: 2rem;
+    background: none;
     color: var(--cor-vermelho);
     border: 0.1rem solid var(--cor-vermelho);
-    background: none;
     &:hover {
       background-color: var(--cor-vermelho);
       color: var(--cor-neutra2-bg);
@@ -93,12 +93,12 @@
     position: absolute;
     top: 0;
     right: 0;
-    transform: translate3d(25%, -25%, 0);
     padding: 1rem;
+    border-radius: 50%;
+    transform: translate3d(25%, -25%, 0);
     cursor: pointer;
     background-color: var(--cor-neutra2-bg);
     border: 0.2rem solid var(--cor-vermelho);
-    border-radius: 50%;
   }
 }
 

@@ -24,7 +24,7 @@
   border-right: 0.1rem solid var(--cor-roxo);
 }
 .dark-mode:root .nav__item a {
-  color: #f3f3f3;
+  color: var(--cor-texto);
 }
 .dark-mode:root .nav__item a svg path {
   fill: var(--cor-neutra-bg);
@@ -40,7 +40,7 @@
   color: var(--cor-roxo);
 }
 .dark-mode:root .nav__btn svg path {
-  fill: #ffffff;
+  fill: var(--cor-texto);
 }
 .dark-mode:root .adicionarLista-box,
 .dark-mode:root .editarLista-box {
@@ -61,11 +61,11 @@
 }
 .dark-mode:root .inputTarefa,
 .dark-mode:root .modal input {
-  color: #ffffff;
-  background: #3b3b3b;
+  color: var(--cor-texto);
+  background: var(--cor-cinza);
 }
 .dark-mode:root .lista {
-  background: #2f2f2f;
+  background: var(--cor-cinza2);
 }
 
 *,
@@ -83,10 +83,10 @@ html {
 }
 
 body {
+  transition: 0.2s;
   min-height: 100vh;
   color: var(--cor-neutra-bg);
   background-color: var(--cor-neutra2-bg);
-  transition: 0.2s;
 }
 
 img {
@@ -131,10 +131,10 @@ a {
   align-items: center;
   gap: 1rem;
   font-size: 2rem;
-  color: var(--cor-neutra-bg);
   border: none;
   cursor: pointer;
   background: none;
+  color: var(--cor-neutra-bg);
 }
 
 .nav__btn-fechar {
@@ -145,10 +145,10 @@ a {
   position: absolute;
   top: 0;
   left: 0;
-  padding-top: 1rem;
   z-index: 20;
   width: 28rem;
   height: 100vh;
+  padding-top: 1rem;
   transition: all 0.3s;
   border-right: 0.1rem solid var(--cor-roxo2);
   background: var(--cor-neutra2-bg);
@@ -161,9 +161,9 @@ a {
   position: absolute;
   top: 2rem;
   right: 2rem;
+  border: none;
   cursor: pointer;
   background: none;
-  border: none;
 }
 .nav__item-usuario h1 {
   font-size: 3rem;
@@ -171,10 +171,10 @@ a {
   margin-bottom: 1rem;
 }
 .nav__item-usuario p {
-  color: var(--cor-roxo2);
+  font-weight: 500;
   font-size: 1.2rem;
   margin-bottom: 4rem;
-  font-weight: 500;
+  color: var(--cor-roxo2);
 }
 .nav__item-usuario p .me {
   font-weight: 700;
@@ -188,11 +188,11 @@ a {
   align-items: center;
   justify-self: start;
   gap: 1.5rem;
+  font-weight: 500;
   font-size: 1.6rem;
+  border-radius: 0.5rem;
   padding: 1rem 1rem 1rem 1rem;
   color: var(--cor-cinza2);
-  border-radius: 0.5rem;
-  font-weight: 500;
 }
 .nav__item a:hover {
   color: var(--cor-neutra2-bg);
@@ -202,8 +202,8 @@ a {
   fill: var(--cor-neutra2-bg);
 }
 .nav.ativo .nav__list-box {
-  pointer-events: auto;
   display: block;
+  pointer-events: auto;
   box-shadow: 0rem 0 0 1000rem rgba(17, 17, 17, 0.7);
 }
 .nav.ativo .nav__btn-fechar {
@@ -243,14 +243,14 @@ a {
   font-weight: 700;
   font-size: 1.4rem;
   padding: 1rem 2rem;
+  transition: 0.3s;
+  border-radius: 0.5rem;
   letter-spacing: 0.1rem;
   border: none;
   cursor: pointer;
   text-transform: uppercase;
-  border-radius: 0.5rem;
   color: var(--cor-texto);
   background: var(--cor-roxo2);
-  transition: 0.3s;
 }
 .main__lista-add button:hover {
   background-color: var(--cor-roxo3);
@@ -264,18 +264,18 @@ a {
 
 .lista {
   height: 37rem;
-  box-shadow: 0 0.2rem 0.4rem var(--box-shadow);
   border-radius: 0.5rem;
   overflow-y: auto;
+  box-shadow: 0 0.2rem 0.4rem var(--box-shadow);
 }
 .lista__nome {
   display: flex;
   justify-content: space-between;
   align-items: center;
   word-break: break-all;
+  padding: 1.5rem 1.5rem;
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
-  padding: 1.5rem 1.5rem;
   gap: 1.5rem;
   color: var(--cor-texto);
   background: var(--cor-roxo4);
@@ -307,15 +307,15 @@ a {
 }
 .lista__add button {
   font-size: 1.6rem;
-  text-transform: uppercase;
   font-weight: 700;
-  cursor: pointer;
-  border: none;
+  transition: 0.3s;
   padding: 1rem 1.5rem;
   border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
   color: var(--cor-texto);
   background: var(--cor-roxo2);
-  transition: 0.3s;
 }
 .lista__add button:hover {
   background-color: var(--cor-roxo3);
@@ -339,15 +339,15 @@ a {
 .lista__item .checkbox-campo .descricao:before {
   content: "";
   cursor: pointer;
+  display: inline-block;
   width: 2.5rem;
   height: 2.5rem;
-  display: inline-block;
-  background-image: url("/img/checkbox.svg");
   transition: 0.3s;
+  background-image: url("/img/checkbox.svg");
 }
 .lista__item p {
-  padding: 0 6.4rem 4.5rem 0;
   line-height: 1.5;
+  padding: 0 6.4rem 4.5rem 0;
   word-break: break-all;
 }
 .lista__item.concluido p {
@@ -369,8 +369,8 @@ a {
   display: block;
   position: absolute;
   bottom: 3rem;
-  width: calc(100% - 1.5rem);
   height: 0.2rem;
+  width: calc(100% - 1.5rem);
   background: var(--cor-roxo5);
 }
 
@@ -407,43 +407,43 @@ a {
 }
 .adicionarLista-box,
 .editarLista-box {
-  margin: 1rem 2rem;
-  max-width: 40rem;
   width: 90%;
+  max-width: 40rem;
   padding: 2rem;
+  margin: 1rem 2rem;
   border-radius: 0.5rem;
+  position: relative;
   background: var(--cor-neutra2-bg);
   border: 0.1rem solid var(--cor-roxo2);
-  position: relative;
 }
 .adicionarLista h1,
 .editarLista h1 {
   font-size: 3.2rem;
   font-weight: 500;
-  color: var(--cor-roxo2);
   margin-bottom: 4rem;
   position: relative;
+  color: var(--cor-roxo2);
 }
 .adicionarLista h1::before,
 .editarLista h1::before {
   content: "";
-  display: block;
+  position: absolute;
+  left: 0;
+  bottom: -0.5rem;
   width: 3.5rem;
   height: 0.3rem;
+  display: block;
   background: var(--cor-verde);
-  position: absolute;
-  bottom: -0.5rem;
-  left: 0;
 }
 .adicionarLista input,
 .editarLista input {
+  border: none;
   width: 100%;
   font-size: 1.7rem;
-  padding: 1rem 1.5rem;
-  outline: 0.15rem solid var(--cor-roxo5);
-  border: none;
-  border-radius: 0.5rem;
   margin-bottom: 1rem;
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+  outline: 0.15rem solid var(--cor-roxo5);
 }
 .adicionarLista input:hover, .adicionarLista input:focus,
 .editarLista input:hover,
@@ -457,18 +457,18 @@ a {
 .editarLista .adicionar,
 .editarLista .trocarNomeLista,
 .editarLista .deletarLista {
-  width: 100%;
   font-size: 1.7rem;
-  padding: 1rem;
-  letter-spacing: 0.1rem;
-  text-transform: uppercase;
   font-weight: 700;
-  cursor: pointer;
-  background-color: var(--cor-roxo2);
-  color: var(--cor-texto);
-  border: none;
-  border-radius: 0.5rem;
+  letter-spacing: 0.1rem;
+  width: 100%;
+  padding: 1rem;
   transition: 0.3s;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  color: var(--cor-texto);
+  background-color: var(--cor-roxo2);
 }
 .adicionarLista .adicionar:hover,
 .adicionarLista .trocarNomeLista:hover,
@@ -481,9 +481,9 @@ a {
 .adicionarLista .deletarLista,
 .editarLista .deletarLista {
   margin-top: 2rem;
+  background: none;
   color: var(--cor-vermelho);
   border: 0.1rem solid var(--cor-vermelho);
-  background: none;
 }
 .adicionarLista .deletarLista:hover,
 .editarLista .deletarLista:hover {
@@ -495,12 +495,12 @@ a {
   position: absolute;
   top: 0;
   right: 0;
-  transform: translate3d(25%, -25%, 0);
   padding: 1rem;
+  border-radius: 50%;
+  transform: translate3d(25%, -25%, 0);
   cursor: pointer;
   background-color: var(--cor-neutra2-bg);
   border: 0.2rem solid var(--cor-vermelho);
-  border-radius: 50%;
 }
 
 @keyframes modal {
@@ -517,28 +517,30 @@ a {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  position: fixed;
+  position: absolute;
   top: 1.5rem;
   left: 1.5rem;
   width: 23rem;
   height: 11.4rem;
   overflow-y: hidden;
+}
+.areaNotificacao.ativo {
   z-index: 100;
 }
 
 .notificacao {
   top: 1.5rem;
   left: 1.5rem;
-  padding: 1.5rem 1.5rem;
   width: 23rem;
+  font-weight: 700;
   font-size: 1.4rem;
   border-radius: 0.5rem;
+  padding: 1.5rem 1.5rem;
   color: var(--cor-roxo2);
   background: var(--cor-texto);
   border: 0.2rem solid var(--cor-roxo2);
   border-left: 1rem solid var(--cor-roxo2);
   animation: notificacao 0.4s;
-  font-weight: 700;
 }
 .notificacaoMax, .notificacaoNome {
   border-color: var(--cor-vermelho);

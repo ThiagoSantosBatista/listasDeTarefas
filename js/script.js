@@ -12,6 +12,8 @@ const btnTrocarTema = document.querySelector(".btnTrocarTema");
 const btnTrocarNome = document.querySelector(".trocarNomeLista");
 const btnDeletarLista = document.querySelector(".deletarLista");
 const inputEditarNome = document.querySelector("#editarNomeLista");
+const area = document.querySelector(".areaNotificacao");
+let areaArray = [];
 
 let conteudoArrayListas = localStorage.getItem("listas")
   ? JSON.parse(localStorage.getItem("listas"))
@@ -31,6 +33,45 @@ for (let i = 0; i < 6; i++) {
 for (let i = 0; i < 6; i++) {
   window[`arrayCheckbox${i}`] = localStorage.getItem(`checkboxLista-${i}`)
     ? JSON.parse(localStorage.getItem(`checkboxLista-${i}`))
+    : [];
+}
+
+function dadosLista() {
+  tarefasLista0 = localStorage.getItem("lista0")
+    ? JSON.parse(localStorage.getItem("lista0"))
+    : [];
+  tarefasLista1 = localStorage.getItem("lista1")
+    ? JSON.parse(localStorage.getItem("lista1"))
+    : [];
+  tarefasLista2 = localStorage.getItem("lista2")
+    ? JSON.parse(localStorage.getItem("lista2"))
+    : [];
+  tarefasLista3 = localStorage.getItem("lista3")
+    ? JSON.parse(localStorage.getItem("lista3"))
+    : [];
+  tarefasLista4 = localStorage.getItem("lista4")
+    ? JSON.parse(localStorage.getItem("lista4"))
+    : [];
+  tarefasLista5 = localStorage.getItem("lista5")
+    ? JSON.parse(localStorage.getItem("lista5"))
+    : [];
+  arrayCheckbox0 = localStorage.getItem("checkboxLista-0")
+    ? JSON.parse(localStorage.getItem("checkboxLista-0"))
+    : [];
+  arrayCheckbox1 = localStorage.getItem("checkboxLista-1")
+    ? JSON.parse(localStorage.getItem("checkboxLista-1"))
+    : [];
+  arrayCheckbox2 = localStorage.getItem("checkboxLista-2")
+    ? JSON.parse(localStorage.getItem("checkboxLista-2"))
+    : [];
+  arrayCheckbox3 = localStorage.getItem("checkboxLista-3")
+    ? JSON.parse(localStorage.getItem("checkboxLista-3"))
+    : [];
+  arrayCheckbox4 = localStorage.getItem("checkboxLista-4")
+    ? JSON.parse(localStorage.getItem("checkboxLista-4"))
+    : [];
+  arrayCheckbox5 = localStorage.getItem("checkboxLista-5")
+    ? JSON.parse(localStorage.getItem("checkboxLista-5"))
     : [];
 }
 
@@ -66,17 +107,24 @@ function toggleMenu(event) {
 }
 
 function notificacao(tipo, nome) {
+  area.classList.add("ativo");
   let div = document.createElement("div");
   let id = Math.random().toString(36).substring(2, 10);
   div.setAttribute("id", id);
   div.classList.add("notificacao", tipo);
   div.innerText = nome;
-  document.querySelector(".areaNotificacao").prepend(div);
+  area.prepend(div);
+  areaArray.push(id);
   setTimeout(() => {
     let notificacoes = document.querySelectorAll(".notificacao");
     for (let i = 0; i < notificacoes.length; i++) {
       if (notificacoes[i].getAttribute("id") === id) {
         notificacoes[i].remove();
+        let idArea = areaArray.indexOf(id);
+        areaArray.splice(idArea, 1);
+        if (areaArray.length === 0) {
+          area.classList.remove("ativo");
+        }
         break;
       }
     }
@@ -98,7 +146,7 @@ function addListasDados(event) {
 
     notificacao("notificacaoSucesso", "Lista criada com sucesso!");
   } else {
-    notificacao("notificacaoNome", "Escreva o nome da lista");
+    notificacao("notificacaoNome", "Escreva o nome da lista!");
   }
 }
 
@@ -305,7 +353,7 @@ function criarTarefa() {
       inputTarefa.focus();
       salvarCheckbox();
     } else {
-      alert("Escreva uma tarefa!");
+      notificacao("notificacaoNome", "Escreva uma tarefa!");
     }
   }
   inputTarefa.addEventListener("keyup", (e) => {
@@ -334,24 +382,25 @@ document.addEventListener("click", (e) => {
   }
 });
 
-conteudoArrayListas.forEach((undefined, id) => {
-  let idTarefa;
-  if (id === 0) idTarefa = tarefasLista0.length;
-  if (id === 1) idTarefa = tarefasLista1.length;
-  if (id === 2) idTarefa = tarefasLista2.length;
-  if (id === 3) idTarefa = tarefasLista3.length;
-  if (id === 4) idTarefa = tarefasLista4.length;
-  if (id === 5) idTarefa = tarefasLista5.length;
+function adicionarTarefasLista() {
+  conteudoArrayListas.forEach((undefined, id) => {
+    let idTarefa;
+    if (id === 0) idTarefa = tarefasLista0.length;
+    if (id === 1) idTarefa = tarefasLista1.length;
+    if (id === 2) idTarefa = tarefasLista2.length;
+    if (id === 3) idTarefa = tarefasLista3.length;
+    if (id === 4) idTarefa = tarefasLista4.length;
+    if (id === 5) idTarefa = tarefasLista5.length;
 
-  let btnAddTarefa = document.querySelector(`.at${id}`);
-  const ulListaConteudo = document.querySelector(`.lc${id}`);
-  let inputTarefa = document.querySelector(`.it${id}`);
-  function adicionarTarefa() {
-    let valor = inputTarefa.value.trim();
-    if (valor.length > 0) {
-      let li = document.createElement("li");
-      li.classList.add("lista__item");
-      li.innerHTML = `<div class="checkbox-campo">
+    let btnAddTarefa = document.querySelector(`.at${id}`);
+    const ulListaConteudo = document.querySelector(`.lc${id}`);
+    let inputTarefa = document.querySelector(`.it${id}`);
+    function adicionarTarefa() {
+      let valor = inputTarefa.value.trim();
+      if (valor.length > 0) {
+        let li = document.createElement("li");
+        li.classList.add("lista__item");
+        li.innerHTML = `<div class="checkbox-campo">
          <input type="checkbox" class="checkbox" id="checkbox${idCheckbox}">
          <label for="checkbox${idCheckbox}" class="descricao"></label>
          </div>
@@ -361,95 +410,115 @@ conteudoArrayListas.forEach((undefined, id) => {
          <path d="M3.68229 25C3.09896 25 2.58854 24.7917 2.15104 24.375C1.71354 23.9583 1.49479 23.4722 1.49479 22.9167V3.125H1.09375C0.777778 3.125 0.516493 3.02662 0.309896 2.82986C0.103299 2.6331 0 2.38426 0 2.08333C0 1.78241 0.103299 1.53356 0.309896 1.33681C0.516493 1.14005 0.777778 1.04167 1.09375 1.04167H6.85417C6.85417 0.740741 6.95747 0.491898 7.16406 0.295139C7.37066 0.0983798 7.63194 0 7.94792 0H15.3854C15.7014 0 15.9627 0.0983798 16.1693 0.295139C16.3759 0.491898 16.4792 0.740741 16.4792 1.04167H22.2396C22.5556 1.04167 22.8168 1.14005 23.0234 1.33681C23.23 1.53356 23.3333 1.78241 23.3333 2.08333C23.3333 2.38426 23.23 2.6331 23.0234 2.82986C22.8168 3.02662 22.5556 3.125 22.2396 3.125H21.8385V22.9167C21.8385 23.4722 21.6198 23.9583 21.1823 24.375C20.7448 24.7917 20.2344 25 19.651 25H3.68229ZM3.68229 3.125V22.9167H19.651V3.125H3.68229ZM7.54688 18.8889C7.54688 19.1898 7.65017 19.4387 7.85677 19.6354C8.06337 19.8322 8.32465 19.9306 8.64063 19.9306C8.9566 19.9306 9.21788 19.8322 9.42448 19.6354C9.63108 19.4387 9.73438 19.1898 9.73438 18.8889V7.11806C9.73438 6.81713 9.63108 6.56829 9.42448 6.37153C9.21788 6.17477 8.9566 6.07639 8.64063 6.07639C8.32465 6.07639 8.06337 6.17477 7.85677 6.37153C7.65017 6.56829 7.54688 6.81713 7.54688 7.11806V18.8889ZM13.599 18.8889C13.599 19.1898 13.7023 19.4387 13.9089 19.6354C14.1155 19.8322 14.3767 19.9306 14.6927 19.9306C15.0087 19.9306 15.27 19.8322 15.4766 19.6354C15.6832 19.4387 15.7865 19.1898 15.7865 18.8889V7.11806C15.7865 6.81713 15.6832 6.56829 15.4766 6.37153C15.27 6.17477 15.0087 6.07639 14.6927 6.07639C14.3767 6.07639 14.1155 6.17477 13.9089 6.37153C13.7023 6.56829 13.599 6.81713 13.599 7.11806V18.8889Z" fill="#FE5045"/>
          </svg>
          <span class="linha"></span>`;
-      ulListaConteudo.appendChild(li);
-      if (id === 0) {
-        let listaTarefa = {
-          tarefa: inputTarefa.value,
-        };
-        tarefasLista0.push(listaTarefa);
-        localStorage.setItem("lista0", JSON.stringify(tarefasLista0));
-        arrayCheckbox0.push(idCheckbox);
-        localStorage.setItem("checkboxLista-0", JSON.stringify(arrayCheckbox0));
-        mostrarTarefas0();
-        ++idCheckbox;
-        addTarefaNum = idCheckbox;
-        localStorage.setItem("tarefas", JSON.stringify(addTarefaNum));
-      } else if (id === 1) {
-        let listaTarefa = {
-          tarefa: inputTarefa.value,
-        };
-        tarefasLista1.push(listaTarefa);
-        localStorage.setItem("lista1", JSON.stringify(tarefasLista1));
-        arrayCheckbox1.push(idCheckbox);
-        localStorage.setItem("checkboxLista-1", JSON.stringify(arrayCheckbox1));
-        mostrarTarefas1();
-        ++idCheckbox;
-        addTarefaNum = idCheckbox;
-        localStorage.setItem("tarefas", JSON.stringify(addTarefaNum));
-      } else if (id === 2) {
-        let listaTarefa = {
-          tarefa: inputTarefa.value,
-        };
-        tarefasLista2.push(listaTarefa);
-        localStorage.setItem("lista2", JSON.stringify(tarefasLista2));
-        arrayCheckbox2.push(idCheckbox);
-        localStorage.setItem("checkboxLista-2", JSON.stringify(arrayCheckbox2));
-        mostrarTarefas2();
-        ++idCheckbox;
-        addTarefaNum = idCheckbox;
-        localStorage.setItem("tarefas", JSON.stringify(addTarefaNum));
-      } else if (id === 3) {
-        let listaTarefa = {
-          tarefa: inputTarefa.value,
-        };
-        tarefasLista3.push(listaTarefa);
-        localStorage.setItem("lista3", JSON.stringify(tarefasLista3));
-        arrayCheckbox3.push(idCheckbox);
-        localStorage.setItem("checkboxLista-3", JSON.stringify(arrayCheckbox3));
-        mostrarTarefas3();
-        ++idCheckbox;
-        addTarefaNum = idCheckbox;
-        localStorage.setItem("tarefas", JSON.stringify(addTarefaNum));
-      } else if (id === 4) {
-        let listaTarefa = {
-          tarefa: inputTarefa.value,
-        };
-        tarefasLista4.push(listaTarefa);
-        localStorage.setItem("lista4", JSON.stringify(tarefasLista4));
-        arrayCheckbox4.push(idCheckbox);
-        localStorage.setItem("checkboxLista-4", JSON.stringify(arrayCheckbox4));
-        mostrarTarefas4();
-        ++idCheckbox;
-        addTarefaNum = idCheckbox;
-        localStorage.setItem("tarefas", JSON.stringify(addTarefaNum));
-      } else if (id === 5) {
-        let listaTarefa = {
-          tarefa: inputTarefa.value,
-        };
-        tarefasLista5.push(listaTarefa);
-        localStorage.setItem("lista5", JSON.stringify(tarefasLista5));
-        arrayCheckbox5.push(idCheckbox);
-        localStorage.setItem("checkboxLista-5", JSON.stringify(arrayCheckbox5));
-        mostrarTarefas5();
-        ++idCheckbox;
-        addTarefaNum = idCheckbox;
-        localStorage.setItem("tarefas", JSON.stringify(addTarefaNum));
+        ulListaConteudo.appendChild(li);
+        if (id === 0) {
+          let listaTarefa = {
+            tarefa: inputTarefa.value,
+          };
+          tarefasLista0.push(listaTarefa);
+          localStorage.setItem("lista0", JSON.stringify(tarefasLista0));
+          arrayCheckbox0.push(idCheckbox);
+          localStorage.setItem(
+            "checkboxLista-0",
+            JSON.stringify(arrayCheckbox0)
+          );
+          mostrarTarefas0();
+          ++idCheckbox;
+          addTarefaNum = idCheckbox;
+          localStorage.setItem("tarefas", JSON.stringify(addTarefaNum));
+        } else if (id === 1) {
+          let listaTarefa = {
+            tarefa: inputTarefa.value,
+          };
+          tarefasLista1.push(listaTarefa);
+          localStorage.setItem("lista1", JSON.stringify(tarefasLista1));
+          arrayCheckbox1.push(idCheckbox);
+          localStorage.setItem(
+            "checkboxLista-1",
+            JSON.stringify(arrayCheckbox1)
+          );
+          mostrarTarefas1();
+          ++idCheckbox;
+          addTarefaNum = idCheckbox;
+          localStorage.setItem("tarefas", JSON.stringify(addTarefaNum));
+        } else if (id === 2) {
+          let listaTarefa = {
+            tarefa: inputTarefa.value,
+          };
+          tarefasLista2.push(listaTarefa);
+          localStorage.setItem("lista2", JSON.stringify(tarefasLista2));
+          arrayCheckbox2.push(idCheckbox);
+          localStorage.setItem(
+            "checkboxLista-2",
+            JSON.stringify(arrayCheckbox2)
+          );
+          mostrarTarefas2();
+          ++idCheckbox;
+          addTarefaNum = idCheckbox;
+          localStorage.setItem("tarefas", JSON.stringify(addTarefaNum));
+        } else if (id === 3) {
+          let listaTarefa = {
+            tarefa: inputTarefa.value,
+          };
+          tarefasLista3.push(listaTarefa);
+          localStorage.setItem("lista3", JSON.stringify(tarefasLista3));
+          arrayCheckbox3.push(idCheckbox);
+          localStorage.setItem(
+            "checkboxLista-3",
+            JSON.stringify(arrayCheckbox3)
+          );
+          mostrarTarefas3();
+          ++idCheckbox;
+          addTarefaNum = idCheckbox;
+          localStorage.setItem("tarefas", JSON.stringify(addTarefaNum));
+        } else if (id === 4) {
+          let listaTarefa = {
+            tarefa: inputTarefa.value,
+          };
+          tarefasLista4.push(listaTarefa);
+          localStorage.setItem("lista4", JSON.stringify(tarefasLista4));
+          arrayCheckbox4.push(idCheckbox);
+          localStorage.setItem(
+            "checkboxLista-4",
+            JSON.stringify(arrayCheckbox4)
+          );
+          mostrarTarefas4();
+          ++idCheckbox;
+          addTarefaNum = idCheckbox;
+          localStorage.setItem("tarefas", JSON.stringify(addTarefaNum));
+        } else if (id === 5) {
+          let listaTarefa = {
+            tarefa: inputTarefa.value,
+          };
+          tarefasLista5.push(listaTarefa);
+          localStorage.setItem("lista5", JSON.stringify(tarefasLista5));
+          arrayCheckbox5.push(idCheckbox);
+          localStorage.setItem(
+            "checkboxLista-5",
+            JSON.stringify(arrayCheckbox5)
+          );
+          mostrarTarefas5();
+          ++idCheckbox;
+          addTarefaNum = idCheckbox;
+          localStorage.setItem("tarefas", JSON.stringify(addTarefaNum));
+        }
+        inputTarefa.value = "";
+        inputTarefa.focus();
+        salvarCheckbox();
+      } else {
+        notificacao("notificacaoNome", "Escreva uma tarefa!");
       }
-      inputTarefa.value = "";
-      inputTarefa.focus();
-      salvarCheckbox();
-    } else {
-      alert("Escreva uma tarefa!");
     }
-  }
-  inputTarefa.addEventListener("keyup", (e) => {
-    e.preventDefault();
-    if (e.keyCode === 13) {
-      btnAddTarefa.click();
-    }
+    inputTarefa.addEventListener("keyup", (e) => {
+      e.preventDefault();
+      if (e.keyCode === 13) {
+        btnAddTarefa.click();
+      }
+    });
+    btnAddTarefa.addEventListener("click", adicionarTarefa);
   });
-  btnAddTarefa.addEventListener("click", adicionarTarefa);
-});
+}
+adicionarTarefasLista();
 
 for (let i = 0; i < 6; i++) {
   window[`mostrarTarefas${i}`] = function () {
@@ -588,6 +657,7 @@ function editarLista() {
       conteudoArrayListas[0].nome = novoNome;
       localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
       fecharModalLista();
+      notificacao("notificacaoSucesso", "Nome alterado!");
     }
     if (inputEditarNome.classList.contains("1")) {
       let h1 = document.querySelector(".listaNome1");
@@ -596,6 +666,7 @@ function editarLista() {
       conteudoArrayListas[1].nome = novoNome;
       localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
       fecharModalLista();
+      notificacao("notificacaoSucesso", "Nome alterado!");
     }
     if (inputEditarNome.classList.contains("2")) {
       let h1 = document.querySelector(".listaNome2");
@@ -604,6 +675,7 @@ function editarLista() {
       conteudoArrayListas[2].nome = novoNome;
       localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
       fecharModalLista();
+      notificacao("notificacaoSucesso", "Nome alterado!");
     }
     if (inputEditarNome.classList.contains("3")) {
       let h1 = document.querySelector(".listaNome3");
@@ -612,6 +684,7 @@ function editarLista() {
       conteudoArrayListas[3].nome = novoNome;
       localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
       fecharModalLista();
+      notificacao("notificacaoSucesso", "Nome alterado!");
     }
     if (inputEditarNome.classList.contains("4")) {
       let h1 = document.querySelector(".listaNome4");
@@ -620,6 +693,7 @@ function editarLista() {
       conteudoArrayListas[4].nome = novoNome;
       localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
       fecharModalLista();
+      notificacao("notificacaoSucesso", "Nome alterado!");
     }
     if (inputEditarNome.classList.contains("5")) {
       let h1 = document.querySelector(".listaNome5");
@@ -628,9 +702,10 @@ function editarLista() {
       conteudoArrayListas[5].nome = novoNome;
       localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
       fecharModalLista();
+      notificacao("notificacaoSucesso", "Nome alterado!");
     }
   } else {
-    alert("Insira um nome!");
+    notificacao("notificacaoNome", "Insira um nome!");
   }
 }
 
@@ -644,6 +719,7 @@ function deletarLista() {
         tarefasLista0.splice(0, 1);
         arrayCheckbox0.splice(0, 1);
       }
+
       localStorage.setItem("lista5", JSON.stringify(tarefasLista0));
       localStorage.setItem("lista0", JSON.stringify(tarefasLista1));
       localStorage.setItem("lista1", JSON.stringify(tarefasLista2));
@@ -739,7 +815,15 @@ function deletarLista() {
     localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
     atualizarListas();
     fecharModalLista();
-    location.reload();
+    dadosLista();
+    mostrarTarefas0();
+    mostrarTarefas1();
+    mostrarTarefas2();
+    mostrarTarefas3();
+    mostrarTarefas4();
+    mostrarTarefas5();
+    adicionarTarefasLista();
+    notificacao("notificacaoSucesso", "Lista excluída!");
   }
   if (inputEditarNome.classList.contains("1")) {
     deletarTarefas(1);
@@ -747,7 +831,15 @@ function deletarLista() {
     localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
     atualizarListas();
     fecharModalLista();
-    location.reload();
+    dadosLista();
+    mostrarTarefas0();
+    mostrarTarefas1();
+    mostrarTarefas2();
+    mostrarTarefas3();
+    mostrarTarefas4();
+    mostrarTarefas5();
+    adicionarTarefasLista();
+    notificacao("notificacaoSucesso", "Lista excluída!");
   }
   if (inputEditarNome.classList.contains("2")) {
     deletarTarefas(2);
@@ -755,6 +847,15 @@ function deletarLista() {
     localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
     atualizarListas();
     fecharModalLista();
+    dadosLista();
+    mostrarTarefas0();
+    mostrarTarefas1();
+    mostrarTarefas2();
+    mostrarTarefas3();
+    mostrarTarefas4();
+    mostrarTarefas5();
+    adicionarTarefasLista();
+    notificacao("notificacaoSucesso", "Lista excluída!");
   }
   if (inputEditarNome.classList.contains("3")) {
     deletarTarefas(3);
@@ -762,7 +863,15 @@ function deletarLista() {
     localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
     atualizarListas();
     fecharModalLista();
-    location.reload();
+    dadosLista();
+    mostrarTarefas0();
+    mostrarTarefas1();
+    mostrarTarefas2();
+    mostrarTarefas3();
+    mostrarTarefas4();
+    mostrarTarefas5();
+    adicionarTarefasLista();
+    notificacao("notificacaoSucesso", "Lista excluída!");
   }
   if (inputEditarNome.classList.contains("4")) {
     deletarTarefas(4);
@@ -770,7 +879,15 @@ function deletarLista() {
     localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
     atualizarListas();
     fecharModalLista();
-    location.reload();
+    dadosLista();
+    mostrarTarefas0();
+    mostrarTarefas1();
+    mostrarTarefas2();
+    mostrarTarefas3();
+    mostrarTarefas4();
+    mostrarTarefas5();
+    adicionarTarefasLista();
+    notificacao("notificacaoSucesso", "Lista excluída!");
   }
   if (inputEditarNome.classList.contains("5")) {
     deletarTarefas(5);
@@ -778,7 +895,15 @@ function deletarLista() {
     localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
     atualizarListas();
     fecharModalLista();
-    location.reload();
+    dadosLista();
+    mostrarTarefas0();
+    mostrarTarefas1();
+    mostrarTarefas2();
+    mostrarTarefas3();
+    mostrarTarefas4();
+    mostrarTarefas5();
+    adicionarTarefasLista();
+    notificacao("notificacaoSucesso", "Lista excluída!");
   }
 }
 

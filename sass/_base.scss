@@ -24,7 +24,7 @@
       border-right: 0.1rem solid var(--cor-roxo);
     }
     &__item a {
-      color: #f3f3f3;
+      color: var(--cor-texto);
       svg path {
         fill: var(--cor-neutra-bg);
       }
@@ -40,7 +40,7 @@
       color: var(--cor-roxo);
     }
     &__btn svg path {
-      fill: #ffffff;
+      fill: var(--cor-texto);
     }
   }
 
@@ -68,11 +68,11 @@
 
   .inputTarefa,
   .modal input {
-    color: #ffffff;
-    background: #3b3b3b;
+    color: var(--cor-texto);
+    background: var(--cor-cinza);
   }
   .lista {
-    background: #2f2f2f;
+    background: var(--cor-cinza2);
   }
 }
 
@@ -89,10 +89,10 @@ html {
   font-size: 62.5%;
 }
 body {
+  transition: 0.2s;
   min-height: 100vh;
   color: var(--cor-neutra-bg);
   background-color: var(--cor-neutra2-bg);
-  transition: 0.2s;
 }
 img {
   display: block;
