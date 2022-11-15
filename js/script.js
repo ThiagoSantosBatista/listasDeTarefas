@@ -13,6 +13,8 @@ const btnTrocarNome = document.querySelector(".trocarNomeLista");
 const btnDeletarLista = document.querySelector(".deletarLista");
 const inputEditarNome = document.querySelector("#editarNomeLista");
 const area = document.querySelector(".areaNotificacao");
+const html = document.querySelector("html");
+
 let areaArray = [];
 
 let conteudoArrayListas = localStorage.getItem("listas")
@@ -24,67 +26,36 @@ let contagemTarefas = localStorage.getItem("tarefas")
   : 0;
 let idCheckbox = contagemTarefas;
 
-for (let i = 0; i < 6; i++) {
-  window[`tarefasLista${i}`] = localStorage.getItem(`lista${i}`)
-    ? JSON.parse(localStorage.getItem(`lista${i}`))
-    : [];
-}
-
-for (let i = 0; i < 6; i++) {
-  window[`arrayCheckbox${i}`] = localStorage.getItem(`checkboxLista-${i}`)
-    ? JSON.parse(localStorage.getItem(`checkboxLista-${i}`))
-    : [];
-}
-
 function dadosLista() {
-  tarefasLista0 = localStorage.getItem("lista0")
-    ? JSON.parse(localStorage.getItem("lista0"))
-    : [];
-  tarefasLista1 = localStorage.getItem("lista1")
-    ? JSON.parse(localStorage.getItem("lista1"))
-    : [];
-  tarefasLista2 = localStorage.getItem("lista2")
-    ? JSON.parse(localStorage.getItem("lista2"))
-    : [];
-  tarefasLista3 = localStorage.getItem("lista3")
-    ? JSON.parse(localStorage.getItem("lista3"))
-    : [];
-  tarefasLista4 = localStorage.getItem("lista4")
-    ? JSON.parse(localStorage.getItem("lista4"))
-    : [];
-  tarefasLista5 = localStorage.getItem("lista5")
-    ? JSON.parse(localStorage.getItem("lista5"))
-    : [];
-  arrayCheckbox0 = localStorage.getItem("checkboxLista-0")
-    ? JSON.parse(localStorage.getItem("checkboxLista-0"))
-    : [];
-  arrayCheckbox1 = localStorage.getItem("checkboxLista-1")
-    ? JSON.parse(localStorage.getItem("checkboxLista-1"))
-    : [];
-  arrayCheckbox2 = localStorage.getItem("checkboxLista-2")
-    ? JSON.parse(localStorage.getItem("checkboxLista-2"))
-    : [];
-  arrayCheckbox3 = localStorage.getItem("checkboxLista-3")
-    ? JSON.parse(localStorage.getItem("checkboxLista-3"))
-    : [];
-  arrayCheckbox4 = localStorage.getItem("checkboxLista-4")
-    ? JSON.parse(localStorage.getItem("checkboxLista-4"))
-    : [];
-  arrayCheckbox5 = localStorage.getItem("checkboxLista-5")
-    ? JSON.parse(localStorage.getItem("checkboxLista-5"))
-    : [];
+  for (let i = 0; i < 6; i++) {
+    window[`tarefasLista${i}`] = localStorage.getItem(`lista${i}`)
+      ? JSON.parse(localStorage.getItem(`lista${i}`))
+      : [];
+  }
+
+  for (let i = 0; i < 6; i++) {
+    window[`arrayCheckbox${i}`] = localStorage.getItem(`checkboxLista-${i}`)
+      ? JSON.parse(localStorage.getItem(`checkboxLista-${i}`))
+      : [];
+  }
 }
+dadosLista();
 
 function carregarTema() {
+  html.classList.contains("dark-mode")
+    ? btnTrocarTema.setAttribute("aria-label", "Ativar modo claro")
+    : btnTrocarTema.setAttribute("aria-label", "Ativar modo escuro");
   const darkMode = localStorage.getItem("darkMode");
   if (darkMode) trocarTema();
 }
 carregarTema();
 
 function trocarTema() {
-  const html = document.querySelector("html");
   html.classList.toggle("dark-mode");
 
+  html.classList.contains("dark-mode")
+    ? btnTrocarTema.setAttribute("aria-label", "Ativar modo claro")
+    : btnTrocarTema.setAttribute("aria-label", "Ativar modo escuro");
   localStorage.removeItem("darkMode");
   if (html.classList.contains("dark-mode")) localStorage.setItem("darkMode", 1);
 }
@@ -158,7 +129,7 @@ function criarLista(text) {
     div.classList.add(`lista`);
     div.innerHTML = `<div class="lista__nome">
       <h1 class="listaNome${id}">${conteudo}</h1>
-      <img class="listaEditar${id} listaEdit" src="./img/edit_note.svg" alt="">
+      <img class="listaEditar${id} listaEdit" src="./img/edit_note.svg" alt="Editar Lista">
     </div>
     <div class="lista__add">
       <input class="inputTarefa it${id}" type="text" placeholder="Escreva uma tarefa">
@@ -243,7 +214,7 @@ function atualizarListas() {
       div.classList.add(`lista`);
       div.innerHTML = `<div class="lista__nome">
                               <h1 class="listaNome${id}">${conteudo}</h1>
-                              <img class="listaEditar${id} listaEdit" src="./img/edit_note.svg" alt="">
+                              <img class="listaEditar${id} listaEdit" src="./img/edit_note.svg" alt="Editar Lista">
                           </div>
                           <div class="lista__add">
                               <input class="inputTarefa it${id}" type="text" placeholder="Escreva uma tarefa">
@@ -809,101 +780,23 @@ function deletarLista() {
       localStorage.setItem("checkboxLista-5", JSON.stringify(arrayCheckbox5));
     }
   }
-  if (inputEditarNome.classList.contains("0")) {
-    deletarTarefas(0);
-    conteudoArrayListas.splice(0, 1);
-    localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
-    atualizarListas();
-    fecharModalLista();
-    dadosLista();
-    mostrarTarefas0();
-    mostrarTarefas1();
-    mostrarTarefas2();
-    mostrarTarefas3();
-    mostrarTarefas4();
-    mostrarTarefas5();
-    adicionarTarefasLista();
-    notificacao("notificacaoSucesso", "Lista excluída!");
-  }
-  if (inputEditarNome.classList.contains("1")) {
-    deletarTarefas(1);
-    conteudoArrayListas.splice(1, 1);
-    localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
-    atualizarListas();
-    fecharModalLista();
-    dadosLista();
-    mostrarTarefas0();
-    mostrarTarefas1();
-    mostrarTarefas2();
-    mostrarTarefas3();
-    mostrarTarefas4();
-    mostrarTarefas5();
-    adicionarTarefasLista();
-    notificacao("notificacaoSucesso", "Lista excluída!");
-  }
-  if (inputEditarNome.classList.contains("2")) {
-    deletarTarefas(2);
-    conteudoArrayListas.splice(2, 1);
-    localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
-    atualizarListas();
-    fecharModalLista();
-    dadosLista();
-    mostrarTarefas0();
-    mostrarTarefas1();
-    mostrarTarefas2();
-    mostrarTarefas3();
-    mostrarTarefas4();
-    mostrarTarefas5();
-    adicionarTarefasLista();
-    notificacao("notificacaoSucesso", "Lista excluída!");
-  }
-  if (inputEditarNome.classList.contains("3")) {
-    deletarTarefas(3);
-    conteudoArrayListas.splice(3, 1);
-    localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
-    atualizarListas();
-    fecharModalLista();
-    dadosLista();
-    mostrarTarefas0();
-    mostrarTarefas1();
-    mostrarTarefas2();
-    mostrarTarefas3();
-    mostrarTarefas4();
-    mostrarTarefas5();
-    adicionarTarefasLista();
-    notificacao("notificacaoSucesso", "Lista excluída!");
-  }
-  if (inputEditarNome.classList.contains("4")) {
-    deletarTarefas(4);
-    conteudoArrayListas.splice(4, 1);
-    localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
-    atualizarListas();
-    fecharModalLista();
-    dadosLista();
-    mostrarTarefas0();
-    mostrarTarefas1();
-    mostrarTarefas2();
-    mostrarTarefas3();
-    mostrarTarefas4();
-    mostrarTarefas5();
-    adicionarTarefasLista();
-    notificacao("notificacaoSucesso", "Lista excluída!");
-  }
-  if (inputEditarNome.classList.contains("5")) {
-    deletarTarefas(5);
-    conteudoArrayListas.splice(5, 1);
-    localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
-    atualizarListas();
-    fecharModalLista();
-    dadosLista();
-    mostrarTarefas0();
-    mostrarTarefas1();
-    mostrarTarefas2();
-    mostrarTarefas3();
-    mostrarTarefas4();
-    mostrarTarefas5();
-    adicionarTarefasLista();
-    notificacao("notificacaoSucesso", "Lista excluída!");
+  for (let i = 0; i < 6; i++) {
+    if (inputEditarNome.classList.contains(`${i}`)) {
+      deletarTarefas(i);
+      conteudoArrayListas.splice(i, 1);
+      localStorage.setItem("listas", JSON.stringify(conteudoArrayListas));
+      atualizarListas();
+      fecharModalLista();
+      dadosLista();
+      mostrarTarefas0();
+      mostrarTarefas1();
+      mostrarTarefas2();
+      mostrarTarefas3();
+      mostrarTarefas4();
+      mostrarTarefas5();
+      adicionarTarefasLista();
+      notificacao("notificacaoSucesso", "Lista excluída!");
+    }
   }
 }
 
