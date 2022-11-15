@@ -4,7 +4,7 @@
 
 ---
 
-Esse projeto foi inspirado no famoso "To Do List" e trata-se de uma página que permite criar listas de tarefas, possuindo como diferencial a capacidade do usúario criar diversas listas e adicionar as tarefas em seus respectivos temas ao invés de adicionar todas as tarefas em somente uma lista, obtendo assim uma melhor organização. 
+Esse projeto foi inspirado no famoso "To Do List" e trata-se de uma página que permite criar listas de tarefas, possuindo como diferencial a capacidade do usuário criar diversas listas e adicionar as tarefas em seus respectivos temas ao invés de adicionar todas as tarefas em somente uma lista, obtendo assim uma melhor organização. 
 
 OBS: O usuário consegue criar até no máximo 6 listas, tendo que excluir uma lista para a adição de uma nova.
 
